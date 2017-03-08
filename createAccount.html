@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="DISCO">
+    <meta name="author" content="Tushar">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>DISCO</title>
+    
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="jumbotron.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+    
+    <!-- Firebase -->
+
+<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
+<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
+    authDomain: "disco-6a3bf.firebaseapp.com",
+    databaseURL: "https://disco-6a3bf.firebaseio.com",
+    storageBucket: "disco-6a3bf.appspot.com",
+    messagingSenderId: "71660981931"
+  };
+  firebase.initializeApp(config);
+</script>
+      
+ 
+
+
+
+<!-- Leave out Storage -->
+<!-- <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script> -->
+ 
+
+  
+  </head>
+  
+ <!-- fireUI here -->
+ 
+  <body  style = "background-color: #whitw; color: #444444" >
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html"> DISCO </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control" id = "inputEmail">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control" id = "inputPassword">
+            </div>
+            <button type="submit" class="btn btn-primary btn-med">Sign in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+    
+    
+    
+    
+    
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
+      <div class="container">
+        <h1 >WELCOME TO DISCO</h1>
+        <p>Made for Artists</p>
+       
+      </div>
+    </div>
+    
+    
+    
+    
+    
+    <div class="container">
+    
+    <h2 style="text-align: center; padding-bottom: 25px">Create Account</h2>
+    
+    
+    
+    
+    <form class="form-horizontal" id="loginForm">
+    
+    
+    
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" name ="inputEmail" placeholder="Email">
+    </div>
+  </div>
+   
+    <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputUsername" placeholder="Username">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" name ="inputPassword" placeholder="Password">
+    </div>
+  </div>
+   
+    <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">Confirm Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button class="btn btn-primary" type = "button" onclick="startLogin()">Create Account</button>
+      
+    </div>
+  </div>
+</form>
+  
+  
+  
+  
+   <script>
+       function startLogin (){
+           
+        console.log("start Script");
+
+       var loginForm = document.getElementById('loginForm');
+
+           console.log(loginForm.inputEmail.value);
+           console.log("starting sign up");
+        
+        var email = loginForm.inputEmail.value;
+        var password = loginForm.inputPassword.value;
+        
+        console.log("SIGNING UP..");
+        console.log(email);
+        console.log("is this you?");
+           
+      if (email.length < 4) {
+        alert('Please enter an email address.');
+        return;
+      }
+      if (password.length < 4) {
+        alert('Please enter a password.');
+        return;
+      }
+      console.log("about to try to create");
+      // Sign in with email and pass.
+      // [START createwithemail]
+      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        console.log("inside create error");
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode == 'auth/weak-password') {
+          alert('The password is too weak.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+        // [END_EXCLUDE]
+      });
+      // [END createwithemail]
+           
+       }
+           
+
+
+      
+</script>
+    
+     
+
+
+    </div>
+
+    
+
+      <div class= "container">
+      <footer>
+        <p> &copy; 2017 Hutch Limited</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+  </body>
+</html>

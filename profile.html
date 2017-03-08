@@ -1,0 +1,144 @@
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
+
+        <title>DISCO</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="jumbotron.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+
+        <!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
+    <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+<!-- Leave out Storage -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script> -->
+
+    <script src="java/firebaseStart.js"></script>
+
+      </head>
+
+        <div style= "color: white" class="container">
+             <script >
+            initApp = function() {
+            firebase.auth().onAuthStateChanged(function(user) {
+              if (user) {              
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var uid = user.uid;
+                var providerData = user.providerData;
+                user.getToken().then(function(accessToken) {
+                  document.getElementById('displayName').textContent = displayName,
+                  document.getElementById("profilePhoto").src = photoURL,
+                
+                  document.getElementById('account-details').textContent = JSON.stringify({
+                    displayName: displayName,
+                    email: email,
+                    emailVerified: emailVerified,
+                    photoURL: photoURL,
+                    uid: uid,
+                    accessToken: accessToken,
+                    providerData: providerData
+                  }, null, '  ');
+
+                    });
+              } else {
+                // User is signed out.
+                document.getElementById('sign-in-status').textContent = 'Signed out';
+                document.getElementById('sign-in').textContent = 'Sign in';
+                document.getElementById('account-details').textContent = ' ';
+              }
+            }, function(error) {
+              console.log(error);
+            });
+          };
+
+          window.addEventListener('load', function() {
+            initApp()
+          });
+            </script>
+        </div>
+
+      <body  style = "background-color: #444444; color: #F4F4F4" >
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="index.html"> DISCO </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <form class="navbar-form navbar-right">
+                <h4 id="displayName"> </h4>
+              </form>
+            </div><!--/.navbar-collapse -->
+          </div>
+        </nav>
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div style="text-align: center; background-color: #333333" class="jumbotron">
+        <div class="container">
+            <div class="row">
+        <div class="col-xs-6 col-md-4 col-lg-2 vcenter">
+            <div class= "container">
+            <img id = "profilePhoto" alt="..." class="img-circle square">    
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-8 col-lg-10">
+            <div > 
+            <h2 id="displayName"> </h2>
+            <p text> @Username </p>
+            </div>
+        </div>
+
+        </div>
+
+    </div>
+        </div>
+        <div class="container">
+        <h2 style="text-align: CENTER ">YOUR MUSIC</h2>
+         <div >
+           
+          
+            
+             
+         </div>
+        </div>
+
+
+
+
+
+
+
+          <div class= "container">
+          <footer>
+            <p>&copy; 2017 Hutch Limited</p>
+          </footer>
+        </div> <!-- /container -->
+
+
+      </body>
+    </html>

@@ -2324,7 +2324,7 @@ th {
 .table-bordered > thead > tr > td,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
-  border: 1px solid #ddd;
+  border: 0px solid black;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {
@@ -6784,5 +6784,9 @@ button.close {
     height: 200px;
     width: 200px;
 }
-
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
 /*# sourceMappingURL=bootstrap.css.map */

@@ -39,7 +39,7 @@
         //document.getElementById('quickstart-verify-email').disabled = true;
         // [END_EXCLUDE]
         if (user) {
-            console.log("user" + email + "is logged in ");
+            
           // User is signed in.
           var displayName = user.displayName;
           var email = user.email;
@@ -47,7 +47,8 @@
           var photoURL = user.photoURL;
           var isAnonymous = user.isAnonymous;
           var uid = user.uid;
-          var providerData = user.providerData;     
+          var providerData = user.providerData;    
+        console.log("user" + email + "is logged in ");
         document.getElementById("email").value = email;
           // [START_EXCLUDE]
          // document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';

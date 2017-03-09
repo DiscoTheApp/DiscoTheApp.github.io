@@ -47,9 +47,12 @@
           var photoURL = user.photoURL;
           var isAnonymous = user.isAnonymous;
           var uid = user.uid;
-          var providerData = user.providerData;    
-        console.log("user" + email + "is logged in ");
-        document.getElementById("email").value = email;
+          var providerData = user.providerData;   
+        document.getElementById("email").innerHTML = email;
+
+            
+          console.log("user" + email.va + "is logged in ");
+            
           // [START_EXCLUDE]
          // document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
           //document.getElementById('quickstart-sign-in').textContent = 'Sign out';
@@ -101,7 +104,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                <div class="navbar-right"> 
                 
-               <h1 id="email"> </h1>
+               <a> <h3 id="email"> </h3> </a>
                <script>
                 console.log("we aare logged in for..  +" + email);
                 </script>
@@ -146,7 +149,7 @@
          <img src="Images/coverArt.png" class ="square-medium"> 
          </td> 
         <td> 
-         <h2 style="color: #D7B659">Hold On, We're Going Home </h2>
+         <h2 style="color: #D7B659">Hold On, We're Going Home</h2>
         <h1><small> <i> Drake</i></small></h1>
         <h4>Nothing Was The Same </h4>
         <h4> <small> 4:20 </small></h4>

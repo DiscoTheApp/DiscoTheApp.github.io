@@ -226,3 +226,10 @@ Clipboard:
      
         </div>
         
+        
+        
+        /// JAVA TO HTML 
+        
+        
+        
+                document.getElementById("email").innerHTML = email;

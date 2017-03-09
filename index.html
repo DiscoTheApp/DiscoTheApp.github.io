@@ -51,7 +51,7 @@
             firebase.auth().onAuthStateChanged(function(user) {
               if (user) { 
                 console.log("welcome " + user.email);
-                window.location.open("feed.html", "_self");
+                window.open("feed.html", "_self");
                 
               } else {
                 // User is signed out.
@@ -71,7 +71,7 @@
   
   </head>
 
-  <body  style = "background-color: #whitw; color: #444444" >
+  <body  style = "background-color: #white; color: #444444" >
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">

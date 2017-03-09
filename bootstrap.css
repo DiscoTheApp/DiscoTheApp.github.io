@@ -11,9 +11,9 @@
 
 
 
-.column-left{ float: left; width: 20%; }
-.column-right{ float: right; width: 20%; }
-.column-center{ display: inline-block; width: 60%; }
+.column-left{ float: left; width: 25%; }
+.column-right{ float: right; width: 75%; }
+
 
 
 

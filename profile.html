@@ -32,51 +32,7 @@
 
       </head>
 
-        <div style= "color: white" class="container">
-             <script >
-            initApp = function() {
-            firebase.auth().onAuthStateChanged(function(user) {
-              if (user) {              
-                // User is signed in.
-                var displayName = user.displayName;
-                var email = user.email;
-                var emailVerified = user.emailVerified;
-                var photoURL = user.photoURL;
-                var uid = user.uid;
-                var providerData = user.providerData;
-                user.getToken().then(function(accessToken) {
-                  document.getElementById('displayName').textContent = displayName,
-                  document.getElementById("profilePhoto").src = photoURL,
-                
-                  document.getElementById('account-details').textContent = JSON.stringify({
-                    displayName: displayName,
-                    email: email,
-                    emailVerified: emailVerified,
-                    photoURL: photoURL,
-                    uid: uid,
-                    accessToken: accessToken,
-                    providerData: providerData
-                  }, null, '  ');
-
-                    });
-              } else {
-                // User is signed out.
-                document.getElementById('sign-in-status').textContent = 'Signed out';
-                document.getElementById('sign-in').textContent = 'Sign in';
-                document.getElementById('account-details').textContent = ' ';
-              }
-            }, function(error) {
-              console.log(error);
-            });
-          };
-
-          window.addEventListener('load', function() {
-            initApp()
-          });
-            </script>
-        </div>
-
-      <body  style = "background-color: #444444; color: #F4F4F4" >
+      <body  style = "background-color: #222 ; color: #F4F4F4">
 
         <nav class="navbar navbar-inverse navbar-fixed-top">
           <div class="container">
@@ -97,35 +53,35 @@
           </div>
         </nav>
 
-        <!-- Main jumbotron for a primary marketing message or call to action -->
-        <div style="text-align: center; background-color: #333333" class="jumbotron">
-        <div class="container">
-            <div class="row">
-        <div class="col-xs-6 col-md-4 col-lg-2 vcenter">
-            <div class= "container">
-            <img id = "profilePhoto" alt="..." class="img-circle square">    
-            </div>
-        </div>
-        <div class="col-xl-6 col-md-8 col-lg-10">
-            <div > 
-            <h2 id="displayName"> </h2>
-            <p text> @Username </p>
-            </div>
-        </div>
+        <div>
+        
 
+        
+        <div class="container" style="padding-top: 10px; background-color: #222">
+        <div style="padding-left: 115px; padding-bottom: 5px">
+        <h5> Username Liked</h5>
         </div>
-
-    </div>
+        <div class="col-xs-6 col-md-4" style="text-align: center">
+        <img src="Images/coverArt.png" class ="square-medium">
         </div>
-        <div class="container">
-        <h2 style="text-align: CENTER ">YOUR MUSIC</h2>
-         <div >
-           
+        <div class="col-xs-12 col-sm-6 col-md-8">
+        <h2 style="color: #D7B659">Hold On, We're Going Home </h2>
+        <h1><small> <i> Drake</i></small></h1>
+        <h4>Nothing Was The Same </h4>
+        </div>
+        <div>
+        <p></p>
+        </div>
+    
           
-            
-             
-         </div>
         </div>
+        
+        
+      
+    
+            
+        </div>
+
 
 
 
@@ -135,9 +91,59 @@
 
           <div class= "container">
           <footer>
-            <p>&copy; 2017 Hutch Limited</p>
+         
           </footer>
         </div> <!-- /container -->
+        
+    <script>
+            function initApp() {
+      // Listening for auth state changes.
+      // [START authstatelistener]
+      firebase.auth().onAuthStateChanged(function(user) {
+        // [START_EXCLUDE silent]
+        //document.getElementById('quickstart-verify-email').disabled = true;
+        // [END_EXCLUDE]
+        if (user) {
+          // User is signed in.
+          var displayName = user.displayName;
+          var email = user.email;
+          var emailVerified = user.emailVerified;
+          var photoURL = user.photoURL;
+          var isAnonymous = user.isAnonymous;
+          var uid = user.uid;
+          var providerData = user.providerData;
+        
+            console.log(email);
+          // [START_EXCLUDE]
+         // document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
+          //document.getElementById('quickstart-sign-in').textContent = 'Sign out';
+          //document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
+          if (!emailVerified) {
+           // document.getElementById('quickstart-verify-email').disabled = false;
+          }
+          // [END_EXCLUDE]
+        } else {
+          // User is signed out.
+          // [START_EXCLUDE]
+      //    document.getElementById('quickstart-sign-in-status').textContent = 'Signed out';
+        //  document.getElementById('quickstart-sign-in').textContent = 'Sign in';
+          // document.getElementById('quickstart-account-details').textContent = 'null';
+          // [END_EXCLUDE]
+        }
+        // [START_EXCLUDE silent]
+     //   document.getElementById('quickstart-sign-in').disabled = false;
+        // [END_EXCLUDE]
+      });
+      // [END authstatelistener]
+     // document.getElementById('quickstart-sign-up').addEventListener('click', handleSignUp, false);
+     // document.getElementById('quickstart-verify-email').addEventListener('click', sendEmailVerification, false);
+     // document.getElementById('quickstart-password-reset').addEventListener('click', sendPasswordReset, false);
+    }
+    window.onload = function() {
+      initApp();
+    };
+
+    </script>    
 
 
       </body>

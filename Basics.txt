@@ -1,6 +1,8 @@
 Basics:
 
+Darkest: #222222
 Dark Back: #333333
 Ligher back: #444444
+
 Light Text: #F4F4F4
 color? : #D7B659

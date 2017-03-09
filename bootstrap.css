@@ -4,6 +4,19 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
+
+
+
+
+
+
+.column-left{ float: left; width: 20%; }
+.column-right{ float: right; width: 20%; }
+.column-center{ display: inline-block; width: 60%; }
+
+
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -4961,7 +4974,7 @@ a.badge:focus {
   padding-bottom: 30px;
   margin-bottom: 30px;
   color: inherit;
-  background-color: #eee;
+  background-color: #333333;
 }
 .jumbotron h1,
 .jumbotron .h1 {
@@ -6755,8 +6768,19 @@ button.close {
     display: none !important;
   }
 }
-
-.square {
+.square-icon {
+    height: 50px;
+    width: 50px;
+}
+.square-small {
+    height: 100px;
+    width: 100px;
+}
+.square-medium{
+    height: 150px;
+    width: 150px;
+}
+.square-large{
     height: 200px;
     width: 200px;
 }

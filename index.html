@@ -51,7 +51,7 @@
             firebase.auth().onAuthStateChanged(function(user) {
               if (user) { 
                 console.log("welcome " + user.email);
-                window.open("feed.html");
+                window.location.open("feed.html", "_self");
                 
               } else {
                 // User is signed out.

@@ -116,9 +116,9 @@
   </div>
    
     <div class="form-group">
-    <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+    <label for="inputEmail3" class="col-sm-2 control-label">@Username</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputUsername" placeholder="Username">
+      <input type="text" class="form-control" id="inputUsername" placeholder="@Username">
     </div>
   </div>
   
@@ -160,7 +160,7 @@
    <script>
        function startLogin (){
            
-        console.log("start Script");
+        console.log("starting to create account");
 
        var loginForm = document.getElementById('loginForm');
 
@@ -168,8 +168,10 @@
            console.log("starting sign up");
         
         var email = loginForm.inputEmail.value;
+        var inputUsername = loginForm.inputUsername.value;
         var password = loginForm.inputPassword.value;
-        
+        var confirmPassword = loginForm.inputConfirmPassword.value;
+           
         console.log("SIGNING UP..");
         console.log(email);
         console.log("is this you?");
@@ -182,6 +184,12 @@
         alert('Please enter a password.');
         return;
       }
+      if (password != confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
+       
+           
       console.log("about to try to create");
       // Sign in with email and pass.
       // [START createwithemail]
@@ -199,8 +207,35 @@
         console.log(error);
         // [END_EXCLUDE]
       });
+           
+           // post account creation 
+           
+           // Get a reference to the database service
+        var database = firebase.database();
+           
+        var user = firebase.auth().currentUser;
+        var name, email, photoUrl, uid, emailVerified;
+
+        if (user != null) {
+          name = user.displayName;
+          email = user.email;
+          photoUrl = user.photoURL;
+          emailVerified = user.emailVerified;
+          uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+                           // this value to authenticate with your backend server, if
+                           // you have one. Use User.getToken() instead.
+        writeUserData(uid,inputUsername,email);
+        } 
+           
+        function writeUserData(uid, inputUsername, email) {
+              firebase.database().ref('users/' + inputUsername).set({
+                username: inputUsername,
+                email: email,
+                uid: uid,
+              }); 
+        } 
+            
            window.open("feed.html");
-   
       // [END createwithemail]
            
        }

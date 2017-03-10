@@ -118,7 +118,7 @@
     <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">@Username</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputUsername" placeholder="@Username">
+      <input type="text" class="form-control" id="inputUsername" onkeypress="return AvoidSpace(event)" placeholder="@Username">
     </div>
   </div>
   
@@ -230,7 +230,12 @@
   
        // end create account function
     }
-       
+    
+       function AvoidSpace(event) {
+    var k = event ? event.which : window.event.keyCode;
+    if (k == 32) return false;
+    if (k == 64) return false;       
+}
        
 
 </script>

@@ -1,132 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="DISCO">
-    <meta name="author" content="Tushar">
-    <link rel="icon" href="../../favicon.ico">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="DISCO">
+        <meta name="author" content="Tushar">
+        <link rel="icon" href="../../favicon.ico">
 
-    <title>DISCO</title>
-    
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
-    
-    <!-- Firebase -->
+        <title>DISCO</title>
 
-<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
-<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
-<script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="jumbotron.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+
+        <!-- Firebase -->
+
+        <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
+        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+        <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
 
 
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
-    authDomain: "disco-6a3bf.firebaseapp.com",
-    databaseURL: "https://disco-6a3bf.firebaseio.com",
-    storageBucket: "disco-6a3bf.appspot.com",
-    messagingSenderId: "71660981931"
-  };
-  firebase.initializeApp(config);
-</script>
-      
- 
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
+                authDomain: "disco-6a3bf.firebaseapp.com",
+                databaseURL: "https://disco-6a3bf.firebaseio.com",
+                storageBucket: "disco-6a3bf.appspot.com",
+                messagingSenderId: "71660981931"
+            };
+            firebase.initializeApp(config);
+        </script>
 
 
 
-<!-- Leave out Storage -->
-<!-- <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script> -->
- 
-     <script >
+
+
+        <!-- Leave out Storage -->
+        <!-- <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script> -->
+
+        <script >
             initApp = function() {
-            firebase.auth().onAuthStateChanged(function(user) {
-              if (user) { 
-                console.log("welcome " + user.email);
-                window.open("feed.html", "_self");
-                
-              } else {
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) { 
+                        console.log("welcome " + user.email);
+                        window.open("feed.html", "_self");
 
-              }
-            }, function(error) {
-              console.log(error);
+                    } else {
+
+                    }
+                }, function(error) {
+                    console.log(error);
+                });
+            };
+
+            window.addEventListener('load', function() {
+                initApp()
             });
-          };
+        </script>
 
-          window.addEventListener('load', function() {
-            initApp()
-          });
-            </script>
-  
-  </head>
+    </head>
 
-  <body  style = "background-color: #white; color: #444444" >
+    <body  style = "background-color: #white; color: #444444" >
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html"> DISCO </a>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html"> DISCO </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <form class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <input type="text" placeholder="Email" class="form-control" id = "inputEmail">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Password" class="form-control" id = "inputPassword">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-med">Sign in</button>
+                    </form>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
+            <div class="container">
+                <h1 >Discover new music.</h1>
+                <p>Disco is music streaming service that allows Artists to share their music for free, and get paid for their work.</p>
+                <p><a class="btn btn-primary btn-lg" href="createAccount.html" role="button">CREATE ACCOUNT</a></p>
+            </div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control" id = "inputEmail">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control" id = "inputPassword">
-            </div>
-            <button type="submit" class="btn btn-primary btn-med">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
+        <div class="container">
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
-      <div class="container">
-        <h1 >Discover new music.</h1>
-        <p>Disco is music streaming service that allows Artists to share their music for free, and get paid for their work.</p>
-        <p><a class="btn btn-primary btn-lg" href="createAccount.html" role="button">CREATE ACCOUNT</a></p>
-      </div>
-    </div>
-    <div class="container">
-    
-    <h2 style="text-align: center">MORE WEBSITE INFO </h2>
+            <h2 style="text-align: center">MORE WEBSITE INFO </h2>
 
-    </div>
-
-    
-    
-      
- 
-      
-      
-      
-      
-      
-      
-      
-      
-      <div class= "container">
-      <footer>
-        <p> &copy; 2017 Hutch Limited</p>
-      </footer>
-    </div> <!-- /container -->
+        </div>
 
 
-  </body>
+
+
+
+
+
+
+
+
+
+
+
+        <div class= "container">
+            <footer>
+                <p> &copy; 2017 Hutch Limited</p>
+            </footer>
+        </div> <!-- /container -->
+
+
+    </body>
 </html>

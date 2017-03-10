@@ -1,6 +1,6 @@
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,257 +19,257 @@
 
         <!-- Firebase -->
 
-    <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
-    <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
-<!-- Leave out Storage -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script> -->
+        <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
+        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+        <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+        <!-- Leave out Storage -->
+        <!-- <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script> -->
 
-    <script src="java/firebaseStart.js"></script>
-      
-  <script>
+        <script src="java/firebaseStart.js"></script>
+
+        <script>
             function initApp() {
-      // Listening for auth state changes.
-      // [START authstatelistener]
-      firebase.auth().onAuthStateChanged(function(user) {
-        // [START_EXCLUDE silent]
-        //document.getElementById('quickstart-verify-email').disabled = true;
-        // [END_EXCLUDE]
-        if (user) {
-            
-          // User is signed in.
-          var displayName = user.displayName;
-          var email = user.email;
-          var emailVerified = user.emailVerified;
-          var photoURL = user.photoURL;
-          var isAnonymous = user.isAnonymous;
-          var uid = user.uid;
-          var providerData = user.providerData;   
-        document.getElementById("email").innerHTML = email;
+                // Listening for auth state changes.
+                // [START authstatelistener]
+                firebase.auth().onAuthStateChanged(function(user) {
+                    // [START_EXCLUDE silent]
+                    //document.getElementById('quickstart-verify-email').disabled = true;
+                    // [END_EXCLUDE]
+                    if (user) {
 
-            
-          console.log("user" + email.va + "is logged in ");
-            
-          // [START_EXCLUDE]
-         // document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
-          //document.getElementById('quickstart-sign-in').textContent = 'Sign out';
-          //document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
-          if (!emailVerified) {
-           // document.getElementById('quickstart-verify-email').disabled = false;
-          }
-          // [END_EXCLUDE]
-        } else {
-          // User is signed out.
-          // [START_EXCLUDE]
-      //    document.getElementById('quickstart-sign-in-status').textContent = 'Signed out';
-        //  document.getElementById('quickstart-sign-in').textContent = 'Sign in';
-          // document.getElementById('quickstart-account-details').textContent = 'null';
-          // [END_EXCLUDE]
-        }
-        // [START_EXCLUDE silent]
-     //   document.getElementById('quickstart-sign-in').disabled = false;
-        // [END_EXCLUDE]
-      });
-      // [END authstatelistener]
-     // document.getElementById('quickstart-sign-up').addEventListener('click', handleSignUp, false);
-     // document.getElementById('quickstart-verify-email').addEventListener('click', sendEmailVerification, false);
-     // document.getElementById('quickstart-password-reset').addEventListener('click', sendPasswordReset, false);
-    }
-    window.onload = function() {
-      initApp();
-    };
+                        // User is signed in.
+                        var displayName = user.displayName;
+                        var email = user.email;
+                        var emailVerified = user.emailVerified;
+                        var photoURL = user.photoURL;
+                        var isAnonymous = user.isAnonymous;
+                        var uid = user.uid;
+                        var providerData = user.providerData;   
+                        document.getElementById("email").innerHTML = email;
 
-    </script> 
 
-      </head>
-      
-       
+                        console.log("user" + email.va + "is logged in ");
 
-      <body  style = "background-color: #222 ; color: #F4F4F4">
+                        // [START_EXCLUDE]
+                        // document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
+                        //document.getElementById('quickstart-sign-in').textContent = 'Sign out';
+                        //document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
+                        if (!emailVerified) {
+                            // document.getElementById('quickstart-verify-email').disabled = false;
+                        }
+                        // [END_EXCLUDE]
+                    } else {
+                        // User is signed out.
+                        // [START_EXCLUDE]
+                        //    document.getElementById('quickstart-sign-in-status').textContent = 'Signed out';
+                        //  document.getElementById('quickstart-sign-in').textContent = 'Sign in';
+                        // document.getElementById('quickstart-account-details').textContent = 'null';
+                        // [END_EXCLUDE]
+                    }
+                    // [START_EXCLUDE silent]
+                    //   document.getElementById('quickstart-sign-in').disabled = false;
+                    // [END_EXCLUDE]
+                });
+                // [END authstatelistener]
+                // document.getElementById('quickstart-sign-up').addEventListener('click', handleSignUp, false);
+                // document.getElementById('quickstart-verify-email').addEventListener('click', sendEmailVerification, false);
+                // document.getElementById('quickstart-password-reset').addEventListener('click', sendPasswordReset, false);
+            }
+            window.onload = function() {
+                initApp();
+            };
+
+        </script> 
+
+    </head>
+
+
+
+    <body  style = "background-color: #222 ; color: #F4F4F4">
 
         <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="index.html"> DISCO </a>
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html"> DISCO </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <div class="navbar-right"> 
+
+                        <a> <h3 id="email"> </h3> </a>
+                        <button class="primary-btn" onclick="signOut()">Sign Out</button>
+                        <script>
+                            function signOut(){
+                                firebase.auth().signOut();
+                                window.open("feed.html", "_self");
+
+                            }
+                            console.log("we aare logged in for..  +" + email);
+                        </script>
+                    </div>
+                </div><!--/.navbar-collapse -->
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
-               <div class="navbar-right"> 
-                
-               <a> <h3 id="email"> </h3> </a>
-               <button class="primary-btn" onclick="signOut()">Sign Out</button>
-               <script>
-                   function signOut(){
-                        firebase.auth().signOut();
-                        window.open("feed.html", "_self");
-                       
-                   }
-                console.log("we aare logged in for..  +" + email);
-                </script>
-               </div>
-            </div><!--/.navbar-collapse -->
-          </div>
         </nav>
-    
-    
-    <div class="container" style="padding-top: 25px">
-      <table class="table">
-      
-      <tr>
-        <td style="text-align: center; padding-bottom: 20px" > 
-        <p>@username </p>
-         <img src="Images/coverArt.png" class ="square-medium"> 
-         </td> 
-        <td> 
-         <h2 style="color: #D7B659">Hold On, We're Going Home </h2>
-        <h1><small> <i> Drake</i></small></h1>
-        <h4>Nothing Was The Same </h4>
-        <h4> <small> 4:20 </small></h4>
-        </td>
-        <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>SHARE </SMALL> </h3>
-        <h3> <SMALL>9 </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>LIKE </SMALL> </h3>
-        <h3> <SMALL>93 </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>QUE </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>ADD </SMALL> </h3>
-        </tD>
-      </tr>
-               <tr>
-        <td style="text-align: center; padding-bottom: 20px" > 
-        <p>@username </p>
-         <img src="Images/coverArt.png" class ="square-medium"> 
-         </td> 
-        <td> 
-         <h2 style="color: #D7B659">Hold On, We're Going Home</h2>
-        <h1><small> <i> Drake</i></small></h1>
-        <h4>Nothing Was The Same </h4>
-        <h4> <small> 4:20 </small></h4>
-        </td>
-        <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>SHARE </SMALL> </h3>
-        <h3> <SMALL>9 </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>LIKE </SMALL> </h3>
-        <h3> <SMALL>93 </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>QUE </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>ADD </SMALL> </h3>
-        </tD>
-      </tr>
-               <tr>
-        <td style="text-align: center; padding-bottom: 20px" > 
-        <p>@username </p>
-         <img src="Images/coverArt.png" class ="square-medium"> 
-         </td> 
-        <td> 
-         <h2 style="color: #D7B659">Hold On, We're Going Home </h2>
-        <h1><small> <i> Drake</i></small></h1>
-        <h4>Nothing Was The Same </h4>
-        <h4> <small> 4:20 </small></h4>
-        </td>
-        <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>SHARE </SMALL> </h3>
-        <h3> <SMALL>9 </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>LIKE </SMALL> </h3>
-        <h3> <SMALL>93 </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>QUE </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>ADD </SMALL> </h3>
-        </tD>
-      </tr>
-               <tr>
-        <td style="text-align: center; padding-bottom: 20px" > 
-        <p>@username </p>
-         <img src="Images/coverArt.png" class ="square-medium"> 
-         </td> 
-        <td> 
-         <h2 style="color: #D7B659">Hold On, We're Going Home </h2>
-        <h1><small> <i> Drake</i></small></h1>
-        <h4>Nothing Was The Same </h4>
-        <h4> <small> 4:20 </small></h4>
-        </td>
-        <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>SHARE </SMALL> </h3>
-        <h3> <SMALL>9 </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>LIKE </SMALL> </h3>
-        <h3> <SMALL>93 </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>QUE </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>ADD </SMALL> </h3>
-        </tD>
-      </tr>
+
+
+        <div class="container" style="padding-top: 25px">
+            <table class="table">
+
                 <tr>
-        <td style="text-align: center; padding-bottom: 20px" > 
-        <p>@username </p>
-         <img src="Images/coverArt.png" class ="square-medium"> 
-         </td> 
-        <td> 
-         <h2 style="color: #D7B659">Hold On, We're Going Home </h2>
-        <h1><small> <i> Drake</i></small></h1>
-        <h4>Nothing Was The Same </h4>
-        <h4> <small> 4:20 </small></h4>
-        </td>
-        <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>SHARE </SMALL> </h3>
-        <h3> <SMALL>9 </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>LIKE </SMALL> </h3>
-        <h3> <SMALL>93 </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>QUE </SMALL> </h3>
-        </tD>
-           <tD style = "text-align: center; vertical-align: middle"> 
-        <h3> <SMALL>ADD </SMALL> </h3>
-        </tD>
-      </tr>
-          
+                    <td style="text-align: center; padding-bottom: 20px" > 
+                        <p>@username </p>
+                        <img src="Images/coverArt.png" class ="square-medium"> 
+                    </td> 
+                    <td> 
+                        <h2 style="color: #D7B659">Hold On, We're Going Home </h2>
+                        <h1><small> <i> Drake</i></small></h1>
+                        <h4>Nothing Was The Same </h4>
+                        <h4> <small> 4:20 </small></h4>
+                    </td>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>SHARE </SMALL> </h3>
+                        <h3> <SMALL>9 </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>LIKE </SMALL> </h3>
+                        <h3> <SMALL>93 </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>QUE </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>ADD </SMALL> </h3>
+                    </tD>
+                </tr>
+                <tr>
+                    <td style="text-align: center; padding-bottom: 20px" > 
+                        <p>@username </p>
+                        <img src="Images/coverArt.png" class ="square-medium"> 
+                    </td> 
+                    <td> 
+                        <h2 style="color: #D7B659">Hold On, We're Going Home</h2>
+                        <h1><small> <i> Drake</i></small></h1>
+                        <h4>Nothing Was The Same </h4>
+                        <h4> <small> 4:20 </small></h4>
+                    </td>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>SHARE </SMALL> </h3>
+                        <h3> <SMALL>9 </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>LIKE </SMALL> </h3>
+                        <h3> <SMALL>93 </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>QUE </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>ADD </SMALL> </h3>
+                    </tD>
+                </tr>
+                <tr>
+                    <td style="text-align: center; padding-bottom: 20px" > 
+                        <p>@username </p>
+                        <img src="Images/coverArt.png" class ="square-medium"> 
+                    </td> 
+                    <td> 
+                        <h2 style="color: #D7B659">Hold On, We're Going Home </h2>
+                        <h1><small> <i> Drake</i></small></h1>
+                        <h4>Nothing Was The Same </h4>
+                        <h4> <small> 4:20 </small></h4>
+                    </td>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>SHARE </SMALL> </h3>
+                        <h3> <SMALL>9 </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>LIKE </SMALL> </h3>
+                        <h3> <SMALL>93 </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>QUE </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>ADD </SMALL> </h3>
+                    </tD>
+                </tr>
+                <tr>
+                    <td style="text-align: center; padding-bottom: 20px" > 
+                        <p>@username </p>
+                        <img src="Images/coverArt.png" class ="square-medium"> 
+                    </td> 
+                    <td> 
+                        <h2 style="color: #D7B659">Hold On, We're Going Home </h2>
+                        <h1><small> <i> Drake</i></small></h1>
+                        <h4>Nothing Was The Same </h4>
+                        <h4> <small> 4:20 </small></h4>
+                    </td>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>SHARE </SMALL> </h3>
+                        <h3> <SMALL>9 </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>LIKE </SMALL> </h3>
+                        <h3> <SMALL>93 </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>QUE </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>ADD </SMALL> </h3>
+                    </tD>
+                </tr>
+                <tr>
+                    <td style="text-align: center; padding-bottom: 20px" > 
+                        <p>@username </p>
+                        <img src="Images/coverArt.png" class ="square-medium"> 
+                    </td> 
+                    <td> 
+                        <h2 style="color: #D7B659">Hold On, We're Going Home </h2>
+                        <h1><small> <i> Drake</i></small></h1>
+                        <h4>Nothing Was The Same </h4>
+                        <h4> <small> 4:20 </small></h4>
+                    </td>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>SHARE </SMALL> </h3>
+                        <h3> <SMALL>9 </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>LIKE </SMALL> </h3>
+                        <h3> <SMALL>93 </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>QUE </SMALL> </h3>
+                    </tD>
+                    <tD style = "text-align: center; vertical-align: middle"> 
+                        <h3> <SMALL>ADD </SMALL> </h3>
+                    </tD>
+                </tr>
 
-   
-    </table>
-        
-    </div>
-        
-      
 
-          <div class= "container">
-          <footer>
-         
-          </footer>
+
+            </table>
+
+        </div>
+
+
+
+        <div class= "container">
+            <footer>
+
+            </footer>
         </div> <!-- /container -->
-        
- 
 
 
-      </body>
-    </html>
+
+
+    </body>
+</html>

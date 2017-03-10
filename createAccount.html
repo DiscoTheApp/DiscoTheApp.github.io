@@ -202,6 +202,7 @@
         // [START_EXCLUDE]
         if (errorCode == 'auth/weak-password') {
           alert('The password is too weak.');
+            
         } else {
           alert(errorMessage);
         }
@@ -210,12 +211,23 @@
   
       // done creating account     
       });
-    
-    var database = firebase.database();
+           
+    firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+        var database = firebase.database();
      firebase.database().ref('users/' + inputUsername).set({
     username: inputUsername,
     email: inputEmail,
   });
+    // User is signed in.
+  } else {
+    // No user is signed in.
+  }
+});
+           
+        
+    
+  
        // end create account function
     }
        

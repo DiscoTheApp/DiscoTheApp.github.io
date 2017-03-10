@@ -224,6 +224,8 @@
           uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
                            // this value to authenticate with your backend server, if
                            // you have one. Use User.getToken() instead.
+            
+        console.log("about to write...." + uid + inputUsername + email );
         writeUserData(uid,inputUsername,email);
         } 
            
@@ -235,7 +237,7 @@
               }); 
         } 
             
-           window.open("feed.html");
+       window.open("feed.html", "_self");
       // [END createwithemail]
            
        }

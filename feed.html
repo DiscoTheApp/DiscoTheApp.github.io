@@ -105,7 +105,13 @@
                <div class="navbar-right"> 
                 
                <a> <h3 id="email"> </h3> </a>
+               <button class="primary-btn" onclick="signOut()">Sign Out</button>
                <script>
+                   function signOut(){
+                        firebase.auth().signOut();
+                        window.open("feed.html", "_self");
+                       
+                   }
                 console.log("we aare logged in for..  +" + email);
                 </script>
                </div>

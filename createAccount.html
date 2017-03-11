@@ -37,7 +37,7 @@
                 messagingSenderId: "71660981931"
             };
             firebase.initializeApp(config);
-            
+
             firebase.auth().signOut();
         </script>
 
@@ -115,12 +115,6 @@
                     <div class="col-sm-10">
                         <input type="email" class="form-control" name ="inputEmail" placeholder="Email">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputName" placeholder="Name">
-                    </div>
                 </div>   
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">@Username</label>
@@ -168,6 +162,8 @@
 
                 function startLogin (){
 
+
+
                     console.log("starting to create account");
 
                     var loginForm = document.getElementById('loginForm');
@@ -179,7 +175,10 @@
                     var inputUsername = loginForm.inputUsername.value;
                     var password = loginForm.inputPassword.value;
                     var confirmPassword = loginForm.inputConfirmPassword.value;
-                    var inputName = loginForm.inputName.value;
+                  
+
+                    checkUsername(inputUsername);
+
 
                     console.log("SIGNING UP..");
                     console.log(inputEmail);
@@ -197,6 +196,8 @@
                         alert('Passwords do not match');
                         return;
                     }
+
+
 
 
                     console.log("about to try to create");
@@ -218,42 +219,39 @@
                         // [END_EXCLUDE]
 
                     }); // dont creating account
-                    
+
                     console.log("Account Created Successfully");
-                  
-                      
-                    
+
+
+
                     firebase.auth().onAuthStateChanged(function(user) {
-                                      if (user) {
+                        if (user) {
                             // User is signed in.
                             var database = firebase.database();
                             user.updateProfile({
-                          displayName: inputName
-                        }).then(function() {
-                            console.log("users name is: " + user.displayName)
-                          // Update successful.
-                        }, function(error) {
-                          // An error happened.
-                        });
+                                displayName: inputUsername
+                            }).then(function() {
+                                console.log("users name is: " + user.displayName)
+                                // Update successful.
+                            }, function(error) {
+                                // An error happened.
+                            });
                             console.log("About to start saving data: ");
                             firebase.database().ref('users/' + user.uid).set({
                                 email: inputEmail,
-                                name: inputName,
                                 username: inputUsername,
 
                             });
-                              firebase.database().ref('usernames/' + inputUsername).set({
-                                email: inputEmail,
-                                name: inputName,
-                                  
+                             firebase.database().ref('username/'+ inputUsername).set({
+                                username: user.uid,
+
                             });
-                           
                         } // User is signed in.
-                        
+
                         else {
                             // No user is signed in.
-                          }
-                        });
+                        }
+                    });
 
                 } // end create account function
 
@@ -261,6 +259,24 @@
                     var k = event ? event.which : window.event.keyCode;
                     if (k == 32) return false;
                     if (k == 64) return false;       
+                }
+
+                function checkUsername(preUsername){
+                    
+                    console.log("CHECKING USERNAMES");
+
+                    var database = firebase.database();
+                    var usernameRef = database.ref("usernames");
+                    
+                    usernameRef.once('value', function(snapshot) {
+                        snapshot.forEach(function(childSnapshot) {
+                            var childKey = childSnapshot.key;
+                            var childData = childSnapshot.val();
+                            console.log(childData);
+
+                            // ...
+                        });
+                    });
                 }
 
 

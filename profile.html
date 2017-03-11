@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="DISCO">
+        <meta name="author" content="Tushar">
+        <link rel="icon" href="../../favicon.ico">
+
+        <title>DISCO</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="jumbotron.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+
+        <!-- Firebase -->
+
+        <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
+        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+        <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+
+
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
+                authDomain: "disco-6a3bf.firebaseapp.com",
+                databaseURL: "https://disco-6a3bf.firebaseio.com",
+                storageBucket: "disco-6a3bf.appspot.com",
+                messagingSenderId: "71660981931"
+            };
+            firebase.initializeApp(config);
+        </script>
+
+
+
+
+    </head>
+
+    <body  style = "background-color: #white; color: #444444" >
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html"> DISCO </a>
+                    <a class="navbar-brand" href="index.html"> UPLOAD </a>
+                </div>
+                <div id="navbar">
+                    <a class="navbar-brand navbar-right" href="profile.html">
+            
+                    </a>
+                     <a class="navbar-brand navbar-right" href="profile.html">
+                    My Music
+                    </a>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
+            <div class="container">
+        <div class="col-xs-6 col-md-4">
+        <img  src="Images/Profile_avatar_placeholder_large%20copy.png" class ="img-circle square-large">
+     
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-8 vcenter"> 
+        <h2 style="text-align: left ; color: #D7B659"> Artist Name </h2>    
+        <h3 style="text-align: left">Username</h3> 
+        </div>
+            </div>
+        </div>
+        <div class="container">
+
+            <h2 style="text-align: center">USER HISTORY HERE</h2>
+
+        </div>
+
+        <div class= "container">
+            <footer>
+                <p> &copy; 2017 Hutch Limited</p>
+            </footer>
+        </div> <!-- /container -->
+    
+    
+    
+    
+
+    </body>
+</html>

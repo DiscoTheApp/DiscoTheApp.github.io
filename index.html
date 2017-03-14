@@ -51,7 +51,7 @@
                 firebase.auth().onAuthStateChanged(function(user) {
                     if (user) { 
                         console.log("welcome " + user.email);
-                        window.open("feed.html", "_self");
+                        window.open("profile.html", "_self");
 
                     } else {
 
@@ -90,6 +90,7 @@
                             <input type="password" placeholder="Password" class="form-control" id = "inputPassword">
                         </div>
                         <button type="submit" class="btn btn-primary btn-med">Sign in</button>
+                        <button type="button" class="btn btn-primary btn-med" onclick="openCreateAccount()">Create Account</button>
                     </form>
                 </div><!--/.navbar-collapse -->
             </div>
@@ -111,22 +112,18 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
         <div class= "container">
             <footer>
                 <p> &copy; 2017 Hutch Limited</p>
             </footer>
         </div> <!-- /container -->
 
+    <script> 
+        function openCreateAccount(){
+         window.open("createAccount.html", "_self");  
+        }
 
+        
+    </script>
     </body>
 </html>

@@ -7,7 +7,6 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="DISCO">
         <meta name="author" content="Tushar">
-        <link rel="icon" href="../../favicon.ico">
 
         <title>DISCO</title>
 
@@ -27,34 +26,54 @@
         <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
 
 
-        <script>
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
-                authDomain: "disco-6a3bf.firebaseapp.com",
-                databaseURL: "https://disco-6a3bf.firebaseio.com",
-                storageBucket: "disco-6a3bf.appspot.com",
-                messagingSenderId: "71660981931"
-            };
-            firebase.initializeApp(config);
-
-            firebase.auth().signOut();
-        </script>
-
-
-
-
-
         <!-- Leave out Storage -->
         <!-- <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script> -->
 
-
-
     </head>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
+            authDomain: "disco-6a3bf.firebaseapp.com",
+            databaseURL: "https://disco-6a3bf.firebaseio.com",
+            storageBucket: "disco-6a3bf.appspot.com",
+            messagingSenderId: "71660981931"
+        };
+        firebase.initializeApp(config);
+
+        firebase.auth().signOut();
+
+        // FirebaseUI config.
+        var uiConfig = {
+            signInSuccessUrl: 'index.html',
+            signInOptions: [
+                // Leave the lines as is for the providers you want to offer your users.
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ],
+            // Terms of service url.
+            tosUrl: '<your-tos-url>'
+        };
+
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
+
+
+    </script>
+
+
 
     <!-- fireUI here -->
 
+
     <body  style = "background-color: #whitw; color: #444444" >
+
+
 
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
@@ -95,6 +114,8 @@
             </div>
         </div>
 
+        <div id="firebase-ui-container"></div>
+
 
 
 
@@ -106,54 +127,7 @@
 
 
 
-            <form class="form-horizontal" id="loginForm">
-
-
-
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" name ="inputEmail" placeholder="Email">
-                    </div>
-                </div>   
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">@Username</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputUsername" onkeypress="return AvoidSpace(event)" placeholder="@Username">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" name ="inputPassword" placeholder="Password">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">Confirm Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Remember me
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button  class="btn btn-primary" type = "button" onclick="startLogin()"  >Create Account</button>
-
-                    </div>
-                </div>
-            </form>
+       
 
 
 
@@ -175,7 +149,7 @@
                     var inputUsername = loginForm.inputUsername.value;
                     var password = loginForm.inputPassword.value;
                     var confirmPassword = loginForm.inputConfirmPassword.value;
-                  
+
 
                     checkUsername(inputUsername);
 
@@ -242,7 +216,7 @@
                                 username: inputUsername,
 
                             });
-                             firebase.database().ref('username/'+ inputUsername).set({
+                            firebase.database().ref('username/'+ inputUsername).set({
                                 username: user.uid,
 
                             });
@@ -262,12 +236,12 @@
                 }
 
                 function checkUsername(preUsername){
-                    
+
                     console.log("CHECKING USERNAMES");
 
                     var database = firebase.database();
                     var usernameRef = database.ref("usernames");
-                    
+
                     usernameRef.once('value', function(snapshot) {
                         snapshot.forEach(function(childSnapshot) {
                             var childKey = childSnapshot.key;
@@ -282,10 +256,8 @@
 
             </script>
 
-
-
-
         </div>
+        <div id="firebaseui-auth-container"></div>
 
 
 
@@ -294,6 +266,10 @@
                 <p> &copy; 2017 Hutch Limited</p>
             </footer>
         </div> <!-- /container -->
+
+        <script>
+
+        </script>
 
 
     </body>

@@ -39,6 +39,31 @@
             firebase.initializeApp(config);
         </script>
 
+        <script>
+
+            var name, email, photoUrl, uid, emailVerified;
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    // User is signed in.
+                    name = user.displayName;
+                    email = user.email;
+                    photoUrl = user.photoURL;
+                    uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+                    // this value to authenticate with your backend server, if
+                    // you have one. Use User.getToken() instead.
+
+                    console.log("user: " + name + " is logged in");
+
+                    document.getElementById("userName").innerHTML = name;
+                    document.getElementById("userEmail").innerHTML = email;
+                    document.getElementById("userPhotoUrl").innerHTML = phot;        
+                } else {
+                    // No user is signed in.
+                }
+            });
+
+        </script>
+
 
 
 
@@ -53,27 +78,31 @@
                     <a class="navbar-brand" href="index.html"> UPLOAD </a>
                 </div>
                 <div id="navbar">
-                    <a class="navbar-brand navbar-right" href="profile.html">
-            
+                    <a class="navbar-brand navbar-right" href="profile.html" > PROFILE 
+
                     </a>
-                     <a class="navbar-brand navbar-right" href="profile.html">
-                    My Music
+                    <a class="navbar-brand navbar-right" href="profile.html">
+                        MY MUSIC
                     </a>
                 </div><!--/.navbar-collapse -->
             </div>
         </nav>
 
         <!-- Main jumbotron for a primary marketing message or call to action -->
+        <!-- Main jumbotron for a primary marketing message or call to action -->
         <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
             <div class="container">
-        <div class="col-xs-6 col-md-4">
-        <img  src="Images/Profile_avatar_placeholder_large%20copy.png" class ="img-circle square-large">
-     
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-8 vcenter"> 
-        <h2 style="text-align: left ; color: #D7B659"> Artist Name </h2>    
-        <h3 style="text-align: left">Username</h3> 
-        </div>
+                <div class="col-xs-6 col-md-4">
+                    <img  src="Images/Profile_avatar_placeholder_large%20copy.png" class ="img-circle square-large">
+
+                </div>
+                <div style="text-align: left" class="col-xs-12 col-sm-6 col-md-8"> 
+                    <h2 style="color: #D7B659" id="userName"> </h2>    
+                    <h2><small> Followers</small></h2> 
+                    <h3 style="color: #white"> 100</h3>
+                    <h2><small> Following</small></h2> 
+                    <h3 style="color: #white"> 100</h3>
+                </div>
             </div>
         </div>
         <div class="container">
@@ -87,10 +116,10 @@
                 <p> &copy; 2017 Hutch Limited</p>
             </footer>
         </div> <!-- /container -->
-    
-    
-    
-    
+
+
+
+
 
     </body>
 </html>

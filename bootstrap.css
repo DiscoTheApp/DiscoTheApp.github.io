@@ -4288,7 +4288,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand {
   float: left;
   height: 50px;
-  padding: 15px 15px;
+  padding: 15px 25px;
   font-size: 18px;
   line-height: 20px;
 }
@@ -6781,8 +6781,8 @@ button.close {
     width: 150px;
 }
 .square-large{
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    width: 250px;
 }
 .vcenter {
     display: inline-block;

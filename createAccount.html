@@ -110,7 +110,7 @@
 
                 if (inputUsername.length > 0){
                     // username typed 
-                    var usernameRef = firebase.database().ref("usernames/");
+                    var usernameRef = firebase.database().ref("users/");
                     usernameRef.once("value")
                         .then(function(snapshot) {
                         if (snapshot.child(inputUsername).exists()){
@@ -159,6 +159,7 @@
                         // User is signed in.
                         console.log("user was created");
                         console.log(user.uid);
+                        writeUserData(goodUsername,goodEmail,user.uid);
                         window.open("feed.html", "_self");  
 
                     } else {
@@ -174,6 +175,13 @@
                 var k = event ? event.which : window.event.keyCode;
                 if (k == 32) return false;
                 if (k == 64) return false;       
+            }
+            function writeUserData(username, email, uid) {
+                firebase.database().ref('users/' + username).set({
+                    username: username,
+                    email: email,
+                    userID: uid
+                });
             }
 
         </script>

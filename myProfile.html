@@ -23,8 +23,22 @@
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
         <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
-        <scipt src="firebaseStart.js"></scipt>
+
+        <script>
+
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
+                authDomain: "disco-6a3bf.firebaseapp.com",
+                databaseURL: "https://disco-6a3bf.firebaseio.com",
+                storageBucket: "disco-6a3bf.appspot.com",
+                messagingSenderId: "71660981931"
+            };
+            firebase.initializeApp(config);
+            var storage = firebase.storage();
+        </script>
 
     </head>
 
@@ -45,18 +59,77 @@
             </div>
         </nav>
 
-        // page content start 
         <div class="container" style = "padding-top: 50px">
 
             <div class="column-left" style="text-align: center"> 
-                <img  src="Images/Profile_avatar_placeholder_large%20copy.png" class ="img-circle square-medium">
+                <img onclick="document.getElementById('file').click();" src="Images/Profile_avatar_placeholder_large%20copy.png" class ="img-circle square-medium">
+                <input type="file" name="file" id = "file" style="display: none;" accept="image/*" />
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8"> 
-                <h2 style="text-align: left ; color: #D7B659">ARTIST NAME</h2>    
-                <h3 style="text-align: left"> @Username</h3> 
+                <h2 style="text-align: left ; color: #D7B659" id="publicName">ARTIST NAME</h2>    
+                <h3 style="text-align: left"> @Username</h3> <br>
             </div>
 
         </div>
+
+        <script>
+
+            var auth = firebase.auth();
+            var user = firebase.auth().currentUser;
+
+            if (user != null){
+                var userId = user.uid;
+
+                }
+            if (user == null) {
+                userId = "rando";
+            }
+
+
+
+            var storageRef = firebase.storage().ref();
+            function handleFileSelect(evt) {
+                evt.stopPropagation();
+                evt.preventDefault();
+                var file = evt.target.files[0];
+                var metadata = {
+                    'contentType': file.type
+                };
+                // Push to child path.
+                // [START oncomplete]
+                storageRef.child('profileImages/'+ userId +"/"+ file.name).put(file, metadata).then(function(snapshot) {
+                    console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+                    console.log(snapshot.metadata);
+                    var url = snapshot.downloadURL;
+                    console.log('File available at', url);
+                    // [START_EXCLUDE]
+            
+                    // [END_EXCLUDE]
+                }).catch(function(error) {
+                    // [START onfailure]
+                    console.error('Upload failed:', error);
+                    // [END onfailure]
+                });
+                // [END oncomplete]
+            }
+
+            window.onload = function() {
+                document.getElementById('file').addEventListener('change', handleFileSelect, false);
+
+                auth.onAuthStateChanged(function(user) {
+                    if (user) {
+                        // user is signed in 
+                    } else {
+                        // no user
+                        window.open("createAccount.html", "_self");                      }
+                });
+
+
+            }
+
+        </script>
+
+
 
     </body>
 

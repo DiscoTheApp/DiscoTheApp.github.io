@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,251 +26,158 @@
         <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
 
 
-        <!-- Leave out Storage -->
-        <!-- <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script> -->
-
-    </head>
-
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
-            authDomain: "disco-6a3bf.firebaseapp.com",
-            databaseURL: "https://disco-6a3bf.firebaseio.com",
-            storageBucket: "disco-6a3bf.appspot.com",
-            messagingSenderId: "71660981931"
-        };
-        firebase.initializeApp(config);
-
-        firebase.auth().signOut();
-
-        // FirebaseUI config.
-        var uiConfig = {
-            signInSuccessUrl: 'index.html',
-            signInOptions: [
-                // Leave the lines as is for the providers you want to offer your users.
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                firebase.auth.EmailAuthProvider.PROVIDER_ID
-            ],
-            // Terms of service url.
-            tosUrl: '<your-tos-url>'
-        };
-
-        // Initialize the FirebaseUI Widget using Firebase.
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
-        // The start method will wait until the DOM is loaded.
-        ui.start('#firebaseui-auth-container', uiConfig);
-
-
-    </script>
-
-
-
-    <!-- fireUI here -->
-
-
-    <body  style = "background-color: #whitw; color: #444444" >
-
-
-
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html"> DISCO </a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <form class="navbar-form navbar-right">
-                        <div class="form-group">
-                            <input type="text" placeholder="Email" class="form-control" id = "inputEmail">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" placeholder="Password" class="form-control" id = "inputPassword">
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-med">Sign in</button>
-                    </form>
-                </div><!--/.navbar-collapse -->
-            </div>
-        </nav>
-
-
-
-
-
-
-        <!-- Main jumbotron for a primary marketing message or call to action -->
-        <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
-            <div class="container">
-                <h1 >WELCOME TO DISCO</h1>
-                <p>Made for Artists</p>
-
-            </div>
-        </div>
-
-        <div id="firebase-ui-container"></div>
-
-
-
-
-
-        <div class="container">
-
-            <h2 style="text-align: center; padding-bottom: 25px">Create Account</h2>
-
-
-
-
-       
-
-
-
-
-            <script>
-
-                function startLogin (){
-
-
-
-                    console.log("starting to create account");
-
-                    var loginForm = document.getElementById('loginForm');
-
-                    console.log(loginForm.inputEmail.value);
-                    console.log("starting sign up");
-
-                    var inputEmail = loginForm.inputEmail.value;
-                    var inputUsername = loginForm.inputUsername.value;
-                    var password = loginForm.inputPassword.value;
-                    var confirmPassword = loginForm.inputConfirmPassword.value;
-
-
-                    checkUsername(inputUsername);
-
-
-                    console.log("SIGNING UP..");
-                    console.log(inputEmail);
-                    console.log("is this you?");
-
-                    if (inputEmail.length < 4) {
-                        alert('Please enter an email address.');
-                        return;
-                    }
-                    if (password.length < 4) {
-                        alert('Please enter a password.');
-                        return;
-                    }
-                    if (password != confirmPassword) {
-                        alert('Passwords do not match');
-                        return;
-                    }
-
-
-
-
-                    console.log("about to try to create");
-                    // Sign in with email and pass.
-                    // [START createwithemail]
-                    firebase.auth().createUserWithEmailAndPassword(inputEmail, password).catch(function(error) {
-                        console.log("inside create error");
-                        // Handle Errors here.
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
-                        // [START_EXCLUDE]
-                        if (errorCode == 'auth/weak-password') {
-                            alert('The password is too weak.');
-
-                        } else {
-                            alert(errorMessage);
-                        }
-                        console.log(error);
-                        // [END_EXCLUDE]
-
-                    }); // dont creating account
-
-                    console.log("Account Created Successfully");
-
-
-
-                    firebase.auth().onAuthStateChanged(function(user) {
-                        if (user) {
-                            // User is signed in.
-                            var database = firebase.database();
-                            user.updateProfile({
-                                displayName: inputUsername
-                            }).then(function() {
-                                console.log("users name is: " + user.displayName)
-                                // Update successful.
-                            }, function(error) {
-                                // An error happened.
-                            });
-                            console.log("About to start saving data: ");
-                            firebase.database().ref('users/' + user.uid).set({
-                                email: inputEmail,
-                                username: inputUsername,
-
-                            });
-                            firebase.database().ref('username/'+ inputUsername).set({
-                                username: user.uid,
-
-                            });
-                        } // User is signed in.
-
-                        else {
-                            // No user is signed in.
-                        }
-                    });
-
-                } // end create account function
-
-                function AvoidSpace(event) {
-                    var k = event ? event.which : window.event.keyCode;
-                    if (k == 32) return false;
-                    if (k == 64) return false;       
-                }
-
-                function checkUsername(preUsername){
-
-                    console.log("CHECKING USERNAMES");
-
-                    var database = firebase.database();
-                    var usernameRef = database.ref("usernames");
-
-                    usernameRef.once('value', function(snapshot) {
-                        snapshot.forEach(function(childSnapshot) {
-                            var childKey = childSnapshot.key;
-                            var childData = childSnapshot.val();
-                            console.log(childData);
-
-                            // ...
-                        });
-                    });
-                }
-
-
-            </script>
-
-        </div>
-        <div id="firebaseui-auth-container"></div>
-
-
-
-        <div class= "container">
-            <footer>
-                <p> &copy; 2017 Hutch Limited</p>
-            </footer>
-        </div> <!-- /container -->
-
         <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
+                authDomain: "disco-6a3bf.firebaseapp.com",
+                databaseURL: "https://disco-6a3bf.firebaseio.com",
+                storageBucket: "disco-6a3bf.appspot.com",
+                messagingSenderId: "71660981931"
+            };
+            firebase.initializeApp(config);
+
+
 
         </script>
 
 
+    </head>
+
+
+    <body  style = "background-color: #222">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="Index.html"> DISCO </a>
+                </div>
+                <div class="navbar-right" id="userOptionsBar">
+                    <a class="navbar-brand" href="upload.html"> Upload </a>
+                    <a class="navbar-brand" href="feed.html"> Feed </a>
+                    <a class="navbar-brand" href="myMusic.html"> My Music </a>
+                    <a class="navbar-brand" href="myProfile.html"> Username </a> 
+
+                </div>
+            </div>
+        </nav>
+
+        <div class="container" style = "background-color: #222">
+            <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
+                <div class="container">
+                    <h1 >Welcome to Disco</h1>
+                    <p style="color: #D7B659"> <i>Made for Artists</i></p>
+                </div>
+            </div>
+            <div style="color: white" class= "formCenter">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label style="color: #D7B659">@Username</label>
+                        <input onkeypress="return avoidSpace(event)" type="text" class="form-control" id="inputUsername" placeholder="@Username">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label style="color: #D7B659">Email</label>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label style="color: #D7B659">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label style="color: #D7B659">Confirm Password</label>
+                        <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password">
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-primary btn-medium" onclick="checkUsername()" >Create Account</button>
+
+                </form>
+            </div>
+        </div>
+
+        <script> // page end script
+
+            function checkUsername(){
+                var loginForm = document.getElementById('loginForm');
+
+                var inputUsername = loginForm.inputUsername.value;
+                var inputEmail = loginForm.inputEmail.value;
+                var inputPassword = loginForm.inputPassword.value;
+                var inputConfirmPassword = loginForm.inputConfirmPassword.value;
+
+                // check username availibility 
+
+                if (inputUsername.length > 0){
+                    // username typed 
+                    var usernameRef = firebase.database().ref("usernames/");
+                    usernameRef.once("value")
+                        .then(function(snapshot) {
+                        if (snapshot.child(inputUsername).exists()){
+                            alert("Username is taken");
+                        }
+                        else {
+                            console.log("username NOT is taken");
+                            if (inputPassword.length > 5 && inputPassword == inputConfirmPassword){
+                                // password is longer than 5 and matches confirm
+
+                                createAccount(inputEmail, inputPassword, inputUsername);
+                            }
+                            else {
+                                alert("Passwords DO NOT match");
+                            }
+                        }
+                    });
+                } // end username typed  
+
+
+
+            } // end checkCreate()
+
+
+
+
+
+            function createAccount(goodEmail, goodPassword, goodUsername){
+                console.log("about to create");
+                firebase.auth().createUserWithEmailAndPassword(goodEmail, goodPassword).catch(function(error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // [START_EXCLUDE]
+                    if (errorCode == 'auth/weak-password') {
+                        alert('The password is too weak.');
+                    } else {
+                        alert(errorMessage);
+                    }
+                    console.log(error);
+                    // [END_EXCLUDE]
+                });
+
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                        // User is signed in.
+                        console.log("user was created");
+                        console.log(user.uid);
+                        window.open("feed.html", "_self");  
+
+                    } else {
+                        // No user is signed in.
+                        console.log("user was NOT created");
+                    }
+                });
+
+
+            } // end good Create Account
+
+            function avoidSpace(event) {
+                var k = event ? event.which : window.event.keyCode;
+                if (k == 32) return false;
+                if (k == 64) return false;       
+            }
+
+        </script>
+
     </body>
+
 </html>

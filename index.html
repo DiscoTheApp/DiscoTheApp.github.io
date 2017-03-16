@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,6 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="DISCO">
         <meta name="author" content="Tushar">
-        <link rel="icon" href="../../favicon.ico">
 
         <title>DISCO</title>
 
@@ -37,93 +36,63 @@
                 messagingSenderId: "71660981931"
             };
             firebase.initializeApp(config);
+
+
+
         </script>
 
-
-
-
-
-        <!-- Leave out Storage -->
-        <!-- <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-storage.js"></script> -->
-
-        <script >
-            initApp = function() {
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) { 
-                        console.log("welcome " + user.email);
-                        window.open("profile.html", "_self");
-
-                    } else {
-
-                    }
-                }, function(error) {
-                    console.log(error);
-                });
-            };
-
-            window.addEventListener('load', function() {
-                initApp()
-            });
-        </script>
 
     </head>
 
-    <body  style = "background-color: #white; color: #444444" >
 
+    <body  style = "background-color: #222">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html"> DISCO </a>
+                    <a class="navbar-brand" href="Index.html"> DISCO </a>
                 </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <form class="navbar-form navbar-right">
-                        <div class="form-group">
-                            <input type="text" placeholder="Email" class="form-control" id = "inputEmail">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" placeholder="Password" class="form-control" id = "inputPassword">
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-med">Sign in</button>
-                        <button type="button" class="btn btn-primary btn-med" onclick="openCreateAccount()">Create Account</button>
-                    </form>
-                </div><!--/.navbar-collapse -->
+                <div class="navbar-right" id="userOptionsBar">
+                    <a class="navbar-brand" href="upload.html"> Upload </a>
+                    <a class="navbar-brand" href="feed.html"> Feed </a>
+                    <a class="navbar-brand" href="myMusic.html"> My Music </a>
+                    <a class="navbar-brand" href="myProfile.html"> Username </a> 
+
+                </div>
             </div>
         </nav>
 
-        <!-- Main jumbotron for a primary marketing message or call to action -->
-        <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
-            <div class="container">
-                <h1 >Discover new music.</h1>
-                <p>Disco is music streaming service that allows Artists to share their music for free, and get paid for their work.</p>
-                <p><a class="btn btn-primary btn-lg" href="createAccount.html" role="button">CREATE ACCOUNT</a></p>
+        <div class="container" style = "background-color: #222" id="newUserDiv">
+            <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
+                <div class="container">
+                    <h1 >Discover new music.</h1>
+                    <p>Disco is music streaming service that allows Artists to share their music for free, and get paid for their work.</p>
+                    <p><a class="btn btn-primary btn-lg" href="createAccount.html" role="button">CREATE ACCOUNT</a></p>
+                </div>
             </div>
         </div>
-        <div class="container">
-
-            <h2 style="text-align: center">MORE WEBSITE INFO </h2>
-
+        <div class="container">    
+            <div style="color: white; text-align: center">
+                <h1> Recently Released</h1>  <br>
+                <h1> Top Songs</h1> <br>
+                <h2> Feed </h2> <br>
+            </div>
         </div>
+        <script>
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    // User is signed in.
+                    console.log("logged in");
+                    document.getElementById("newUserDiv").style.visibility="hidden" ;
 
+                } else {
+                    // No user is signed in.
+                    console.log("no one logged in");
+                    document.getElementById("userOptionsBar").style.visibility="hidden" ;
 
+                }
+            });
+        </script>
 
-        <div class= "container">
-            <footer>
-                <p> &copy; 2017 Hutch Limited</p>
-            </footer>
-        </div> <!-- /container -->
-
-    <script> 
-        function openCreateAccount(){
-         window.open("createAccount.html", "_self");  
-        }
-
-        
-    </script>
     </body>
+
 </html>

@@ -11,6 +11,10 @@
     padding-left: 250px;
 }
 
+.nav-btn{
+    padding-top: 50px;
+}
+
 
 
 
@@ -3143,7 +3147,7 @@ select[multiple].input-lg {
     }
     .btn-primary:hover {
         color: #fff;
-        background-color: transparent;
+        background-color: #D7B659;
         border-color: #D7B659;
     }
     .btn-primary:active,
@@ -4613,8 +4617,9 @@ select[multiple].input-lg {
         color: #9d9d9d;
     }
     .navbar-inverse .navbar-brand:hover,
-    .navbar-inverse .navbar-brand:focus {
-        color: #fff;
+    .navbar-inverse .navbar-brand:focus,
+    .navbar-inverse .navbar-brand:active{
+        color: #D7B659;
         background-color: transparent;
     }
     .navbar-inverse .navbar-text {

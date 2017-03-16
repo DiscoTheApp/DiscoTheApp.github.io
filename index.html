@@ -27,6 +27,7 @@
 
 
         <script>
+            
             // Initialize Firebase
             var config = {
                 apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
@@ -36,8 +37,6 @@
                 messagingSenderId: "71660981931"
             };
             firebase.initializeApp(config);
-
-
 
         </script>
 
@@ -56,6 +55,7 @@
                     <a class="navbar-brand" href="feed.html"> Feed </a>
                     <a class="navbar-brand" href="myMusic.html"> My Music </a>
                     <a class="navbar-brand" href="myProfile.html"> Username </a> 
+                    
 
                 </div>
             </div>
@@ -83,7 +83,6 @@
                     // User is signed in.
                     console.log("logged in");
                     document.getElementById("newUserDiv").style.visibility="hidden" ;
-
                 } else {
                     // No user is signed in.
                     console.log("no one logged in");

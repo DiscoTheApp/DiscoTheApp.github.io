@@ -80,7 +80,7 @@
             if (user != null){
                 var userId = user.uid;
 
-                }
+            }
             if (user == null) {
                 userId = "rando";
             }
@@ -89,7 +89,7 @@
 
             var storageRef = firebase.storage().ref();
             function handleFileSelect(evt) {
-<<<<<<< HEAD
+
 
                 firebase.auth().onAuthStateChanged(function(user) {
                     if (user) {
@@ -113,48 +113,25 @@
                             // [START_EXCLUDE]
 
                             // [END_EXCLUDE]
-                            ).catch(function(error) {
-                                // [START onfailure]
-                                console.error('Upload failed:', error);
-                                // [END onfailure]
-                            });
-                            // [END oncomplete]
+                        }).catch(function(error) {
+                            // [START onfailure]
+                            console.error('Upload failed:', error);
+                            // [END onfailure]
+                        });
+                        // [END oncomplete]
 
-                        }    // User is signed in.
-                        
-                                                                                                                 else {
-                                                                                                                 // no one logged in 
-                                                                                                                 window.open("createAccount.html", "_self");  
+                    }    // User is signed in.
+
+                    else {
+                        // no one logged in 
+                        window.open("createAccount.html", "_self");  
 
                     }
-                }});
+                });
 
             } // END FILE SELECT
-=======
-                evt.stopPropagation();
-                evt.preventDefault();
-                var file = evt.target.files[0];
-                var metadata = {
-                    'contentType': file.type
-                };
-                // Push to child path.
-                // [START oncomplete]
-                storageRef.child('profileImages/'+ userId +"/"+ file.name).put(file, metadata).then(function(snapshot) {
-                    console.log('Uploaded', snapshot.totalBytes, 'bytes.');
-                    console.log(snapshot.metadata);
-                    var url = snapshot.downloadURL;
-                    console.log('File available at', url);
-                    // [START_EXCLUDE]
-            
-                    // [END_EXCLUDE]
-                }).catch(function(error) {
-                    // [START onfailure]
-                    console.error('Upload failed:', error);
-                    // [END onfailure]
-                });
-                // [END oncomplete]
-            }
->>>>>>> parent of b178b53... working uploader
+
+         
 
             window.onload = function() {
                 document.getElementById('file').addEventListener('change', handleFileSelect, false);
@@ -162,8 +139,7 @@
                 auth.onAuthStateChanged(function(user) {
                     if (user) {
 
-                        user.
-                        // user is signed in 
+
                     } else {
                         // no user
                         window.open("createAccount.html", "_self");                      }

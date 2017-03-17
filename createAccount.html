@@ -37,6 +37,12 @@
             };
             firebase.initializeApp(config);
 
+            function avoidSpace(event) {
+                var k = event ? event.which : window.event.keyCode;
+                if (k == 32) return false;
+                if (k == 64) return false;       
+            }
+
 
 
         </script>
@@ -134,10 +140,6 @@
 
             } // end checkCreate()
 
-
-
-
-
             function createAccount(goodEmail, goodPassword, goodUsername){
                 console.log("about to create");
                 firebase.auth().createUserWithEmailAndPassword(goodEmail, goodPassword).catch(function(error) {
@@ -160,6 +162,20 @@
                         console.log("user was created");
                         console.log(user.uid);
                         writeUserData(goodUsername,goodEmail,user.uid);
+
+                        user.updateProfile({
+                            console.log("updating user profile");
+                            displayName: goodUsername,
+                            photoURL: "https://firebasestorage.googleapis.com/v0/b/disco-6a3bf.appspot.com/o/profile.png?alt=media&token=73d177a7-db8d-41f9-88f2-fddec2c2bce1"
+                        }).then(function() {
+                            // Update successful.
+                        }, function(error) {
+                            // An error happened.
+                        });
+
+                        // user now created and logged in:
+
+                        updateProfile();
                         window.open("myProfile.html", "_self");  
 
                     } else {
@@ -171,11 +187,8 @@
 
             } // end good Create Account
 
-            function avoidSpace(event) {
-                var k = event ? event.which : window.event.keyCode;
-                if (k == 32) return false;
-                if (k == 64) return false;       
-            }
+            
+            
             function writeUserData(username, email, uid) {
                 firebase.database().ref('users/' + username).set({
                     username: username,
@@ -183,6 +196,7 @@
                     userID: uid
                 });
             }
+        
 
         </script>
 

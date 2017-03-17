@@ -62,7 +62,7 @@
         <div class="container" style = "padding-top: 50px">
 
             <div class="column-left" style="text-align: center"> 
-                <img onclick="document.getElementById('file').click();" src="Images/Profile_avatar_placeholder_large%20copy.png" class ="img-circle square-medium">
+                <img onclick="document.getElementById('file').click();" id="profileImage" class ="img-circle square-medium">
                 <input type="file" name="file" id = "file" style="display: none;" accept="image/*" />
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8"> 
@@ -97,11 +97,12 @@
                         };
                         // Push to child path.
                         // [START oncomplete]
-                        storageRef.child('profileImages/'+ userId +"/"+ file.name).put(file, metadata).then(function(snapshot) {
+                        storageRef.child('profileImages/'+ userId +''/profileImage.jpg').put(file, metadata).then(function(snapshot) {
                             console.log('Uploaded', snapshot.totalBytes, 'bytes.');
                             console.log(snapshot.metadata);
                             var url = snapshot.downloadURL;
                             console.log('File available at', url);
+                            selectImage(url);
                             // [START_EXCLUDE]
 
                             // [END_EXCLUDE]
@@ -128,6 +129,8 @@
 
                 auth.onAuthStateChanged(function(user) {
                     if (user) {
+                        
+                        user.
                         // user is signed in 
                     } else {
                         // no user
@@ -135,6 +138,10 @@
                 });
 
 
+            }
+
+            function selectImage(fileName) {
+                document.getElementById("profileImage").src = fileName;
             }
 
         </script>

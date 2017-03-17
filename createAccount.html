@@ -163,17 +163,18 @@
                         console.log(user.uid);
                         writeUserData(goodUsername,goodEmail,user.uid);
 
+                        var user = firebase.auth().currentUser;
+
                         user.updateProfile({
-                            displayName: goodUsername,
-                            photoURL: "https://firebasestorage.googleapis.com/v0/b/disco-6a3bf.appspot.com/o/profile.png?alt=media&token=73d177a7-db8d-41f9-88f2-fddec2c2bce1"
+                            displayName: goodUsername
                         }).then(function() {
+                               window.open("myProfile.html", "_self");  
                             // Update successful.
                         }, function(error) {
                             // An error happened.
                         });
-
                         // user now created and logged in:
-                        window.open("myProfile.html", "_self");  
+                     
 
                     } else {
                         // No user is signed in.
@@ -184,8 +185,8 @@
 
             } // end good Create Account
 
-            
-            
+
+
             function writeUserData(username, email, uid) {
                 firebase.database().ref('users/' + username).set({
                     username: username,
@@ -193,8 +194,8 @@
                     userID: uid
                 });
             }
-            
-           
+
+
 
         </script>
 

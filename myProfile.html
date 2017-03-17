@@ -59,15 +59,15 @@
             </div>
         </nav>
 
-        <div class="container" style = "padding-top: 50px">
+        <div class="container jumbotron" style = "padding-top: 50px">
 
             <div class="column-left" style="text-align: center"> 
                 <img onclick="document.getElementById('file').click();" id="profileImage" class ="img-circle square-medium">
                 <input type="file" name="file" id = "file" style="display: none;" accept="image/*" />
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8"> 
-                <h2 style="text-align: left ; color: #D7B659" id="publicName">ARTIST NAME</h2>    
-                <h3 style="text-align: left"> @Username</h3> <br>
+                <h1 style = "color: #D7B659" id="publicName" onclick="changeName()">Change Name</h1>
+                <h3 style="text-align: left; color: white" id="usernameDisplay"></h3> <br>
             </div>
 
         </div>
@@ -82,7 +82,7 @@
 
             }
             if (user == null) {
-                userId = "rando";
+                userId = "anon";
             }
 
 
@@ -108,6 +108,14 @@
                             console.log(snapshot.metadata);
                             var url = snapshot.downloadURL;
                             console.log('File available at', url);
+                            user.updateProfile({
+                                photoURL: url
+                            }).then(function() {
+                                // Update successful.
+                            }, function(error) {
+                                // An error happened.
+                            });
+
                             selectImage(url);
 
                             // [START_EXCLUDE]
@@ -131,13 +139,40 @@
 
             } // END FILE SELECT
 
-         
+
 
             window.onload = function() {
                 document.getElementById('file').addEventListener('change', handleFileSelect, false);
 
                 auth.onAuthStateChanged(function(user) {
                     if (user) {
+                        var userID = user.uid;
+                        var username = user.displayName;
+
+                        console.log(userID);
+                        console.log(username);
+                        document.getElementById("usernameDisplay").innerHTML = "@" + username;
+                        if (user.photoURL != null){
+                            document.getElementById("profileImage").src = user.photoURL;
+
+                        }
+                        if (user.photoURL == null){
+                            document.getElementById("profileImage").src = "images/profile.png";
+                        }
+
+                        // get public name
+
+                        return firebase.database().ref('/users/' + username + "/publicName").once('value').then(function(snapshot) {
+                            var publicName = snapshot.val().publicName;
+                            document.getElementById("publicName").innerHTML = publicName;
+
+
+
+                        });
+
+
+
+
 
 
                     } else {
@@ -151,6 +186,30 @@
             function selectImage(fileName) {
                 document.getElementById("profileImage").src = fileName;
             }
+
+            function changeName(){
+                var name = prompt("Please enter your name", "Name here");
+
+                if (name != null) {
+                    document.getElementById("publicName").innerHTML = name;
+
+                    firebase.auth().onAuthStateChanged(function(user) {
+                        if (user) {
+                            // User is signed in.
+                            firebase.database().ref('users/' + user.displayName + "/publicName").set({
+                                publicName: name
+                            });
+                        } else {
+                            // No user is signed in.
+                        }
+                    });
+
+
+
+                }
+            }
+
+
 
         </script>
 

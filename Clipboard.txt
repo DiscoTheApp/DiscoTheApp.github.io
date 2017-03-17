@@ -290,3 +290,25 @@ Clipboard:
                     </div>
                 </div>
             </form>
+
+
+
+////// changing the design if someone is logged in //////// CLUTCHHHHHHHH
+
+
+
+
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    // User is signed in.
+                    console.log("logged in as: "+ user.displayName);
+                    document.getElementById("newUserDiv").remove();
+
+                    
+                } else {
+                    // No user is signed in.
+                    console.log("no one logged in");
+                    document.getElementById("userOptionsBar").remove();
+
+                }
+            });

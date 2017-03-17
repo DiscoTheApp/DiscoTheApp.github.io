@@ -96,7 +96,7 @@
                         <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password">
                     </div>
                     <br>
-                    <button type="button" class="btn btn-primary btn-medium" onclick="checkUsername()" >Create Account</button>
+                    <button type="button" class="btn btn-primary btn-medium" onclick="checkUsername()">Create Account</button>
 
                 </form>
             </div>
@@ -164,7 +164,6 @@
                         writeUserData(goodUsername,goodEmail,user.uid);
 
                         user.updateProfile({
-                            console.log("updating user profile");
                             displayName: goodUsername,
                             photoURL: "https://firebasestorage.googleapis.com/v0/b/disco-6a3bf.appspot.com/o/profile.png?alt=media&token=73d177a7-db8d-41f9-88f2-fddec2c2bce1"
                         }).then(function() {
@@ -174,8 +173,6 @@
                         });
 
                         // user now created and logged in:
-
-                        updateProfile();
                         window.open("myProfile.html", "_self");  
 
                     } else {
@@ -196,7 +193,8 @@
                     userID: uid
                 });
             }
-        
+            
+           
 
         </script>
 

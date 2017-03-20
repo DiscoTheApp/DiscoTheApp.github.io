@@ -24,7 +24,30 @@
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
         <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
-        <scipt src="firebaseStart.js"></scipt>
+        <script>
+
+
+
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
+                authDomain: "disco-6a3bf.firebaseapp.com",
+                databaseURL: "https://disco-6a3bf.firebaseio.com",
+                storageBucket: "disco-6a3bf.appspot.com",
+                messagingSenderId: "71660981931"
+            };
+            firebase.initializeApp(config);
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    console.log(user.displayName);
+                    // User is signed in.
+                } else {
+                    // No user is signed in.
+                    window.open("createAccount.html", "_self");  
+
+                }
+            });
+        </script>
 
     </head>
 

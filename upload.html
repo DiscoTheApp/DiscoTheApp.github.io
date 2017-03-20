@@ -23,8 +23,36 @@
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
         <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
-        <scipt src="firebaseStart.js"></scipt>
+        <script>
+
+
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
+                authDomain: "disco-6a3bf.firebaseapp.com",
+                databaseURL: "https://disco-6a3bf.firebaseio.com",
+                storageBucket: "disco-6a3bf.appspot.com",
+                messagingSenderId: "71660981931"
+            };
+            firebase.initializeApp(config);
+
+            // before anything happends login code starts here
+
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    // User is signed in.
+                } else {
+                    // No user is signed in.
+                    window.open("createAccount.html", "_self");  
+
+                }
+            });
+
+
+
+        </script>
 
     </head>
 
@@ -33,7 +61,7 @@
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="Index.html"> DISCO </a>
+                    <a class="navbar-brand" href="index.html"> DISCO </a>
                 </div>
                 <div class="navbar-right">
                     <a class="navbar-brand" href="upload.html"> Upload </a>
@@ -45,11 +73,164 @@
                 </div>
             </div>
         </nav>
+        <div class="container">
+            <div class="jumbotron" style="background-color:#333;text-align: center">
+                <h2 style="color: #D7B659">Upload Music</h2>
+                <h3 style="color: white"> <i> Disco provides a way for artist to share their music like never before</i></h3>
+                <button class="btn btn-primary" style="margin-top:10px"> HOW IT WORKS</button>
 
-        // page content start 
-        <div class="container" style = "background-color: #222; padding-top: 30px">
+            </div>
+
+            <div class="col-xs-6 col-md-4">
+
+                <img  src="Images/coverArt.png" class =" square-large" style="margin-bottom: 10px">
+                <select name="uploadType" class="formSelect-control" onchange="toggle(this)">
+                    <option value="single">Single</option>
+                    <option value="album">Album</option>
+                </select>
+                <button class="btn btn-primary btn-lg" style="float:center; margin-top:10px;" id="previewButton" disabled>Preview</button>
+
+
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8" style="background-color: #222"> 
+
+
+
+                <div id="singleDiv" style="color: white; padding-top: px">
+
+                    <input type="text" class="formDetails-control" placeholder="Song Name" style="width: 100%; height: 75px; font-size: 50px" id="songName" onchange="startTyping()"  > <br>
+                    <input type="text" class="formDetails-control" placeholder="@Featuring (Optional)" style="width: 100%" id="ftNames"> <br>
+
+                    <button class="btn btn-primary" style="float:left; margin-top:10px; margin-right: 10px; display: none" onclick="document.getElementById('songFile').click();" id="uploadButton" >+ Upload Song</button>
+                    <input type="file" name="file" id = "songFile" style="display: none;" accept="audio/*" />
+
+
+                </div>
+
+                <div id="albumDiv" style="color: white; display: none">
+
+
+
+
+
+                </div>
+
+            </div>
 
         </div>
+
+
+        <script>
+
+            var songChosen = false;
+            var storageRef = firebase.storage().ref();
+            var songName = document.getElementById("songName").value;
+
+            function songSelected(fileSelected){
+                if (fileSelected != null){
+                    console.log("file was chosen");
+                    songChosen = true;
+                    console.log("song name is: " + songName);
+                } // file exists
+
+            }
+
+
+            function toggle(el){
+                var value = el.options[el.selectedIndex].value,
+                    singleDiv = document.getElementById('singleDiv'),
+                    albumDiv  = document.getElementById('albumDiv');
+
+                if (value === 'single') {
+                    singleDiv.style.display = 'block';
+                    albumDiv.style.display = 'none';
+
+                } else if (value === 'album') {
+                    singleDiv.style.display = 'none';
+                    albumDiv.style.display = 'block';   
+
+                }
+            }
+
+
+
+
+            function handleFileSelect(evt) {
+                console.log("triggered");
+
+
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                        userId = user.uid;
+                        console.log("user: " + userId);
+                        var file = evt.target.files[0];
+                        var metadata = {
+                            'contentType': file.type
+                        };
+                        console.log("file should be chosen");
+
+                        songSelected(file);
+
+                        // Push to child path.
+                        //                            // [START oncomplete]
+                        //                            storageRef.child('profileImages/'+ userId +'/profileImage.jpg').put(file, metadata).then(function(snapshot) {
+                        //                                console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+                        //                                console.log(snapshot.metadata);
+                        //                                var url = snapshot.downloadURL;
+                        //                                console.log('File available at', url);
+                        //                                user.updateProfile({
+                        //                                    photoURL: url
+                        //                                }).then(function() {
+                        //                                    // Update successful.
+                        //                                }, function(error) {
+                        //                                    // An error happened.
+                        //                                });
+                        //
+                        //                                selectImage(url);
+                        //
+                        //                                // [START_EXCLUDE]
+                        //
+                        //                                // [END_EXCLUDE]
+                        //                            }).catch(function(error) {
+                        //                                // [START onfailure]
+                        //                                console.error('Upload failed:', error);
+                        //                                // [END onfailure]
+                        //                            });
+                        //                            // [END oncomplete]
+
+                    }    // User is signed in.
+
+                    else {
+                        // no one logged in 
+                        window.open("createAccount.html", "_self");  
+
+                    }
+                });
+
+
+
+            } // END FILE SELECT
+
+            function startTyping(){
+
+            }
+
+
+
+            window.onload = 
+
+                function() {
+                document.getElementById('songFile').addEventListener('change', handleFileSelect, true);
+
+
+            }
+
+
+
+
+        </script>
+
+
 
     </body>
 

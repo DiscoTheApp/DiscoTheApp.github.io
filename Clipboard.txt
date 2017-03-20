@@ -209,23 +209,7 @@ Clipboard:
   
   // profile box
   
-          <div class="column-left" style="text-align: center" > 
-        
-   
-        <div class="col-xs-6 col-md-4" style="padding-top:10px">
-        <img  src="Images/Profile_avatar_placeholder_large%20copy.png" class ="img-circle square-small">
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-8"> 
-        <h2 style="text-align: left ; color: #D7B659"> Artist Name </h2>    
-        <h3 style="text-align: left"> @Username</h3> 
-        </div>
-    
-
-          x
-        
-     
-        </div>
-        
+         
         
         
         /// JAVA TO HTML !!!!!!!!!!!!!!!!!!!!!

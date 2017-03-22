@@ -27,6 +27,8 @@
         <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
         <script>
 
+            var userUsername, userUid;
+
 
             // Initialize Firebase
             var config = {
@@ -43,6 +45,8 @@
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
                     // User is signed in.
+                    userUid = user.uid;
+                    userUsername = user.displayName;
                 } else {
                     // No user is signed in.
                     window.open("createAccount.html", "_self");  
@@ -88,7 +92,6 @@
                     <option value="single">Single</option>
                     <option value="album">Album</option>
                 </select>
-                <button class="btn btn-primary btn-lg" style="float:center; margin-top:10px;" id="previewButton" disabled>Preview</button>
 
 
             </div>
@@ -98,11 +101,16 @@
 
                 <div id="singleDiv" style="color: white; padding-top: px">
 
-                    <input type="text" class="formDetails-control" placeholder="Song Name" style="width: 100%; height: 75px; font-size: 50px" id="songName" onchange="startTyping()"  > <br>
-                    <input type="text" class="formDetails-control" placeholder="@Featuring (Optional)" style="width: 100%" id="ftNames"> <br>
+                    <input type="text" class="formDetails-control" placeholder="Song Name" style="width: 100%; height: 75px; font-size: 50px" id="songTextbox" > <br>
+                    <input type="text" class="formDetails-control" placeholder="@Featuring (Optional)" style="width: 100%"> <br>
 
-                    <button class="btn btn-primary" style="float:left; margin-top:10px; margin-right: 10px; display: none" onclick="document.getElementById('songFile').click();" id="uploadButton" >+ Upload Song</button>
+                    <button class="btn btn-primary" style="float:left; margin-top:10px; margin-right: 10px; display: none" onclick="startUpload()" id="uploadButton">+ Upload Song</button>
+
                     <input type="file" name="file" id = "songFile" style="display: none;" accept="audio/*" />
+
+                    <button class="btn btn-primary btn-lg" style="display: none; float: right" id="previewButton" onclick="previewUpload()">Preview Upload</button>
+
+
 
 
                 </div>
@@ -120,20 +128,17 @@
         </div>
 
 
+
+
+
         <script>
 
-            var songChosen = false;
+
             var storageRef = firebase.storage().ref();
-            var songName = document.getElementById("songName").value;
+            var songName;
 
-            function songSelected(fileSelected){
-                if (fileSelected != null){
-                    console.log("file was chosen");
-                    songChosen = true;
-                    console.log("song name is: " + songName);
-                } // file exists
-
-            }
+            var uploadButton = document.getElementById('uploadButton');
+            var previewButton = document.getElementById('previewButton');
 
 
             function toggle(el){
@@ -156,64 +161,47 @@
 
 
             function handleFileSelect(evt) {
-                console.log("triggered");
+                console.log("ready to upload for: " + userUsername);
+                var uploadFile = evt.target.files[0];
+                // have the file?
 
+                if (uploadFile != null && songName.length > 0){
+                    previewButton.style.display = 'block';
 
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) {
-                        userId = user.uid;
-                        console.log("user: " + userId);
-                        var file = evt.target.files[0];
-                        var metadata = {
-                            'contentType': file.type
-                        };
-                        console.log("file should be chosen");
-
-                        songSelected(file);
-
-                        // Push to child path.
-                        //                            // [START oncomplete]
-                        //                            storageRef.child('profileImages/'+ userId +'/profileImage.jpg').put(file, metadata).then(function(snapshot) {
-                        //                                console.log('Uploaded', snapshot.totalBytes, 'bytes.');
-                        //                                console.log(snapshot.metadata);
-                        //                                var url = snapshot.downloadURL;
-                        //                                console.log('File available at', url);
-                        //                                user.updateProfile({
-                        //                                    photoURL: url
-                        //                                }).then(function() {
-                        //                                    // Update successful.
-                        //                                }, function(error) {
-                        //                                    // An error happened.
-                        //                                });
-                        //
-                        //                                selectImage(url);
-                        //
-                        //                                // [START_EXCLUDE]
-                        //
-                        //                                // [END_EXCLUDE]
-                        //                            }).catch(function(error) {
-                        //                                // [START onfailure]
-                        //                                console.error('Upload failed:', error);
-                        //                                // [END onfailure]
-                        //                            });
-                        //                            // [END oncomplete]
-
-                    }    // User is signed in.
-
-                    else {
-                        // no one logged in 
-                        window.open("createAccount.html", "_self");  
-
-                    }
-                });
+                }
 
 
 
             } // END FILE SELECT
 
-            function startTyping(){
+            function startUpload(){
+
+                document.getElementById('songFile').click();
 
             }
+
+            function nameExists(event){
+                songName = event.target.value;
+
+                if (songName.length > 0){
+                    console.log("should show button now");
+                    uploadButton.style.display = 'block';
+                }
+                if (songName.length == 0){
+                    console.log("should show button now");
+                    uploadButton.style.display = 'none';
+                }
+
+            }
+            
+            function previewUpload(){
+                
+                console.log("r");
+            
+            }
+
+
+
 
 
 
@@ -221,6 +209,8 @@
 
                 function() {
                 document.getElementById('songFile').addEventListener('change', handleFileSelect, true);
+                document.getElementById('songTextbox').addEventListener('input', nameExists,false);
+
 
 
             }

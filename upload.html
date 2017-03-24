@@ -16,6 +16,8 @@
         <link href="jumbotron.css" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
 
+
+
         <!-- Firebase -->
 
         <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
@@ -25,6 +27,7 @@
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
         <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script>
 
             var userUsername, userUid;
@@ -77,6 +80,9 @@
                 </div>
             </div>
         </nav>
+
+
+
         <div class="container">
             <div class="jumbotron" style="background-color:#333;text-align: center">
                 <h2 style="color: #D7B659">Upload Music</h2>
@@ -87,8 +93,9 @@
 
             <div class="col-xs-6 col-md-4">
 
-                <img  src="Images/coverArt.png" class =" square-large" style="margin-bottom: 10px">
-                <select name="uploadType" class="formSelect-control" onchange="toggle(this)">
+                <img  src="Images/coverArt.png" class =" square-large" style="margin-bottom: 10px" onclick="startCoverUpload()" id="coverArt">
+
+                <select name="uploadType" class="formSelect-control" onchange="toggleType(this)">
                     <option value="single">Single</option>
                     <option value="album">Album</option>
                 </select>
@@ -98,25 +105,41 @@
             <div class="col-xs-12 col-sm-6 col-md-8" style="background-color: #222"> 
 
 
+                <div id="singleDiv" style="color: white">
 
-                <div id="singleDiv" style="color: white; padding-top: px">
+
 
                     <input type="text" class="formDetails-control" placeholder="Song Name" style="width: 100%; height: 75px; font-size: 50px" id="songTextbox" > <br>
                     <input type="text" class="formDetails-control" placeholder="@Featuring (Optional)" style="width: 100%"> <br>
 
-                    <button class="btn btn-primary" style="float:left; margin-top:10px; margin-right: 10px; display: none" onclick="startUpload()" id="uploadButton">+ Upload Song</button>
 
-                    <input type="file" name="file" id = "songFile" style="display: none;" accept="audio/*" />
+
+                    <input type="file" id = "songFile" style="display: none;" accept="audio/*" onchange="handleSongSelect(this)" />
+                    <input type="file" id = "coverFile" style="display: none;" accept="image/*" onchange="handleCoverSelect(this)" /> <br>
+
+
+
+                    <button class="btn btn-primary" style="margin-top:0px; margin-right: 10px; display: none;" onclick="startSongUpload()" id="uploadButton">+ Upload Song </button> 
+
+
+
+
+
+
+
 
                     <button class="btn btn-primary btn-lg" style="display: none; float: right" id="previewButton" onclick="previewUpload()">Preview Upload</button>
 
 
 
 
-                </div>
+                    <div id="albumDiv" style="color: white; display: none">
 
-                <div id="albumDiv" style="color: white; display: none">
 
+
+
+
+                    </div>
 
 
 
@@ -124,8 +147,46 @@
                 </div>
 
             </div>
-
         </div>
+
+
+
+
+        <footer class="footer">
+
+            <div class="col-xs-6 col-md-4" style="padding-left:0px">
+
+                <h3 style="margin-top:0px"> Song Name<img id="footerCover" class="footerCover" style="float:left; margin-right: 10px"> </h3>
+                <h3> <small> Artist</small></h3>
+
+            </div>
+
+            <div class="col-xs-6 col-md-4" style="padding-top:25px">
+
+
+
+                <img  id="repeatButton"class="audioIconSmall" src="Icons/Repeat-96.png" onclick="">
+                <img  id="rewindButton"class="audioIconBig" src="Icons/Rewind-100.png" onclick="">
+                <img  id="playButton"class="audioIconBig" src="Icons/Play-100.png" onclick="toggleMusic()">
+                <img  id="forwardButton"class="audioIconBig" src="Icons/Fast%20Forward-100.png" onclick="">
+                <img  id="shuffleButton"class="audioIconSmall" src="Icons/Shuffle-96.png" onclick="">
+
+            </div>
+
+            <div class="col-xs-6 col-md-4">Right
+
+            </div>
+
+
+
+
+
+
+        </footer>
+
+
+
+
 
 
 
@@ -135,13 +196,19 @@
 
 
             var storageRef = firebase.storage().ref();
-            var songName;
+            var songName, songFile, coverFile;
 
+            var player = document.getElementById('player');
             var uploadButton = document.getElementById('uploadButton');
             var previewButton = document.getElementById('previewButton');
+            var songPreview = document.getElementById('songPreview');
+            var playButton = document.getElementById('playButton');
 
 
-            function toggle(el){
+
+
+
+            function toggleType(el){
                 var value = el.options[el.selectedIndex].value,
                     singleDiv = document.getElementById('singleDiv'),
                     albumDiv  = document.getElementById('albumDiv');
@@ -157,26 +224,54 @@
                 }
             }
 
-
-
-
-            function handleFileSelect(evt) {
+            function handleSongSelect(input) {
                 console.log("ready to upload for: " + userUsername);
-                var uploadFile = evt.target.files[0];
-                // have the file?
+                console.log("file chosen");
+                if (input.files && input.files[0]) {
+                    console.log("file exists");
+                    var songFile = input.files[0];
 
-                if (uploadFile != null && songName.length > 0){
-                    previewButton.style.display = 'block';
+                    var reader = new FileReader();
 
+                    reader.onload = function (e) {
+                        $('#player')
+                            .attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+
+            } // END FILE SELECT
+
+            function handleCoverSelect(input) {
+                console.log("file chosen");
+                if (input.files && input.files[0]) {
+                    console.log("file exists");
+                    coverFile = input.files[0];
+
+
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#coverArt')
+                            .attr('src', e.target.result);
+                        $('#footerCover')
+                            .attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
                 }
 
 
 
             } // END FILE SELECT
 
-            function startUpload(){
-
+            function startSongUpload(){
                 document.getElementById('songFile').click();
+
+            }
+            function startCoverUpload(){
+                document.getElementById('coverFile').click();
 
             }
 
@@ -184,22 +279,33 @@
                 songName = event.target.value;
 
                 if (songName.length > 0){
-                    console.log("should show button now");
                     uploadButton.style.display = 'block';
+
+
                 }
                 if (songName.length == 0){
-                    console.log("should show button now");
                     uploadButton.style.display = 'none';
+
                 }
 
             }
-            
-            function previewUpload(){
-                
-                console.log("r");
-            
-            }
 
+
+
+
+            function toggleMusic(){
+                console.log("clicked");
+                if (player.paused){
+                    player.play();  
+                    $('#playButton').attr('src', "Icons/Pause-100.png");
+                }
+                else{
+                    player.pause();
+                    $('#playButton').attr('src', "Icons/Play-100.png");
+                }
+
+
+            }
 
 
 
@@ -208,15 +314,10 @@
             window.onload = 
 
                 function() {
-                document.getElementById('songFile').addEventListener('change', handleFileSelect, true);
                 document.getElementById('songTextbox').addEventListener('input', nameExists,false);
 
 
-
             }
-
-
-
 
         </script>
 

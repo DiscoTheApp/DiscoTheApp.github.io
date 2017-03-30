@@ -91,20 +91,15 @@
                 <button class="btn btn-primary" style="margin-top:10px"> HOW IT WORKS</button>
 
             </div>
-            <div class="container">
-                <select name="uploadType" class="formSelect-control" onchange="toggleType(this)" style="margin-bottom:10px; width: 31%">
-                    <option value="single">Single</option>
-                    <option value="album">Album</option>
-                </select>
-            </div>
 
             <div class="col-xs-6 col-md-4">
 
-
                 <img  src="Images/coverArt.png" class ="square-large" style="margin-bottom: 10px" onclick="startCoverUpload()" id="coverArt">
-                <button class="btn btn-primary" style="width: 100%" onclick="startCoverUpload()"> Upload Cover Art</button> <br>
 
-
+                <select name="uploadType" class="formSelect-control" onchange="toggleType(this)">
+                    <option value="single">Single</option>
+                    <option value="album">Album</option>
+                </select>
 
 
             </div>
@@ -115,10 +110,9 @@
 
 
 
-                    <input type="text" class="formDetails-control" placeholder="Song Name" style="width: 100%; height: 60px; font-size: 40px" id="songTextbox" onkeyup="updateSongName()" > <br>
+                    <input type="text" class="formDetails-control" placeholder="Song Name" style="width: 100%; height: 75px; font-size: 50px" id="songTextbox" onkeyup="updateSongName()" > <br>
                     <input type="text" class="formDetails-control" placeholder="#Keywords (Recommended)" style="width: 100%"> <br>
-                    <input type="text" class="formDetails-control" placeholder="@Usernames (Featuring Artists)" style="width: 100%"> <br>
-                    <input type="checkbox"> Explicit
+                    <input type="text" class="formDetails-control" placeholder="@Featuring Artists (Optional)" style="width: 100%"> <br>
 
 
 
@@ -129,8 +123,16 @@
 
 
 
-                    <button class="btn btn-primary" style="margin-top:2%; margin-right: 10px; display: none;" onclick="startSongUpload()" id="uploadButton">+ Upload Song </button> 
+                    <button class="btn btn-primary" style="margin-top:0px; margin-right: 10px; display: none;" onclick="startSongUpload()" id="uploadButton">+ Upload Song </button> 
 
+
+
+
+
+
+
+
+                    <button class="btn btn-primary btn-lg" style="display: none; float: right" id="previewButton" onclick="previewUpload()">Preview Upload</button>
 
 
 
@@ -142,6 +144,9 @@
 
 
                     </div>
+
+
+
 
                 </div>
 
@@ -162,20 +167,19 @@
                 <i> <h4 style="margin-top: 2%; margin-bottom: 1%; color: white" id="artistName"></h4></i>
             </div>
 
-            <div class="col-xs-6 col-md-4" style="margin-top: 0.5%; display: none" id="controller">
+            <div class="col-xs-6 col-md-4" style="padding-top: 1%; display: none" id="controller">
 
                 <img  id="repeatButton"class="audioIconSmall" src="Icons/Repeat-96.png" onclick="">
                 <img  id="rewindButton"class="audioIconBig" src="Icons/Rewind-100.png" onclick="">
                 <img  id="playButton"class="audioIconBig" src="Icons/Play-100.png" onclick="toggleMusic()">
                 <img  id="forwardButton"class="audioIconBig" src="Icons/Fast%20Forward-100.png" onclick="">
                 <img  id="shuffleButton"class="audioIconSmall" src="Icons/Shuffle-96.png" onclick="">
-                <input type="range" style= "margin-top: 2%">
 
             </div>
 
             <div class="col-xs-6 col-md-4" style="float: right;margin-top: 1%">
 
-                <button class="btn btn-primary btn-lg" id="publishButton" style="display: none;float:right;margin-right: 5%">Publish</button>
+                <button class="btn btn-primary btn-lg">Publish</button>
 
             </div>
 
@@ -208,8 +212,7 @@
             var playButton = document.getElementById('playButton');
             var artistNameId = document.getElementById('artistName');
             var footerName = document.getElementById('footerName');
-            var inputSong = document.getElementById('songTextbox');
-            var publishButton = document.getElementById('publishButton');
+            var inputSong = document.getElementById('songTextbox')
 
 
 
@@ -261,9 +264,6 @@
 
                     if (songFile){
                         controller.style.display = 'block';
-                        publishButton.style.display = 'block';                        
-
-
 
                     }
 
@@ -329,7 +329,7 @@
 
 
             function toggleMusic(){
-                console.log("toggling");
+                console.log("clicked");
                 if (player.paused){
                     player.play();  
                     $('#playButton').attr('src', "Icons/Pause-100.png");
@@ -346,10 +346,7 @@
                 footerName.innerHTML =  inputSong.value;
 
             }
-            function songEnded(){
-                $('#playButton').attr('src', "Icons/play-100.png");
 
-            }
 
 
 
@@ -358,7 +355,6 @@
 
                 function() {
                 inputSong.addEventListener('input', nameExists,false);
-                player.addEventListener('ended', songEnded,false);
 
             }
 

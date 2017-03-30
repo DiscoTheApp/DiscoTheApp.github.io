@@ -65,7 +65,7 @@
                 <input type="file" name="file" id = "file" style="display: none;" accept="image/*" />
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8"> 
-                <h1 style = "color: #D7B659" id="publicName" onclick="changeName()">Change Name</h1>
+                <h1 style = "color: #D7B659" id="publicName"></h1>
                 <h3 style="text-align: left; color: white" id="usernameDisplay"></h3> <br>
             </div>
 
@@ -163,7 +163,7 @@
                         // get public name
 
                         return firebase.database().ref('/users/' + username + "/publicName").once('value').then(function(snapshot) {
-                            var publicName = snapshot.val().publicName;
+                            var publicName = snapshot.val()
                             document.getElementById("publicName").innerHTML = publicName;
 
 
@@ -187,27 +187,7 @@
                 document.getElementById("profileImage").src = fileName;
             }
 
-            function changeName(){
-                var name = prompt("Please enter your name", "Name here");
 
-                if (name != null) {
-                    document.getElementById("publicName").innerHTML = name;
-
-                    firebase.auth().onAuthStateChanged(function(user) {
-                        if (user) {
-                            // User is signed in.
-                            firebase.database().ref('users/' + user.displayName + "/publicName").set({
-                                publicName: name
-                            });
-                        } else {
-                            // No user is signed in.
-                        }
-                    });
-
-
-
-                }
-            }
 
 
 

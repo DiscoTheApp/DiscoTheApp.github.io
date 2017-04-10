@@ -88,7 +88,7 @@ input[type=range]::-ms-thumb {
   cursor: pointer;
 }
 input[type=range]:focus::-ms-fill-lower {
-  background: transparent;
+  background: transparent; 
 }
 input[type=range]:focus::-ms-fill-upper {
   background: transparent;
@@ -125,8 +125,8 @@ input[type=range]:focus::-ms-fill-upper {
 
 .footer {
     position: absolute;
-    bottom: 0;
     width: 100%;
+    bottom: 0;
     /* Set the fixed height of the footer here */
     height: 100px;
     background-color: #111;
@@ -6988,8 +6988,8 @@ select[multiple].input-lg {
         width: 200px;
     }
     .square-large{
-        height: 100%;
-        width: 100%;
+        height: 350px;
+        width: 350px;
     }
     .vcenter {
         display: inline-block;

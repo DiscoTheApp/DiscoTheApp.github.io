@@ -30,7 +30,7 @@
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script>
 
-            var userUsername, userUid;
+            var userUsername, userUid, userPublicName;
 
             // Initialize Firebase
             var config = {
@@ -49,6 +49,10 @@
                     // User is signed in.
                     userUid = user.uid;
                     userUsername = user.displayName;
+                    return firebase.database().ref('/users/' + userUsername + "/publicName").once('value').then(function(snapshot) {
+                        publicName = snapshot.val();
+                        console.log("name is " + publicName);
+                    });
 
 
                 } else {
@@ -85,106 +89,56 @@
 
 
         <div class="container">
-            <div class="jumbotron" style="background-color:#333;text-align: center">
-                <h2 style="color: #D7B659">Upload Music</h2>
-                <h3 style="color: white"> <i> Disco provides a way for artist to share their music like never before</i></h3>
-                <button class="btn btn-primary" style="margin-top:10px"> HOW IT WORKS</button>
-
-            </div>
-            <div class="container">
-                <select name="uploadType" class="formSelect-control" onchange="toggleType(this)" style="margin-bottom:10px; width: 31%">
+            <div class="container" style="text-align: center; width: 100%; margin-top: 2%" >
+                <select name="uploadType" class="formSelect-control" onchange="toggleType(this)" style="margin-bottom:2%">
                     <option value="single">Single</option>
                     <option value="album">Album</option>
                 </select>
             </div>
 
+
             <div class="col-xs-6 col-md-4">
+                <div class="square-large">
+
+                    <img  src="Images/coverArt.png" style="margin-bottom: 10px; max-width:100%; max-height: auto" onclick="startCoverUpload()" id="coverArt">
+
+                </div>
 
 
-                <img  src="Images/coverArt.png" class ="square-large" style="margin-bottom: 10px" onclick="startCoverUpload()" id="coverArt">
-                <button class="btn btn-primary" style="width: 100%" onclick="startCoverUpload()"> Upload Cover Art</button> <br>
-
-
+                <button class="btn btn-primary" style="width: 100%; margin-top: 2%" onclick="startCoverUpload()"> Upload Cover Art</button> <br>
+                <input type="text" class="formDetails-control" placeholder= "Post Caption" style="width: 100%; margin-top: 2%" id="caption"> <br>
 
 
             </div>
+
+
             <div class="col-xs-12 col-sm-6 col-md-8" style="background-color: #222"> 
 
 
                 <div id="singleDiv" style="color: white">
 
-
-
-                    <input type="text" class="formDetails-control" placeholder="Song Name" style="width: 100%; height: 60px; font-size: 40px" id="songTextbox" onkeyup="updateSongName()" > <br>
-                    <input type="text" class="formDetails-control" placeholder="#Keywords (Recommended)" style="width: 100%"> <br>
-                    <input type="text" class="formDetails-control" placeholder="@Usernames (Featuring Artists)" style="width: 100%"> <br>
+                    <input type="text" class="formDetails-control" placeholder="Song Name" style="width: 100%; height: 60px; font-size: 40px" id="inputSongName"> <br>
+                    <input type="text" class="formDetails-control" placeholder="#Vibes (Recommended)" style="width: 100%" id="inputVibes"> <br>
+                    <input type="text" class="formDetails-control" placeholder="@Usernames (Featured Artists)" style="width: 100%" id="inputFeatures"> <br>
                     <input type="checkbox"> Explicit
-
-
-
-
-
                     <input type="file" id = "songFile" style="display: none;" accept="audio/*" onchange="handleSongSelect(this)" />
                     <input type="file" id = "coverFile" style="display: none;" accept="image/*" onchange="handleCoverSelect(this)" /> <br>
+                    <button class="btn btn-primary" style="margin-top:3%;display: none;" onclick="startSongUpload()" id="uploadButton">+ Upload Song </button> 
+                </div>
 
-
-
-                    <button class="btn btn-primary" style="margin-top:2%; margin-right: 10px; display: none;" onclick="startSongUpload()" id="uploadButton">+ Upload Song </button> 
-
-
-
-
-
-                    <div id="albumDiv" style="color: white; display: none">
-
-
-
-
-
-                    </div>
+                <div id="albumDiv" style="color: white; display: none">
 
                 </div>
 
+
             </div>
         </div>
+        <div class="container">
+
+            <button class="btn btn-primary btn-lg" id="publishButton" style="display: none;float:right;margin-top: 5%; margin-right: 2%" onclick="publishSingle()">Publish</button>
 
 
-
-
-        <footer class="footer">
-
-            <audio id="player" style="display: none"></audio>
-
-            <div class="col-xs-6 col-md-4" style="padding-left:0px">
-                <img id="footerCover" class="footerCover" style="float:left; margin-right: 10px"> 
-
-                <h3 style="margin-top:2%; color: #D7B659; margin-bottom:1%" id="footerName"> Song Name</h3>
-                <i> <h4 style="margin-top: 2%; margin-bottom: 1%; color: white" id="artistName"></h4></i>
-            </div>
-
-            <div class="col-xs-6 col-md-4" style="margin-top: 0.5%; display: none" id="controller">
-
-                <img  id="repeatButton"class="audioIconSmall" src="Icons/Repeat-96.png" onclick="">
-                <img  id="rewindButton"class="audioIconBig" src="Icons/Rewind-100.png" onclick="">
-                <img  id="playButton"class="audioIconBig" src="Icons/Play-100.png" onclick="toggleMusic()">
-                <img  id="forwardButton"class="audioIconBig" src="Icons/Fast%20Forward-100.png" onclick="">
-                <img  id="shuffleButton"class="audioIconSmall" src="Icons/Shuffle-96.png" onclick="">
-                <input type="range" style= "margin-top: 2%">
-
-            </div>
-
-            <div class="col-xs-6 col-md-4" style="float: right;margin-top: 1%">
-
-                <button class="btn btn-primary btn-lg" id="publishButton" style="display: none;float:right;margin-right: 5%">Publish</button>
-
-            </div>
-
-
-
-
-
-
-        </footer>
+        </div>
 
 
 
@@ -198,43 +152,17 @@
 
 
             var storageRef = firebase.storage().ref();
-            var songName, songFile, coverFile;
 
-            var player = document.getElementById('player');
-            var controller =  document.getElementById('controller');
+            var songName, publicName, songFile, coverFile;
+
             var uploadButton = document.getElementById('uploadButton');
-            var previewButton = document.getElementById('previewButton');
-            var songPreview = document.getElementById('songPreview');
-            var playButton = document.getElementById('playButton');
-            var artistNameId = document.getElementById('artistName');
-            var footerName = document.getElementById('footerName');
-            var inputSong = document.getElementById('songTextbox');
             var publishButton = document.getElementById('publishButton');
 
+            var artistNameId = document.getElementById('artistName');
 
-
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-
-                    return firebase.database().ref('/users/' + userUsername + "/publicName").once('value').then(function(snapshot) {
-                        var artistName = snapshot.val()
-                        document.getElementById("artistName").innerHTML = artistName;
-
-
-
-                    });
-
-
-                } else {
-                    // No user is signed in.
-                    window.open("createAccount.html", "_self");  
-
-                }
-            });
-
-
-
-
+            var inputSongName = document.getElementById('inputSongName');
+            var inputVibes = document.getElementById('inputVibes');
+            var inputFeatures = document.getElementById('inputFeatures');
 
             function toggleType(el){
                 var value = el.options[el.selectedIndex].value,
@@ -257,10 +185,10 @@
                 console.log("file chosen");
                 if (input.files && input.files[0]) {
                     console.log("file exists");
-                    var songFile = input.files[0];
+                    songFile = input.files[0];
 
                     if (songFile){
-                        controller.style.display = 'block';
+                        // controller.style.display = 'block';
                         publishButton.style.display = 'block';                        
 
 
@@ -290,8 +218,6 @@
                     reader.onload = function (e) {
                         $('#coverArt')
                             .attr('src', e.target.result);
-                        $('#footerCover')
-                            .attr('src', e.target.result);
                     };
 
                     reader.readAsDataURL(input.files[0]);
@@ -310,6 +236,7 @@
 
             }
 
+
             function nameExists(event){
                 songName = event.target.value;
 
@@ -327,38 +254,90 @@
 
 
 
+            function publishSingle(){
+                console.log("test 1");
 
-            function toggleMusic(){
-                console.log("toggling");
-                if (player.paused){
-                    player.play();  
-                    $('#playButton').attr('src', "Icons/Pause-100.png");
+
+                var timestamp = new Date();
+
+
+                // Get a reference to the database service
+                var database = firebase.database();
+                var songsRef = firebase.database().ref('songs');
+
+                var readySongFile = songFile;
+                var readyCoverFile = coverFile;
+                var readySongName = inputSongName.value;
+                var readyVibes = inputVibes.value;
+                var readyFeatures = inputFeatures.value;
+                var readyPublicName = publicName;
+
+
+                // Create a new post reference with an auto-generated id
+                var newSongRef = songsRef.push();
+                var songKey = newSongRef.key;  
+
+
+
+
+                console.log("just checking");
+
+                var creator = {
+                    username: userUsername,
+                    publicName: publicName,
+                    uid : userUid
+
+                };
+
+                console.log(creator);
+
+                var songPost = {
+                    name: readySongName ,
+                    vibes: readyVibes ,
+                    creator: creator,
+                    features: readyFeatures,
+                    dateAdded: Date(),
+                    timeline: timestamp.getTime(),
+                    plays: 1,
+                    likes: 1,
+                    shares: 0,
+                    cover: songKey
+                };
+
+                // write post
+
+                console.log(songPost);
+
+
+                newSongRef.set(songPost);
+                console.log("test 3");
+
+
+                // upload File
+                var songStorageRef = storageRef.child('songs/' + songKey);
+                var coverStorageRef = storageRef.child('covers/' + songKey);
+
+                songStorageRef.put(readySongFile).then(function(snapshot) {
+                    console.log('Uploaded a song file!');
+                });
+                console.log("test 4");
+
+                if (coverFile){
+                    coverStorageRef.put(readyCoverFile).then(function(snapshot) {
+                        console.log('Uploaded a cover file!');
+                    });
+
                 }
-                else{
-                    player.pause();
-                    $('#playButton').attr('src', "Icons/Play-100.png");
-                }
+
 
 
             }
-
-            function updateSongName(){
-                footerName.innerHTML =  inputSong.value;
-
-            }
-            function songEnded(){
-                $('#playButton').attr('src', "Icons/play-100.png");
-
-            }
-
-
-
 
             window.onload = 
 
                 function() {
-                inputSong.addEventListener('input', nameExists,false);
-                player.addEventListener('ended', songEnded,false);
+
+                inputSongName.addEventListener('input', nameExists,false);
 
             }
 

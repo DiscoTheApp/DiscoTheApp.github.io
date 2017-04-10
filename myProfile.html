@@ -53,7 +53,7 @@
                     <a class="navbar-brand" href="upload.html"> Upload </a>
                     <a class="navbar-brand" href="feed.html"> Feed </a>
                     <a class="navbar-brand" href="myMusic.html"> My Music </a>
-                    <a class="navbar-brand" href="myProfile.html"> Username </a>
+                    <a class="navbar-brand" href="myProfile.html" id="navUsername"> </a>
                 </div>
             </div>
         </nav>
@@ -71,6 +71,33 @@
 
         </div>
 
+        <div class="container">
+            <div>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">All</a></li>
+                    <li role="presentation"><a href="#posts" aria-controls="posts" role="tab" data-toggle="tab">Posts</a></li>
+                    <li role="presentation"><a href="#shares" aria-controls="shares" role="tab" data-toggle="tab">Shares</a></li>
+                    <li role="presentation"><a href="#likes" aria-controls="likes" role="tab" data-toggle="tab">Likes</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="home">...</div>
+                    <div role="tabpanel" class="tab-pane" id="profile">...</div>
+                    <div role="tabpanel" class="tab-pane" id="messages">...</div>
+                    <div role="tabpanel" class="tab-pane" id="settings">...</div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
         <script>
 
             var auth = firebase.auth();
@@ -87,7 +114,7 @@
 
 
             var storageRef = firebase.storage().ref();
-            
+
             function handleFileSelect(evt) {
 
 
@@ -152,6 +179,9 @@
                         console.log(userID);
                         console.log(username);
                         document.getElementById("usernameDisplay").innerHTML = "@" + username;
+                        document.getElementById("navUsername").innerHTML = username;
+
+
                         if (user.photoURL != null){
                             document.getElementById("profileImage").src = user.photoURL;
 

@@ -11,7 +11,7 @@
         <title>DISCO</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="bootstrap.css" rel="stylesheet">
+        <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
         <!-- Custom styles for this template -->
         <link href="jumbotron.css" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
@@ -192,7 +192,7 @@
 
                         // get public name
 
-                        return firebase.database().ref('/users/' + username + "/publicName").once('value').then(function(snapshot) {
+                        return firebase.database().ref('/users/' + username + "/details/publicName").once('value').then(function(snapshot) {
                             var publicName = snapshot.val()
                             document.getElementById("publicName").innerHTML = publicName;
 

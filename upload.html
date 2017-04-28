@@ -11,12 +11,10 @@
         <title>DISCO</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="bootstrap.css" rel="stylesheet">
+        <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
         <!-- Custom styles for this template -->
         <link href="jumbotron.css" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
-
-
 
         <!-- Firebase -->
 
@@ -28,9 +26,15 @@
         <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
         <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
         <script>
 
-            var userUsername, userUid, userPublicName;
 
             // Initialize Firebase
             var config = {
@@ -46,22 +50,12 @@
 
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
-                    // User is signed in.
-                    userUid = user.uid;
-                    userUsername = user.displayName;
-                    return firebase.database().ref('/users/' + userUsername + "/publicName").once('value').then(function(snapshot) {
-                        publicName = snapshot.val();
-                        console.log("name is " + publicName);
-                    });
-
-
+                    creator();
                 } else {
                     // No user is signed in.
                     window.open("createAccount.html", "_self");  
-
                 }
             });
-
 
 
         </script>
@@ -70,6 +64,7 @@
 
 
     <body  style = "background-color: #222">
+
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -87,131 +82,159 @@
         </nav>
 
 
-
+        <!-- Type Select-->
         <div class="container">
             <div class="container" style="text-align: center; width: 100%; margin-top: 2%" >
-                <select name="uploadType" class="formSelect-control" onchange="toggleType(this)" style="margin-bottom:2%">
-                    <option value="single">Single</option>
-                    <option value="album">Album</option>
-                </select>
             </div>
 
-
+            <!--left side-->
             <div class="col-xs-6 col-md-4">
                 <div class="square-large">
 
-                    <img  src="Images/coverArt.png" style="margin-bottom: 10px; max-width:100%; max-height: auto" onclick="startCoverUpload()" id="coverArt">
+                    <img  src="Images/coverArt.png" style="margin-bottom: 3%; max-width:100%; max-height: auto" onclick="startCoverUpload()" id="coverArt">
 
                 </div>
 
 
-                <button class="btn btn-primary" style="width: 100%; margin-top: 2%" onclick="startCoverUpload()"> Upload Cover Art</button> <br>
-                <input type="text" class="formDetails-control" placeholder= "Post Caption" style="width: 100%; margin-top: 2%" id="caption"> <br>
-
+                <button class="btn btn-primary" style="width: 100%; margin-top: 3%" onclick="startCoverUpload()"> Upload Cover Art</button> <br>
+                <input type="text" class="formDetails-control" placeholder= "Post Caption" style="width: 100%; margin-top: 3%" id="inputCaption"> <br>
 
             </div>
 
-
+            <!--right side-->
             <div class="col-xs-12 col-sm-6 col-md-8" style="background-color: #222"> 
 
 
+                <!--single-->
                 <div id="singleDiv" style="color: white">
 
-                    <input type="text" class="formDetails-control" placeholder="Song Name" style="width: 100%; height: 60px; font-size: 40px" id="inputSongName"> <br>
-                    <input type="text" class="formDetails-control" placeholder="#Vibes (Recommended)" style="width: 100%" id="inputVibes"> <br>
-                    <input type="text" class="formDetails-control" placeholder="@Usernames (Featured Artists)" style="width: 100%" id="inputFeatures"> <br>
-                    <input type="checkbox"> Explicit
-                    <input type="file" id = "songFile" style="display: none;" accept="audio/*" onchange="handleSongSelect(this)" />
-                    <input type="file" id = "coverFile" style="display: none;" accept="image/*" onchange="handleCoverSelect(this)" /> <br>
-                    <button class="btn btn-primary" style="margin-top:3%;display: none;" onclick="startSongUpload()" id="uploadButton">+ Upload Song </button> 
+
+                    <form id="inputFields" >
+
+                        <input type="text" class="formDetails-control" placeholder="Song Name" style="width: 100%; height: 60px; font-size: 40px" id="inputSongName"> <br>
+
+                        <input type="text" class="formDetails-control" placeholder="@Usernames (Featured Artists)" style="width: 100%; margin-top:1%" id="inputFeatures"> <br>
+
+
+                        <input type="text" class="formDetails-control" placeholder="#Vibes (Recommended)" style="width: 100%" id="inputVibes" onfocus="loadFill()" onkeypress="saveVibes(event)"> <br>
+
+                        <button id="vibe1" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click1()">   </button>
+                        <button id="vibe2" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click2()">   </button>
+                        <button id="vibe3" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click3()">   </button>
+                        <button id="vibe4" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click4()">   </button>
+                        <button id="vibe5" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click5()">   </button>
+
+                        <br>
+
+
+
+                        <!--                        <h4 id="postVibes" style=":none"></h4>-->
+
+
+
+
+                        <input type="checkbox" id="inputExplicit"  style="margin-top: 3%" value="true" > Explicit <br>
+
+                        <input type="file" id = "songFile" style="display: none;" accept="audio/*" onchange="handleSongSelect(this)"  /> 
+
+                        <input type="file" id = "coverFile" style="display: none;" accept="image/*" onchange="handleCoverSelect(this)" /> 
+
+                    </form>
+
+                    <button class="btn btn-primary" style="margin-top:3%;display: none;" onclick="startSongUpload()" id="uploadButton">+ Upload Song File </button> 
+                    <button class="btn btn-primary" style="margin-top:3%;display: none; float: right" onclick="addTrack()" id="addTrackButton">+ Add Tracks </button> 
+
                 </div>
 
-                <div id="albumDiv" style="color: white; display: none">
+            </div>
 
-                </div>
+
+        </div>
+
+        <div class="container">
+            <div id = "trackList" style="color: white; padding-left: 2%; padding-right: 2%; display: none" >
+
+                <h1 style="text-align: center"><i>Album Preview</i></h1>
+                <input type="text" class="formDetails-control" placeholder="Album Name" style="width: 100%; height: 60px; font-size: 40px" id="inputAlbumName"> <br>
+
+
+                <h3 id="track1"></h3>  
+
+
 
 
             </div>
-        </div>
-        <div class="container">
 
-            <button class="btn btn-primary btn-lg" id="publishButton" style="display: none;float:right;margin-top: 5%; margin-right: 2%" onclick="publishSingle()">Publish</button>
+            <button class="btn btn-primary btn-lg" id="publishButton" style="display: none;float:right;margin-top: 5%; margin-right: 2%" onclick="publish()">Publish</button>
 
 
         </div>
 
 
-
-
-
-
-
+        <!--        END OF HTML   -->
 
 
         <script>
 
-
+            // FIREBASE REFERENCES 
             var storageRef = firebase.storage().ref();
+            var database = firebase.database();
 
-            var songName, publicName, songFile, coverFile;
+            var songsRef = firebase.database().ref('songs');
+            var vibesRef =  firebase.database().ref('Vibes/Verified');
+            var newVibesRef =  firebase.database().ref('Vibes/Unverified');
 
+
+
+            // SHARED VARIABLES
+            var songName, publicName, details,songFile,coverFile, vibeCount;
+            var coverSelected = false;
+
+            var timestamp = new Date();
+
+
+            //DATA Arrays
+
+            var position = 0;
+            var postPosition = 0;
+            var songDataArray, songFileArray,albumKeys,vibesArray, myVibesArray, unverifiedVibesArray;
+
+            // USER DATA 
+
+            var creator, userUsername, userUid, userPublicName, savedCreator;
+
+            // HTML OBJECTS
             var uploadButton = document.getElementById('uploadButton');
             var publishButton = document.getElementById('publishButton');
+            var addTrackButton = document.getElementById('addTrackButton');
 
             var artistNameId = document.getElementById('artistName');
-
             var inputSongName = document.getElementById('inputSongName');
+
+
+            var trackList = document.getElementById("trackList");
+            var track1 = document.getElementById("track1");
+
+            var inputFields = document.getElementById("inputFields");
+
+            var postVibes =  document.getElementById('postVibes');
             var inputVibes = document.getElementById('inputVibes');
             var inputFeatures = document.getElementById('inputFeatures');
-
-            function toggleType(el){
-                var value = el.options[el.selectedIndex].value,
-                    singleDiv = document.getElementById('singleDiv'),
-                    albumDiv  = document.getElementById('albumDiv');
-
-                if (value === 'single') {
-                    singleDiv.style.display = 'block';
-                    albumDiv.style.display = 'none';
-
-                } else if (value === 'album') {
-                    singleDiv.style.display = 'none';
-                    albumDiv.style.display = 'block';   
-
-                }
-            }
-
-            function handleSongSelect(input) {
-                console.log("ready to upload for: " + userUsername);
-                console.log("file chosen");
-                if (input.files && input.files[0]) {
-                    console.log("file exists");
-                    songFile = input.files[0];
-
-                    if (songFile){
-                        // controller.style.display = 'block';
-                        publishButton.style.display = 'block';                        
+            var inputExplicit = document.getElementById('inputExplicit');
+            var inputCaption = document.getElementById('inputCaption');
+            var inputAlbumName = document.getElementById('inputAlbumName');
 
 
-
-                    }
-
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $('#player')
-                            .attr('src', e.target.result);
-                    };
-
-                    reader.readAsDataURL(input.files[0]);
-                }
-
-            } // END FILE SELECT
-
+            // SHARED FUNCTIONS 
             function handleCoverSelect(input) {
                 console.log("file chosen");
+
                 if (input.files && input.files[0]) {
                     console.log("file exists");
+
+
                     coverFile = input.files[0];
+                    coverSelected = true;
 
                     var reader = new FileReader();
 
@@ -223,22 +246,312 @@
                     reader.readAsDataURL(input.files[0]);
                 }
 
-
-
             } // END FILE SELECT
+
+            function startCoverUpload(){
+                document.getElementById('coverFile').click();
+            }
+
+            function createSong(songFile){
+
+                console.log("creating song @: " + position);
+
+                // capture Song Data 
+                var readySongName = inputSongName.value;
+                var readyFeatures = inputFeatures.value; 
+                var readyCapion = inputCaption.value;
+
+                //vibes 
+                if (myVibesArray){
+                    var readyVibes = myVibesArray;
+                }
+                else if(typeof myVibesArray == "undefined") {
+                    var readyVibes = false;
+                }
+
+
+                // explicit
+
+                var readyExplicit = false;
+                if (inputExplicit.checked == true){
+                    readyExplicit = true;
+                }
+
+
+
+                // create Song Object 
+                var songObject = {
+                    name: readySongName ,
+                    caption: readyCapion,
+                    vibes: readyVibes ,
+                    creator: savedCreator,
+                    features: readyFeatures,
+                    dateAdded: Date(),
+                    timeline: timestamp.getTime(),
+                    plays: 1,
+                    likes: 1,
+                    shares: 0,
+                    explicit: readyExplicit
+                };
+
+                console.log(songObject);
+
+                if (position != 0){
+                    songDataArray.push(songObject);
+                    songFileArray.push(songFile);
+                }
+
+                if (position == 0){
+                    songDataArray = [songObject];
+                    songFileArray = [songFile];    
+                }
+                position = position +1;
+
+
+                console.log("DataArray of size: " + songDataArray.length);
+                console.log(songDataArray);
+
+                console.log("FileArray of size: " + songFileArray.length);
+                console.log(songFileArray);
+
+
+            }
+
+            function saveCreator(incomingCreator){
+                savedCreator = incomingCreator;
+                console.log(savedCreator);
+
+            }
+
+            function creator() {
+
+                var user = firebase.auth().currentUser;
+
+                if (user) {
+                    // User is signed in.
+
+                    if (user != null) {
+                        userUsername = user.displayName;
+                        userUid = user.uid;
+
+                        firebase.database().ref('/users/' + userUsername + "/details/publicName").once('value').then(function(snapshot) {
+                            userPublicName = snapshot.val();
+
+                            creator = {
+                                username: userUsername,
+                                uid: userUid,
+                                publicName: userPublicName
+                            }
+
+                            saveCreator(creator)
+
+                        });
+
+
+                    }
+                } else {
+                    // No user is signed in.
+                    console.log("creator is NOT here")
+
+                }
+
+
+            }
+
+            function handleSongSelect(input) {
+                console.log("file selected for: " + position);
+                if (input.files && input.files[0]) {
+                    console.log("file exists");
+                    songFile = input.files[0];
+
+                    if (songFile){
+                        // controller.style.display = 'block';
+                        publishButton.style.display = 'block'; 
+                    }
+                    createSong(songFile);
+
+
+                }
+
+
+
+
+
+
+
+
+            } // END SONG SELECT
 
             function startSongUpload(){
                 document.getElementById('songFile').click();
-
-            }
-            function startCoverUpload(){
-                document.getElementById('coverFile').click();
-
             }
 
+            function publish(){
+
+                console.log(songDataArray.length + " song data ready");
+                console.log(songDataArray);
+
+                console.log(songFileArray.length + " song files ready");
+                console.log(songFileArray);
+
+
+
+                // SINGLE UPLOAD
+                if (songDataArray.length == 1 ){
+
+
+                    var readyData = songDataArray[0];
+                    var readyFile = songFileArray[0];  
+
+                    var newSongRef = songsRef.push();
+                    var songKey = newSongRef.key; 
+                    var userSongsRef = firebase.database().ref('users/' + userUsername + '/posts/singles/' + songKey);
+
+
+
+                    console.log("posting: ");
+                    console.log(readyData);
+
+                    // upload Song Data
+                    newSongRef.set(readyData);
+                    userSongsRef.set(songKey);
+
+                    // upload Song File
+                    var songStorageRef = storageRef.child('songs/' + songKey);
+
+                    var uploadTask =  songStorageRef.put(readyFile);
+
+                    // UPLOADING TASK
+                    uploadTask.on('state_changed', function(snapshot){
+
+                        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log( progress + "% DONE");
+
+                    }, function(error) {
+                        // Handle unsuccessful uploads
+                    }, function() {
+                        // Handle successful uploads on complete
+
+                        if (coverSelected == true) {
+
+
+                            // write cover location
+                            var coverLocation = songsRef.child(songKey + "/cover");
+                            coverLocation.set(songKey);
+
+                            // store image
+                            var coverStorageRef = storageRef.child('covers/' + songKey);
+                            coverStorageRef.put(coverFile).then(function(snapshot) {
+                                console.log('Uploaded a Single cover file!');
+                                window.open("myProfile.html", "_self"); 
+
+
+
+
+                            });
+
+                        }
+
+
+
+
+                    }); // DONE with all Uploads
+
+
+                }
+
+                //
+                //                // ALBUM UPLOAD
+                //                if (songDataArray.length > 1){
+                //
+                //                    for ( postPosition;(postPosition + 1) < songDataArray.length; postPosition++) {
+                //                        var readyData = songDataArray[postPosition];
+                //                        var readyFile = songFileArray[postPosition];  
+                //
+                //                        var newSongRef = songsRef.push();
+                //                        var songKey = newSongRef.key; 
+                //                        createAlbumKeysArray(songKey);
+                //
+                //                        console.log("posting: ");
+                //                        console.log(readyData);
+                //
+                //                        // upload Song Data
+                //                        newSongRef.set(readyData);
+                //
+                //                        // upload Song File
+                //                        var songStorageRef = storageRef.child('songs/' + songKey);
+                //
+                //                        var uploadTask =  songStorageRef.put(readyFile);
+                //
+                //
+                //                        uploadTask.on('state_changed', function(snapshot){
+                //                            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                //                            console.log('Upload is ' + progress + '% done');
+                //                            switch (snapshot.state) {
+                //                                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                //                                    console.log('Upload is paused');
+                //                                    break;
+                //                                case firebase.storage.TaskState.RUNNING: // or 'running'
+                //                                    console.log('Upload is running');
+                //                                    break;
+                //                                                  }
+                //                        }, function(error) {
+                //                            // Handle unsuccessful uploads
+                //                        }, function() {
+                //                            // Handle successful uploads on complete
+                //
+                //                        }); // END OF UPLOAD TASK 
+                //
+                //
+                //                        // Done uploading redirect 
+                //                        if ((postPosition + 1) == songDataArray.length){
+                //                            window.open("createAccount.html", "_self");  
+                //
+                //
+                //                        } 
+
+                //
+                //                    } // end of FOR loop
+                //
+
+                //                }
+
+            } 
+
+            function createAlbumKeysArray(songKey){
+
+                if (postPosition == 0) {
+                    albumKeys = [songKey];  
+                }
+
+                if (postPosition > 0 ){
+                    albumKeys.push(songKey);
+                }
+
+            }
+
+            function addTrack(){
+
+                console.log("post postition is : ");
+                console.log(postPosition);
+
+                var trackName =  inputSongName.value;
+
+
+
+                trackList.style.display = 'block';
+                console.log("song is: " + trackName);
+                track1.innerHTML = trackName;
+                inputFields.reset();
+
+
+
+            }
 
             function nameExists(event){
+
                 songName = event.target.value;
+
 
                 if (songName.length > 0){
                     uploadButton.style.display = 'block';
@@ -252,92 +565,284 @@
 
             }
 
+            function vibesList(vibes){
 
+                if(typeof vibesArray == "undefined") {
+                    vibesArray = [vibes];
+                }
+                else if (vibesArray){
+                    vibesArray.push(vibes);
+                }
 
-            function publishSingle(){
-                console.log("test 1");
+            }
 
+            function unverifiedVibesList(vibes){
 
-                var timestamp = new Date();
-
-
-                // Get a reference to the database service
-                var database = firebase.database();
-                var songsRef = firebase.database().ref('songs');
-
-                var readySongFile = songFile;
-                var readyCoverFile = coverFile;
-                var readySongName = inputSongName.value;
-                var readyVibes = inputVibes.value;
-                var readyFeatures = inputFeatures.value;
-                var readyPublicName = publicName;
-
-
-                // Create a new post reference with an auto-generated id
-                var newSongRef = songsRef.push();
-                var songKey = newSongRef.key;  
+                console.log("starting unverified list:");
 
 
 
+                if(typeof unverifiedVibesArray == "undefined") {
+                    unverifiedVibesArray = [vibes];
+                }
+                else if (unverifiedVibesArray){
+                    unverifiedVibesArray.push(vibes);
+                }
 
-                console.log("just checking");
-
-                var creator = {
-                    username: userUsername,
-                    publicName: publicName,
-                    uid : userUid
-
-                };
-
-                console.log(creator);
-
-                var songPost = {
-                    name: readySongName ,
-                    vibes: readyVibes ,
-                    creator: creator,
-                    features: readyFeatures,
-                    dateAdded: Date(),
-                    timeline: timestamp.getTime(),
-                    plays: 1,
-                    likes: 1,
-                    shares: 0,
-                    cover: songKey
-                };
-
-                // write post
-
-                console.log(songPost);
+            }
 
 
-                newSongRef.set(songPost);
-                console.log("test 3");
+            function loadFill(){
+                var availableTags = vibesArray;
 
-
-                // upload File
-                var songStorageRef = storageRef.child('songs/' + songKey);
-                var coverStorageRef = storageRef.child('covers/' + songKey);
-
-                songStorageRef.put(readySongFile).then(function(snapshot) {
-                    console.log('Uploaded a song file!');
+                $( "#inputVibes" ).autocomplete({
+                    source: availableTags
                 });
-                console.log("test 4");
+            }
 
-                if (coverFile){
-                    coverStorageRef.put(readyCoverFile).then(function(snapshot) {
-                        console.log('Uploaded a cover file!');
+
+            function saveVibes(e){
+
+
+                console.log(e.keyCode);
+
+
+                if (e.keyCode === 0 || e.keyCode === 32 || e.keyCode === 13) {
+
+                    newVibe(inputVibes.value);
+
+                    e.preventDefault();
+                    console.log('Space  or Enter pressed');
+
+                    if(typeof myVibesArray == "undefined") {
+                        myVibesArray = [inputVibes.value];
+                        console.log("my vibes: " + myVibesArray);
+                        vibeButtons();
+                        inputVibes.value = "";
+
+                    }
+
+                    else if (myVibesArray){
+                        var isRepeat = myVibesArray.indexOf(inputVibes.value);
+                        if (isRepeat < 0){
+                            // not typed
+                            if (myVibesArray.length == 1){
+                                myVibesArray.push(inputVibes.value);
+                                console.log("my vibes: " + myVibesArray);
+                                vibeButtons();
+                                inputVibes.value = "";
+
+                            }
+                            else if (myVibesArray.length == 2){
+                                myVibesArray.push(inputVibes.value);
+                                console.log("my vibes: " + myVibesArray);
+                                vibeButtons();
+                                inputVibes.value = "";
+
+
+                            }
+                            else if (myVibesArray.length == 3){
+                                myVibesArray.push(inputVibes.value);
+                                console.log("my vibes: " + myVibesArray);
+                                vibeButtons();
+                                inputVibes.value = "";
+
+
+                            }
+                            else if (myVibesArray.length == 4){
+                                myVibesArray.push(inputVibes.value);
+                                console.log("my vibes: " + myVibesArray);
+                                vibeButtons();
+                                inputVibes.value = "";
+
+
+                            }
+                            else if (myVibesArray.length == 5){
+                                alert("Out of spots :/``");
+                            }
+
+                        }
+                        else if (isRepeat > -1){
+                            // already typed 
+                            return false
+
+                        }
+
+
+                    }
+
+
+                }
+
+            }
+
+
+            function vibeButtons(){
+
+                console.log("Reset buttons to:");
+                console.log(myVibesArray);
+
+
+                if(typeof myVibesArray == "undefined" || myVibesArray.length == 0) {
+                    $("#vibe1").html("");
+                    $("#vibe2").html("");
+                    $("#vibe3").html("");
+                    $("#vibe4").html("");
+                    $("#vibe5").html("");
+                }
+
+                else if (myVibesArray.length == 1){
+                    $("#vibe1").html(myVibesArray[0]);
+                    $("#vibe2").html("");
+                    $("#vibe3").html("");
+                    $("#vibe4").html("");
+                    $("#vibe5").html("");
+
+                }
+                else if (myVibesArray.length == 2){
+                    $("#vibe1").html(myVibesArray[0]);
+                    $("#vibe2").html(myVibesArray[1]);
+                    $("#vibe3").html("");
+                    $("#vibe4").html("");
+                    $("#vibe5").html("");
+
+                }
+                else if (myVibesArray.length == 3){
+                    $("#vibe1").html(myVibesArray[0]);
+                    $("#vibe2").html(myVibesArray[1]);
+                    $("#vibe3").html(myVibesArray[2]);
+                    $("#vibe4").html("");
+                    $("#vibe5").html("");
+                }
+                else if (myVibesArray.length == 4){
+                    $("#vibe1").html(myVibesArray[0]);
+                    $("#vibe2").html(myVibesArray[1]);
+                    $("#vibe3").html(myVibesArray[2]);
+                    $("#vibe4").html(myVibesArray[3]);
+                    $("#vibe5").html("");         
+                }
+                else if (myVibesArray.length == 5){
+                    $("#vibe1").html(myVibesArray[0]);
+                    $("#vibe2").html(myVibesArray[1]);
+                    $("#vibe3").html(myVibesArray[2]);
+                    $("#vibe4").html(myVibesArray[3]);
+                    $("#vibe5").html(myVibesArray[4]);         
+                }
+
+
+            }
+
+
+            function click1(){
+                myVibesArray.splice(0, 1);
+                vibeButtons();
+            }
+            function click2(){
+                myVibesArray.splice(1, 1);       
+                vibeButtons();
+            }
+            function click3(){
+                myVibesArray.splice(2, 1);
+                vibeButtons();
+
+            }
+            function click4(){
+                myVibesArray.splice(3,1);
+                vibeButtons();
+
+            }
+            function click5(){
+                myVibesArray.splice(4,1);
+                vibeButtons();
+
+            }
+
+            function newVibe(input){
+
+                // check if input is a new or old vibe
+
+                var isUnverified = vibesArray.indexOf(input);
+                var isNew = unverifiedVibesArray.indexOf(input);
+
+                console.log("isNew: " + isNew);
+
+                console.log("isUnverified: " + isUnverified);
+
+
+
+
+                if (isUnverified >= 0){
+                    // if already verified 
+                    console.log("already verified");
+
+                }
+
+
+                else if (isUnverified < 0 && isNew >= 0){
+                    console.log("not verified but old");
+
+                    // if unverified not new
+                    var unverifiedRef = newVibesRef.child(input);
+                    console.log("check 1");
+
+
+                    unverifiedRef.once('value').then(function(snapshot) {
+                        console.log("check 2");
+
+                        var count = snapshot.val();
+                        console.log("check 3");
+
+
+                        // add one 
+                        count++;
+
+                        unverifiedRef.set(count);
+
+                        console.log("tag count is: " + count);
+
+
+
                     });
+
 
                 }
 
 
 
+                else if (isUnverified < 0 && isNew < 0){
+
+                    console.log("not verified and new");
+                    // if unverified and new 
+                    var unverifiedRef = newVibesRef.child(input);
+                    unverifiedRef.set(1);
+                    console.log("added vibe! Thanks :)");
+
+
+
+                }
+
+
             }
 
+
+
+
+
+
+            // ON LOAD EVENT LISTENERS 
             window.onload = 
 
-                function() {
-
+                function() {    
                 inputSongName.addEventListener('input', nameExists,false);
+
+                vibesRef.on('child_added', function(data) {
+                    vibesList(data.key)
+                });
+                newVibesRef.on('child_added', function(data) {
+                    unverifiedVibesList(data.key)
+                });
+
+
 
             }
 

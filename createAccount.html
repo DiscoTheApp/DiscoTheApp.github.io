@@ -11,7 +11,7 @@
         <title>DISCO</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="bootstrap.css" rel="stylesheet">
+        <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
         <!-- Custom styles for this template -->
         <link href="jumbotron.css" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
@@ -57,15 +57,18 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html"> DISCO </a>
                 </div>
-                <div class="navbar-right" id="userOptionsBar">
-                    <a class="navbar-brand" href="upload.html"> Upload </a>
-                    <a class="navbar-brand" href="feed.html"> Feed </a>
-                    <a class="navbar-brand" href="myMusic.html"> My Music </a>
-                    
-                    
-                    
-                    <a class="navbar-brand" href="myProfile.html"> Username </a> 
-
+                <div class="navbar-right" style = "padding-right: 15px">
+                    <div id="navbarLogin" class="navbar-collapse collapse">
+                        <form class="navbar-form navbar-right" id="navLogin">
+                            <div class="form-group">
+                                <input type="email" placeholder="Email" class="form-control" id="navEmail">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="Password" class="form-control" id="navPassword">
+                            </div>
+                            <button type="button" class="btn btn-primary" onclick="tryLogin()">Sign in</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -83,6 +86,7 @@
                         <label style="color: #D7B659">Name (Artist Name)</label>
                         <input type="text" class="form-control" id="inputPublicName" placeholder="Name">
                     </div>
+                    <br>
                     <div class="form-group">
                         <label style="color: #D7B659">Username</label>
                         <input onkeypress="return avoidSpace(event)" type="text" class="form-control" id="inputUsername" placeholder="Username">
@@ -200,8 +204,32 @@
 
 
 
+            function tryLogin(){
+
+                var inputEmail = navLogin.navEmail.value;
+                var inputPassword = navLogin.navPassword.value;
+
+                firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword).catch(function(error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // ...
+                });
+
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                        window.open("myProfile.html", "_self");  
+                        // User is signed in.
+                    } else {
+                        // No user is signed in.
+                    }
+                });
+            }
+
+
+
             function writeUserData(username, email, uid, name) {
-                firebase.database().ref('users/' + username).set({
+                firebase.database().ref('users/' + username + '/details').set({
                     username: username,
                     email: email,
                     userID: uid,

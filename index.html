@@ -11,7 +11,7 @@
         <title>DISCO</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="bootstrap.css" rel="stylesheet">
+        <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
         <!-- Custom styles for this template -->
         <link href="jumbotron.css" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
@@ -24,6 +24,14 @@
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
         <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+
+
+        <!--        SROLL MAGIC        -->
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
+
+
 
 
         <script>
@@ -54,7 +62,9 @@
                     <a class="navbar-brand" href="upload.html"> Upload </a>
                     <a class="navbar-brand" href="feed.html"> Feed </a>
                     <a class="navbar-brand" href="myMusic.html"> My Music </a>
-                    <a class="navbar-brand" href="myProfile.html"> Username </a> 
+                    <a class="navbar-brand" href=myProfile.html> Username </a>
+
+
                 </div>
                 <div class="navbar-right" style = "padding-right: 15px">
                     <div id="navbarLogin" class="navbar-collapse collapse">
@@ -65,7 +75,7 @@
                             <div class="form-group">
                                 <input type="password" placeholder="Password" class="form-control" id="navPassword">
                             </div>
-                            <button type="button" class="btn btn-primary" onclick="tryLogin()">Sign in</button>
+                            <button type="button" class="btn btn-primary" onclick="tryLogin()">SIGN IN</button>
                         </form>
                     </div>
                 </div>
@@ -82,32 +92,86 @@
                 </div>
             </div>
         </div>
+        <div id="timeline">
+
+
+            <div class="timeline-left">
+                <div class="innerTimeline-left">
+                    <div id="songBlock" style="text-align: center;color: white">
+                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt">
+                        <h2 class="detail-padding">Song Name</h2>
+                        <h2 class="detail-padding"><small>Artist Name</small></h2>
+                    </div>
+                </div>
+                <div class="innerTimeline-right">
+                    <div id="songBlock" style="text-align: center;color: white">
+                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt">
+                        <h2 class="detail-padding">Song Name</h2>
+                        <h2 class="detail-padding"><small>Artist Name</small></h2>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="timeline-right">
+                    <div class="innerTimeline-left">
+                    <div id="songBlock" style="text-align: center;color: white">
+                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt">
+                        <h2 class="detail-padding">Song Name</h2>
+                        <h2 class="detail-padding"><small>Artist Name</small></h2>
+                    </div>
+                </div>
+                <div class="innerTimeline-right">
+                    <div id="songBlock" style="text-align: center;color: white">
+                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt">
+                        <h2 class="detail-padding">Song Name</h2>
+                        <h2 class="detail-padding"><small>Artist Name</small></h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-center">
+                <div id="songBlock" style="text-align: center;color: white">
+                    <img  src="Images/coverArt.png" class= "square-large" id="coverArt">
+                    <h2 class="detail-padding">Song Name</h2>
+                    <h2 class="detail-padding"><small>Artist Name</small></h2>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
         <div class="container">    
             <div style="color: white; text-align: center">
-                <h1> Recently Released</h1>  <br>
-                <h1> Top Songs</h1> <br>
-                <h2> Feed </h2> <br>
+
+     <H1>top songs</H1>
             </div>
         </div>
+
         <script>
+
+            // NAV BAR CHOICE 
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
                     // User is signed in.
                     console.log("logged in as: "+ user.displayName);
                     document.getElementById("newUserDiv").remove();
                     document.getElementById("navbarLogin").remove();
-                    
-
 
                 } else {
                     // No user is signed in.
+
                     console.log("no one logged in");
                     document.getElementById("userOptionsBar").remove();
 
                 }
             });
-
-
             function tryLogin(){
 
                 var inputEmail = navLogin.navEmail.value;
@@ -124,11 +188,53 @@
                     if (user) {
                         window.open("myProfile.html", "_self");  
                         // User is signed in.
+
                     } else {
                         // No user is signed in.
                     }
                 });
             }
+
+
+            //SHARED REF
+            var songsRef = firebase.database().ref('songs');
+
+
+            // SHARED VARIABLES
+
+            var songArray;
+
+
+            // FUNCTIONS 
+
+
+            function makeSongList(songId){
+
+                if(typeof songArray == "undefined") {
+                    songArray = [songId];
+                }
+                else if (songArray){
+                    songArray.push(songId);
+                }
+
+
+
+            }
+
+
+            window.onload = 
+
+                function() {    
+                songsRef.limitToFirst(100).on('child_added', function(data) {
+                    makeSongList(data.key)
+                });
+
+
+
+
+            }
+
+
         </script>
 
     </body>

@@ -24,15 +24,11 @@
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
         <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
+
 
 
         <!--        SROLL MAGIC        -->
-
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
-
-
-
 
         <script>
 
@@ -67,176 +63,286 @@
 
                 </div>
                 <div class="navbar-right" style = "padding-right: 15px">
-                    <div id="navbarLogin" class="navbar-collapse collapse">
-                        <form class="navbar-form navbar-right" id="navLogin">
-                            <div class="form-group">
-                                <input type="email" placeholder="Email" class="form-control" id="navEmail">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" placeholder="Password" class="form-control" id="navPassword">
-                            </div>
-                            <button type="button" class="btn btn-primary" onclick="tryLogin()">SIGN IN</button>
-                        </form>
+                    <div class="navbar-right" style = "padding-right: 15px">
+                        <div id="navbarLogin" class="navbar-collapse collapse">
+                            <form class="navbar-form navbar-right" id="navLogin">
+                                <div class="form-group">
+                                    <input type="email" placeholder="Email" class="form-control" id="navEmail">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" placeholder="Password" class="form-control" id="navPassword">
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="tryLogin()">SIGN IN</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                </nav>
+
+            <div class="container" style = "background-color: #222" id="newUserDiv">
+                <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
+                    <div class="container">
+                        <h1 >Discover new music.</h1>
+                        <p>Disco is music streaming service that allows Artists to share their music for free, and get paid for their work.</p>
+                        <p><a class="btn btn-primary btn-lg" href="createAccount.html" role="button">CREATE ACCOUNT</a></p>
                     </div>
                 </div>
-
             </div>
-        </nav>
-
-        <div class="container" style = "background-color: #222" id="newUserDiv">
-            <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
-                <div class="container">
-                    <h1 >Discover new music.</h1>
-                    <p>Disco is music streaming service that allows Artists to share their music for free, and get paid for their work.</p>
-                    <p><a class="btn btn-primary btn-lg" href="createAccount.html" role="button">CREATE ACCOUNT</a></p>
-                </div>
-            </div>
-        </div>
-        <div id="timeline">
+            <br>
+            <div id="timeline">    
 
 
-            <div class="timeline-left">
-                <div class="innerTimeline-left">
-                    <div id="songBlock" style="text-align: center;color: white">
-                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt">
-                        <h2 class="detail-padding">Song Name</h2>
-                        <h2 class="detail-padding"><small>Artist Name</small></h2>
-                    </div>
-                </div>
-                <div class="innerTimeline-right">
-                    <div id="songBlock" style="text-align: center;color: white">
-                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt">
-                        <h2 class="detail-padding">Song Name</h2>
-                        <h2 class="detail-padding"><small>Artist Name</small></h2>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="timeline-right">
+                <div class="timeline-left">
                     <div class="innerTimeline-left">
-                    <div id="songBlock" style="text-align: center;color: white">
-                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt">
-                        <h2 class="detail-padding">Song Name</h2>
-                        <h2 class="detail-padding"><small>Artist Name</small></h2>
+                        <div id="songBlock" style="text-align: center;color: white">
+                            <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt1">
+                            <h2 class="detail-padding" id="name1">Song Name</h2>
+                            <h2 class="detail-padding" id="artist1" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                        </div>
+                    </div>
+                    <div class="innerTimeline-right">
+                        <div id="songBlock" style="text-align: center;color: white">
+                            <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt2">
+                            <h2 class="detail-padding" id="name2">Song Name</h2>
+                            <h2 class="detail-padding" id="artist2" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="timeline-right">
+                    <div class="innerTimeline-left">
+                        <div id="songBlock" style="text-align: center;color: white">
+                            <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt4">
+                            <h2 class="detail-padding" id="name4">Song Name</h2>
+                            <h2 class="detail-padding" id="artist4" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                        </div>
+                    </div>
+                    <div class="innerTimeline-right">
+                        <div id="songBlock" style="text-align: center;color: white">
+                            <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt5">
+                            <h2 class="detail-padding" id="name5">Song Name</h2>
+                            <h2 class="detail-padding" id="artist5" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                        </div>
                     </div>
                 </div>
-                <div class="innerTimeline-right">
+
+
+
+                <div class="timeline-center">
                     <div id="songBlock" style="text-align: center;color: white">
-                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt">
-                        <h2 class="detail-padding">Song Name</h2>
-                        <h2 class="detail-padding"><small>Artist Name</small></h2>
+                        <img  src="Images/coverArt.png" class= "square-large" id="coverArt3">
+                        <h2 class="detail-padding" id="name3">Song Name</h2>
+                        <h2 class="detail-padding" id="artist3" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
                     </div>
                 </div>
+
+
+
+
+
+
+
+
+
             </div>
 
-            <div class="timeline-center">
-                <div id="songBlock" style="text-align: center;color: white">
-                    <img  src="Images/coverArt.png" class= "square-large" id="coverArt">
-                    <h2 class="detail-padding">Song Name</h2>
-                    <h2 class="detail-padding"><small>Artist Name</small></h2>
+            <div class="container">    
+                <div style="color: white; text-align: center">
+
+                    <!--              <H1>top songs</H1>-->
                 </div>
             </div>
 
+            <script>
 
-
-
-
-
-
-
-        </div>
-
-        <div class="container">    
-            <div style="color: white; text-align: center">
-
-     <H1>top songs</H1>
-            </div>
-        </div>
-
-        <script>
-
-            // NAV BAR CHOICE 
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    // User is signed in.
-                    console.log("logged in as: "+ user.displayName);
-                    document.getElementById("newUserDiv").remove();
-                    document.getElementById("navbarLogin").remove();
-
-                } else {
-                    // No user is signed in.
-
-                    console.log("no one logged in");
-                    document.getElementById("userOptionsBar").remove();
-
-                }
-            });
-            function tryLogin(){
-
-                var inputEmail = navLogin.navEmail.value;
-                var inputPassword = navLogin.navPassword.value;
-
-                firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword).catch(function(error) {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    // ...
-                });
-
+                // NAV BAR CHOICE 
                 firebase.auth().onAuthStateChanged(function(user) {
                     if (user) {
-                        window.open("myProfile.html", "_self");  
                         // User is signed in.
+                        console.log("logged in as: "+ user.displayName);
+                        document.getElementById("newUserDiv").remove();
+                        document.getElementById("navbarLogin").remove();
 
                     } else {
                         // No user is signed in.
+
+                        console.log("no one logged in");
+                        document.getElementById("userOptionsBar").remove();
+
                     }
                 });
-            }
+                function tryLogin(){
 
+                    var inputEmail = navLogin.navEmail.value;
+                    var inputPassword = navLogin.navPassword.value;
 
-            //SHARED REF
-            var songsRef = firebase.database().ref('songs');
+                    firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword).catch(function(error) {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        // ...
+                    });
 
+                    firebase.auth().onAuthStateChanged(function(user) {
+                        if (user) {
+                            window.open("myProfile.html", "_self");  
+                            // User is signed in.
 
-            // SHARED VARIABLES
-
-            var songArray;
-
-
-            // FUNCTIONS 
-
-
-            function makeSongList(songId){
-
-                if(typeof songArray == "undefined") {
-                    songArray = [songId];
+                        } else {
+                            // No user is signed in.
+                        }
+                    });
                 }
-                else if (songArray){
-                    songArray.push(songId);
+
+
+                //SHARED REF
+                var songsRef = firebase.database().ref('songs');
+                var coverStorageRef = firebase.storage().ref('covers');
+                var songStorageRef = firebase.storage().ref('songs');
+
+
+
+
+                // SHARED VARIABLES
+
+                var songArray
+                var newNamesArray = [""];
+                var newArtistsArray = [""];
+                var newCoverURLArray = [""];
+
+                // DEFAULTS
+
+                var defaultCover = "https://firebasestorage.googleapis.com/v0/b/disco-6a3bf.appspot.com/o/covers%2FcoverArt.png?alt=media&token=ac5f78d7-580b-4f61-9d1d-f86aa4e64fee";
+
+
+                //objects
+
+
+
+
+                function makeSongList(songId){
+
+                    if(typeof songArray == "undefined") {
+                        songArray = [songId];
+                        loadTimelineData(songId, songArray.length);
+                    }
+                    else if (songArray){
+                        songArray.push(songId);
+                        loadTimelineData(songId, songArray.length);
+
+                    }
+
+                }
+
+                function loadTimelineData(songId, position){
+
+                    var songIdRef = songsRef.child(songId);
+
+
+                    // song name
+                    songIdRef.once('value').then(function(snapshot) {
+                        var name = snapshot.val().name;
+                        newNames(name, position);
+                        // ...
+                    });
+
+                    // artist name
+                    songIdRef.child("creator").once('value').then(function(snapshot) {
+                        var publicName = snapshot.val().publicName;
+                        newArtists(publicName, position);
+
+                        // ...
+                    });
+
+
+                    coverStorageRef.child(songId).getDownloadURL().then(function(url) {
+                        // image url
+
+                        console.log("URL is: " + url);
+                        newCovers(url, position);
+
+                    }).catch(function(error) {
+                        // No Image
+                        newCovers(defaultCover, position);
+
+                    });
+
+
+                }
+
+
+                function newNames(name, position){
+
+                    console.log("assigning " + name +" to position " + position);
+                    newNamesArray[position] = name;
+                    updateTimeline()
+
+                }
+
+                function newArtists(artist, position){
+
+                    console.log("assigning " + artist + " to position " + position);
+                    newArtistsArray[position] = artist;
+                    updateTimeline();
+
+                }
+
+                function newCovers(coverURL, position){
+
+                    console.log("assigning " + coverURL + " to position " + position);
+                    newCoverURLArray[position] = coverURL;
+                    updateTimeline();
+
+                }
+
+
+                function updateTimeline(){
+
+                    console.log(newArtistsArray);
+                    console.log(newNamesArray)
+
+                    name1.innerHTML=  newNamesArray[1];
+                    name2.innerHTML =  newNamesArray[2];
+                    name3.innerHTML =  newNamesArray[3];
+                    name4.innerHTML =  newNamesArray[4];
+                    name5.innerHTML =  newNamesArray[5];
+
+                    artist1.innerHTML =  newArtistsArray[1];
+                    artist2.innerHTML =  newArtistsArray[2];
+                    artist3.innerHTML =  newArtistsArray[3];
+                    artist4.innerHTML =  newArtistsArray[4];
+                    artist5.innerHTML =  newArtistsArray[5];
+
+                    coverArt1.src = newCoverURLArray[1];
+                    coverArt2.src = newCoverURLArray[2];
+                    coverArt3.src = newCoverURLArray[3];
+                    coverArt4.src = newCoverURLArray[4];
+                    coverArt5.src = newCoverURLArray[5];
+
+
+
+
                 }
 
 
 
-            }
+                window.onload = 
+
+                    function() {    
+                    songsRef.limitToLast(5).on('child_added', function(data) {
+                        makeSongList(data.key);
+                        console.log("SAVING KEYS: " + data.key)
+                    });
+
+                }
 
 
-            window.onload = 
+            </script>
 
-                function() {    
-                songsRef.limitToFirst(100).on('child_added', function(data) {
-                    makeSongList(data.key)
-                });
+            </body>
 
-
-
-
-            }
-
-
-        </script>
-
-    </body>
-
-</html>
+        </html>

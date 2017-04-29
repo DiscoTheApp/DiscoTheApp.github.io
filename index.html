@@ -402,6 +402,21 @@
 
             }
 
+            function toggleMusic(){ 
+                console.log("clicked");
+                if (player.paused == true){
+                    player.play();  
+                    playButton.src = "Icons/Pause-100.png";
+                }
+                else if (player.paused == false){
+                    player.pause();
+                    playButton.src = "Icons/Play-100.png";
+
+                }
+
+
+            }
+
 
 
 

@@ -161,7 +161,7 @@
 
         <!--            FOOTER -->
 
-        <footer class="footer">
+        <footer class="footer" id = "footerPlayer" style="display: none">
 
             <audio id="player"></audio>
 
@@ -176,7 +176,7 @@
 
                 <img  id="repeatButton"class="audioIconSmall" src="Icons/Repeat-96.png" onclick="">
                 <img  id="rewindButton"class="audioIconBig" src="Icons/Rewind-100.png" onclick="">
-                <img  id="playButton"class="audioIconBig" src="Icons/Play-100.png" onclick="toggleMusic()">
+                <img  id="playButton"class="audioIconBig" src="Icons/Pause-100.png" onclick="toggleMusic()">
                 <img  id="forwardButton"class="audioIconBig" src="Icons/Fast%20Forward-100.png" onclick="">
                 <img  id="shuffleButton"class="audioIconSmall" src="Icons/Shuffle-96.png" onclick="">
             </div>
@@ -394,6 +394,7 @@
 
 
             function updatePlayer(position){
+                footerPlayer.style.display = 'block';
                 player.src = newSongURLArray[position];
                 playerSong.innerHTML = newNamesArray[position];
                 playerArtist.innerHTML = newArtistsArray[position];

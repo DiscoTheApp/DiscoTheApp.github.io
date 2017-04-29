@@ -5,7 +5,6 @@
 */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
-
 input[type=range] {
     -webkit-appearance: none;
     margin: 10px 0;
@@ -6998,6 +6997,11 @@ select[multiple].input-lg {
     .timeline-left{ float: left; width: 40%; }
     .timeline-right{ float: right; width: 40%; }
     .timline-center{ display: inline-block; width: 20%; }
+
+
+    .player-left{ float: left; width: 33%; }
+    .player-right{ float: right; width: 33%; }
+    .player-center{ display: inline-block; width: 33%; }
 
     .innerTimeline-left{ float: left; width: 50%; }
     .innerTimeline-right{ float: right; width: 50%; }

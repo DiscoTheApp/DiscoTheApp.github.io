@@ -102,6 +102,8 @@
 
             var auth = firebase.auth();
             var user = firebase.auth().currentUser;
+            
+            var defaultProfile = "https://firebasestorage.googleapis.com/v0/b/disco-6a3bf.appspot.com/o/profileImages%2Fprofile.png?alt=media&token=bf906fc5-bc41-4a1b-ba29-6376e4a626ed";
 
             if (user != null){
                 var userId = user.uid;
@@ -187,7 +189,7 @@
 
                         }
                         if (user.photoURL == null){
-                            document.getElementById("profileImage").src = "images/profile.png";
+                            document.getElementById("profileImage").src = defaultProfile;
                         }
 
                         // get public name

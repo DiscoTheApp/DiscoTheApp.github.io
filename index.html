@@ -78,273 +78,374 @@
                     </div>
 
                 </div>
-                </nav>
+            </div>
+        </nav>
 
-            <div class="container" style = "background-color: #222" id="newUserDiv">
-                <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
-                    <div class="container">
-                        <h1 >Discover new music.</h1>
-                        <p>Disco is music streaming service that allows Artists to share their music for free, and get paid for their work.</p>
-                        <p><a class="btn btn-primary btn-lg" href="createAccount.html" role="button">CREATE ACCOUNT</a></p>
-                    </div>
+        <div class="container" style = "background-color: #222" id="newUserDiv">
+            <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
+                <div class="container">
+                    <h1 >Discover new music.</h1>
+                    <p>Disco is music streaming service that allows Artists to share their music for free, and get paid for their work.</p>
+                    <p><a class="btn btn-primary btn-lg" href="createAccount.html" role="button">CREATE ACCOUNT</a></p>
                 </div>
             </div>
-            <br>
-            <div id="timeline">    
+        </div>
+        <br>
+        <div id="timeline">    
 
 
-                <div class="timeline-left">
-                    <div class="innerTimeline-left">
-                        <div id="songBlock" style="text-align: center;color: white">
-                            <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt1">
-                            <h2 class="detail-padding" id="name1">Song Name</h2>
-                            <h2 class="detail-padding" id="artist1" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
-                        </div>
-                    </div>
-                    <div class="innerTimeline-right">
-                        <div id="songBlock" style="text-align: center;color: white">
-                            <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt2">
-                            <h2 class="detail-padding" id="name2">Song Name</h2>
-                            <h2 class="detail-padding" id="artist2" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-                <div class="timeline-right">
-                    <div class="innerTimeline-left">
-                        <div id="songBlock" style="text-align: center;color: white">
-                            <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt4">
-                            <h2 class="detail-padding" id="name4">Song Name</h2>
-                            <h2 class="detail-padding" id="artist4" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
-                        </div>
-                    </div>
-                    <div class="innerTimeline-right">
-                        <div id="songBlock" style="text-align: center;color: white">
-                            <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt5">
-                            <h2 class="detail-padding" id="name5">Song Name</h2>
-                            <h2 class="detail-padding" id="artist5" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="timeline-center">
+            <div class="timeline-left">
+                <div class="innerTimeline-left">
                     <div id="songBlock" style="text-align: center;color: white">
-                        <img  src="Images/coverArt.png" class= "square-large" id="coverArt3">
-                        <h2 class="detail-padding" id="name3">Song Name</h2>
-                        <h2 class="detail-padding" id="artist3" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt1" onclick="playSong1()">
+                        <h2 class="detail-padding" id="name1">Song Name</h2>
+                        <h2 class="detail-padding" id="artist1" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                    </div>
+                </div>
+                <div class="innerTimeline-right">
+                    <div id="songBlock" style="text-align: center;color: white">
+                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt2" onclick="playSong2()">
+                        <h2 class="detail-padding" id="name2">Song Name</h2>
+                        <h2 class="detail-padding" id="artist2" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
                     </div>
                 </div>
 
-
-
-
-
-
-
-
-
             </div>
 
-            <div class="container">    
-                <div style="color: white; text-align: center">
 
-                    <!--              <H1>top songs</H1>-->
+
+            <div class="timeline-right">
+                <div class="innerTimeline-left">
+                    <div id="songBlock" style="text-align: center;color: white">
+                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt4" onclick="playSong4()">
+                        <h2 class="detail-padding" id="name4">Song Name</h2>
+                        <h2 class="detail-padding" id="artist4" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                    </div>
+                </div>
+                <div class="innerTimeline-right">
+                    <div id="songBlock" style="text-align: center;color: white">
+                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt5" onclick="playSong5()">
+                        <h2 class="detail-padding" id="name5">Song Name</h2>
+                        <h2 class="detail-padding" id="artist5" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                    </div>
                 </div>
             </div>
 
-            <script>
 
-                // NAV BAR CHOICE 
+
+            <div class="timeline-center">
+                <div id="songBlock" style="text-align: center;color: white">
+                    <img  src="Images/coverArt.png" class= "square-large" id="coverArt3" onclick="playSong3()">
+                    <h2 class="detail-padding" id="name3">Song Name</h2>
+                    <h2 class="detail-padding" id="artist3" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <div class="container">    
+            <div style="color: white; text-align: center">
+
+                <!--              <H1>top songs</H1>-->
+            </div>
+        </div>
+
+
+        <!--            FOOTER -->
+
+        <footer class="footer">
+
+            <audio id="player"></audio>
+
+            <div class="player-left">
+                <img id="footerCover" class="footerCover" style="float:left; margin-right: 10px"> 
+
+                <h3 style="margin-top:2%; color: #D7B659; margin-bottom:1%" id="playerSong"> Song Name</h3>
+                <i> <h4 style="margin-top: 2%; margin-bottom: 1%; color: white" id="playerArtist"></h4></i>
+            </div>
+
+            <div class="player-center" style="margin-top:1.5%" id="controller">
+
+                <img  id="repeatButton"class="audioIconSmall" src="Icons/Repeat-96.png" onclick="">
+                <img  id="rewindButton"class="audioIconBig" src="Icons/Rewind-100.png" onclick="">
+                <img  id="playButton"class="audioIconBig" src="Icons/Play-100.png" onclick="toggleMusic()">
+                <img  id="forwardButton"class="audioIconBig" src="Icons/Fast%20Forward-100.png" onclick="">
+                <img  id="shuffleButton"class="audioIconSmall" src="Icons/Shuffle-96.png" onclick="">
+            </div>
+
+            <div class="player-right" style="margin-top:1.5%">
+
+                <!--               que-->
+                <button type="button" class="btn btn-primary" style="margin-right: 1%">
+                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                </button>
+
+                <!--                add-->
+                <button type="button" class="btn btn-primary" style="margin-right: 1%">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+
+                <!--                like-->
+                <button type="button" class="btn btn-primary" style="margin-right: 1%">
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                </button>
+
+                <!--                share-->
+                <button type="button" class="btn btn-primary" style="margin-right: 1%">
+                    <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+                </button>
+
+                <!--                suggest-->
+                <button type="button" class="btn btn-primary" style="margin-right: 1%">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                </button>
+
+                <!--                volume-->
+                <button type="button" class="btn btn-primary" style="margin-right: 1%">
+                    <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+                </button>
+
+            </div>
+
+
+        </footer>
+
+
+
+        <script>
+
+            // NAV BAR CHOICE 
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    // User is signed in.
+                    console.log("logged in as: "+ user.displayName);
+                    document.getElementById("newUserDiv").remove();
+                    document.getElementById("navbarLogin").remove();
+
+                } else {
+                    // No user is signed in.
+
+                    console.log("no one logged in");
+                    document.getElementById("userOptionsBar").remove();
+
+                }
+            });
+            function tryLogin(){
+
+                var inputEmail = navLogin.navEmail.value;
+                var inputPassword = navLogin.navPassword.value;
+
+                firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword).catch(function(error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // ...
+                });
+
                 firebase.auth().onAuthStateChanged(function(user) {
                     if (user) {
+                        window.open("myProfile.html", "_self");  
                         // User is signed in.
-                        console.log("logged in as: "+ user.displayName);
-                        document.getElementById("newUserDiv").remove();
-                        document.getElementById("navbarLogin").remove();
 
                     } else {
                         // No user is signed in.
-
-                        console.log("no one logged in");
-                        document.getElementById("userOptionsBar").remove();
-
                     }
                 });
-                function tryLogin(){
+            }
 
-                    var inputEmail = navLogin.navEmail.value;
-                    var inputPassword = navLogin.navPassword.value;
 
-                    firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword).catch(function(error) {
-                        // Handle Errors here.
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
-                        // ...
-                    });
+            //SHARED REF
+            var songsRef = firebase.database().ref('songs');
+            var coverStorageRef = firebase.storage().ref('covers');
+            var songStorageRef = firebase.storage().ref('songs');
 
-                    firebase.auth().onAuthStateChanged(function(user) {
-                        if (user) {
-                            window.open("myProfile.html", "_self");  
-                            // User is signed in.
 
-                        } else {
-                            // No user is signed in.
-                        }
-                    });
+
+
+            // SHARED VARIABLES
+
+            var songArray;
+            var newNamesArray = [""];
+            var newArtistsArray = [""];
+            var newSongURLArray = [""];
+            // DEFAULTS
+
+            var defaultCover = "https://firebasestorage.googleapis.com/v0/b/disco-6a3bf.appspot.com/o/covers%2FcoverArt.png?alt=media&token=ac5f78d7-580b-4f61-9d1d-f86aa4e64fee";
+
+            var newCoverURLArray = [defaultCover,defaultCover,defaultCover,defaultCover,defaultCover,defaultCover];
+
+
+            function makeSongList(songId){
+
+                if(typeof songArray == "undefined") {
+                    songArray = [songId];
+                    loadTimelineData(songId, songArray.length);
                 }
-
-
-                //SHARED REF
-                var songsRef = firebase.database().ref('songs');
-                var coverStorageRef = firebase.storage().ref('covers');
-                var songStorageRef = firebase.storage().ref('songs');
-
-
-
-
-                // SHARED VARIABLES
-
-                var songArray
-                var newNamesArray = [""];
-                var newArtistsArray = [""];
-
-                // DEFAULTS
-
-                var defaultCover = "https://firebasestorage.googleapis.com/v0/b/disco-6a3bf.appspot.com/o/covers%2FcoverArt.png?alt=media&token=ac5f78d7-580b-4f61-9d1d-f86aa4e64fee";
-
-                var newCoverURLArray = [defaultCover,defaultCover,defaultCover,defaultCover,defaultCover,defaultCover];
-
-
-
-                //objects
-
-
-
-
-                function makeSongList(songId){
-
-                    if(typeof songArray == "undefined") {
-                        songArray = [songId];
-                        loadTimelineData(songId, songArray.length);
-                    }
-                    else if (songArray){
-                        songArray.push(songId);
-                        loadTimelineData(songId, songArray.length);
-
-                    }
+                else if (songArray){
+                    songArray.push(songId);
+                    loadTimelineData(songId, songArray.length);
 
                 }
 
-                function loadTimelineData(songId, position){
+            }
 
-                    var songIdRef = songsRef.child(songId);
+            function loadTimelineData(songId, position){
 
+                var songIdRef = songsRef.child(songId);
 
-                    // song name
-                    songIdRef.once('value').then(function(snapshot) {
-                        var name = snapshot.val().name;
-                        newNames(name, position);
-                        // ...
-                    });
+                // song name
+                songIdRef.once('value').then(function(snapshot) {
+                    var name = snapshot.val().name;
+                    newNames(name, position);
+                    // ...
+                });
 
-                    // artist name
-                    songIdRef.child("creator").once('value').then(function(snapshot) {
-                        var publicName = snapshot.val().publicName;
-                        newArtists(publicName, position);
+                // artist name
+                songIdRef.child("creator").once('value').then(function(snapshot) {
+                    var publicName = snapshot.val().publicName;
+                    newArtists(publicName, position);
 
-                        // ...
-                    });
+                    // ...
+                });
 
+                //cover File
+                coverStorageRef.child(songId).getDownloadURL().then(function(coverURL) {
+                    // image url
 
-                    coverStorageRef.child(songId).getDownloadURL().then(function(url) {
-                        // image url
+                    newCovers(coverURL, position);
 
-                        console.log("URL is: " + url);
-                        newCovers(url, position);
+                }).catch(function(error) {
+                    // No Image
+                    newCovers(defaultCover, position);
 
-                    }).catch(function(error) {
-                        // No Image
-                        newCovers(defaultCover, position);
+                });
 
-                    });
+                //song File
+                songStorageRef.child(songId).getDownloadURL().then(function(songURL) {
+                    // song url
+                    console.log("SONG URL is: " + songURL);
+                    newSongs(songURL, position);
 
+                }).catch(function(error) {
 
-                }
+                });
 
-
-                function newNames(name, position){
-
-                    console.log("assigning " + name +" to position " + position);
-                    newNamesArray[position] = name;
-                    updateTimeline()
-
-                }
-
-                function newArtists(artist, position){
-
-                    console.log("assigning " + artist + " to position " + position);
-                    newArtistsArray[position] = artist;
-                    updateTimeline();
-
-                }
-
-                function newCovers(coverURL, position){
-
-                    console.log("assigning " + coverURL + " to position " + position);
-                    newCoverURLArray[position] = coverURL;
-                    updateTimeline();
-
-                }
+            }
 
 
-                function updateTimeline(){
+            function newNames(name, position){
 
-                    console.log(newArtistsArray);
-                    console.log(newNamesArray)
+                newNamesArray[position] = name;
+                updateTimeline()
 
-                    name1.innerHTML=  newNamesArray[1];
-                    name2.innerHTML =  newNamesArray[2];
-                    name3.innerHTML =  newNamesArray[3];
-                    name4.innerHTML =  newNamesArray[4];
-                    name5.innerHTML =  newNamesArray[5];
+            }
 
-                    artist1.innerHTML =  newArtistsArray[1];
-                    artist2.innerHTML =  newArtistsArray[2];
-                    artist3.innerHTML =  newArtistsArray[3];
-                    artist4.innerHTML =  newArtistsArray[4];
-                    artist5.innerHTML =  newArtistsArray[5];
+            function newArtists(artist, position){
 
-                    coverArt1.src = newCoverURLArray[1];
-                    coverArt2.src = newCoverURLArray[2];
-                    coverArt3.src = newCoverURLArray[3];
-                    coverArt4.src = newCoverURLArray[4];
-                    coverArt5.src = newCoverURLArray[5];
+                newArtistsArray[position] = artist;
+                updateTimeline();
+
+            }
+
+            function newCovers(coverURL, position){
+
+                newCoverURLArray[position] = coverURL;
+                updateTimeline();
+
+            }
+
+            function newSongs(songURL, position){
+
+                newSongURLArray[position] = songURL;
+
+            }
+
+            function playSong1(){
+                updatePlayer(1);
+            }
+
+            function playSong2(){
+                updatePlayer(2);
+
+            }
+
+            function playSong3(){
+                updatePlayer(3);
+
+            }
+
+            function playSong4(){         
+                updatePlayer(4);
+
+            }
+
+            function playSong5(){
+                updatePlayer(5);
+
+            }
+
+
+            function updatePlayer(position){
+                player.src = newSongURLArray[position];
+                playerSong.innerHTML = newNamesArray[position];
+                playerArtist.innerHTML = newArtistsArray[position];
+                footerCover.src = newCoverURLArray[position];
+                player.play();
+
+            }
 
 
 
 
-                }
+            function updateTimeline(){
+
+
+                name1.innerHTML=  newNamesArray[1];
+                name2.innerHTML =  newNamesArray[2];
+                name3.innerHTML =  newNamesArray[3];
+                name4.innerHTML =  newNamesArray[4];
+                name5.innerHTML =  newNamesArray[5];
+
+                artist1.innerHTML =  newArtistsArray[1];
+                artist2.innerHTML =  newArtistsArray[2];
+                artist3.innerHTML =  newArtistsArray[3];
+                artist4.innerHTML =  newArtistsArray[4];
+                artist5.innerHTML =  newArtistsArray[5];
+
+                coverArt1.src = newCoverURLArray[1];
+                coverArt2.src = newCoverURLArray[2];
+                coverArt3.src = newCoverURLArray[3];
+                coverArt4.src = newCoverURLArray[4];
+                coverArt5.src = newCoverURLArray[5];
 
 
 
-                window.onload = 
 
-                    function() {    
-                    songsRef.limitToLast(5).on('child_added', function(data) {
-                        makeSongList(data.key);
-                        console.log("SAVING KEYS: " + data.key)
-                    });
-
-                }
+            }
 
 
-            </script>
 
-            </body>
+            window.onload = 
 
-        </html>
+                function() {    
+                songsRef.limitToLast(5).on('child_added', function(data) {
+                    makeSongList(data.key);
+                    console.log("SAVING KEYS: " + data.key)
+                });
+
+            }
+
+
+        </script>
+
+    </body>
+
+</html>

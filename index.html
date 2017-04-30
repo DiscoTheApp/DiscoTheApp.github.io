@@ -44,11 +44,11 @@
 
         </script>
 
-
     </head>
 
 
     <body  style = "background-color: #222">
+       
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -62,6 +62,7 @@
 
 
                 </div>
+                
                 <div class="navbar-right" style = "padding-right: 15px">
                     <div class="navbar-right" style = "padding-right: 15px">
                         <div id="navbarLogin" class="navbar-collapse collapse">
@@ -78,7 +79,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div>  
         </nav>
 
         <div class="container" style = "background-color: #222" id="newUserDiv">
@@ -90,61 +91,61 @@
                 </div>
             </div>
         </div>
-        <br>
+        <div class="container" style="text-align:center; color: #D7B659">
+
+            <h1><i>NEW RELEASES</i></h1>
+
+        </div>
+
         <div id="timeline">    
 
 
+           
             <div class="timeline-left">
                 <div class="innerTimeline-left">
                     <div id="songBlock" style="text-align: center;color: white">
-                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt1" onclick="playSong1()">
+                        <img  src="Images/coverArt.png"  class= "square-large" id="coverArt1" onclick="playSong1()">
                         <h2 class="detail-padding" id="name1">Song Name</h2>
-                        <h2 class="detail-padding" id="artist1" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                        <i><h2 class="detail-padding" id="artist1" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2></i>
                     </div>
                 </div>
                 <div class="innerTimeline-right">
                     <div id="songBlock" style="text-align: center;color: white">
-                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt2" onclick="playSong2()">
+                        <img  src="Images/coverArt.png" class= "square-large" id="coverArt2" onclick="playSong2()">
                         <h2 class="detail-padding" id="name2">Song Name</h2>
-                        <h2 class="detail-padding" id="artist2" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                        <i><h2 class="detail-padding" id="artist2" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                        </i>
                     </div>
                 </div>
 
             </div>
 
-
-
+           
             <div class="timeline-right">
                 <div class="innerTimeline-left">
                     <div id="songBlock" style="text-align: center;color: white">
-                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt4" onclick="playSong4()">
+                        <img  src="Images/coverArt.png" class= "square-large" id="coverArt4" onclick="playSong4()">
                         <h2 class="detail-padding" id="name4">Song Name</h2>
-                        <h2 class="detail-padding" id="artist4" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                        <i><h2 class="detail-padding" id="artist4" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2></i>
                     </div>
                 </div>
                 <div class="innerTimeline-right">
                     <div id="songBlock" style="text-align: center;color: white">
-                        <img  src="Images/coverArt.png" style="width: 90%; height: auto" id="coverArt5" onclick="playSong5()">
+                        <img  src="Images/coverArt.png" class= "square-large" id="coverArt5" onclick="playSong5()">
                         <h2 class="detail-padding" id="name5">Song Name</h2>
-                        <h2 class="detail-padding" id="artist5" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                        <i><h2 class="detail-padding" id="artist5" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2></i>
                     </div>
                 </div>
             </div>
 
-
-
+           
             <div class="timeline-center">
                 <div id="songBlock" style="text-align: center;color: white">
                     <img  src="Images/coverArt.png" class= "square-large" id="coverArt3" onclick="playSong3()">
                     <h2 class="detail-padding" id="name3">Song Name</h2>
-                    <h2 class="detail-padding" id="artist3" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+                    <i><h2 class="detail-padding" id="artist3" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2></i>
                 </div>
             </div>
-
-
-
-
-
 
 
 
@@ -272,7 +273,7 @@
 
             // SHARED VARIABLES
 
-            var songArray;
+            var songArray = [""];
             var newNamesArray = [""];
             var newArtistsArray = [""];
             var newSongURLArray = [""];
@@ -285,16 +286,8 @@
 
             function makeSongList(songId){
 
-                if(typeof songArray == "undefined") {
-                    songArray = [songId];
-                    loadTimelineData(songId, songArray.length);
-                }
-                else if (songArray){
-                    songArray.push(songId);
-                    loadTimelineData(songId, songArray.length);
-
-                }
-
+                songArray.push(songId);
+                loadTimelineData(songId, songArray.length -1 );
             }
 
             function loadTimelineData(songId, position){
@@ -304,6 +297,7 @@
                 // song name
                 songIdRef.once('value').then(function(snapshot) {
                     var name = snapshot.val().name;
+                    console.log("NEW SONG NAME: " + name);
                     newNames(name, position);
                     // ...
                 });
@@ -319,9 +313,7 @@
                 //cover File
                 coverStorageRef.child(songId).getDownloadURL().then(function(coverURL) {
                     // image url
-
                     newCovers(coverURL, position);
-
                 }).catch(function(error) {
                     // No Image
                     newCovers(defaultCover, position);
@@ -344,7 +336,7 @@
             function newNames(name, position){
 
                 newNamesArray[position] = name;
-                updateTimeline()
+                updateTimeline();
 
             }
 
@@ -404,6 +396,7 @@
             }
 
             function toggleMusic(){ 
+
                 console.log("clicked");
                 if (player.paused == true){
                     player.play();  
@@ -414,15 +407,13 @@
                     playButton.src = "Icons/Play-100.png";
 
                 }
-
-
             }
-
-
 
 
             function updateTimeline(){
 
+                console.log(newNamesArray);
+                console.log(newArtistsArray);
 
                 name1.innerHTML=  newNamesArray[1];
                 name2.innerHTML =  newNamesArray[2];
@@ -442,20 +433,48 @@
                 coverArt4.src = newCoverURLArray[4];
                 coverArt5.src = newCoverURLArray[5];
 
-
-
-
             }
+
+
+            songsRef.limitToLast(5).on('child_added', function(data) {
+                if (newNamesArray.length == 6){
+                    console.log("PAUSING!!!!");
+                    setTimeout(function() {
+
+                        songArray.splice(1, 1);
+                        newArtistsArray.splice(1, 1);
+                        newNamesArray.splice(1, 1);
+                        newCoverURLArray.splice(1, 1);
+                        newSongURLArray.splice(1,1);
+                        console.log("AFTER  SPLICE: ");
+                        console.log(newNamesArray);
+                        console.log(newArtistsArray);
+
+
+
+                        setTimeout(function() {
+                            makeSongList(data.key);
+
+                        }, 1000);
+
+                    }, 1000);
+
+
+
+                }
+                else {
+                    makeSongList(data.key);
+
+                }
+                console.log("SAVING KEYS: " + data.key);
+            });
 
 
 
             window.onload = 
 
                 function() {    
-                songsRef.limitToLast(5).on('child_added', function(data) {
-                    makeSongList(data.key);
-                    console.log("SAVING KEYS: " + data.key)
-                });
+
 
             }
 

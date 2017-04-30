@@ -412,9 +412,6 @@
                     console.log("posting: ");
                     console.log(readyData);
 
-                    // upload Song Data
-                    newSongRef.set(readyData);
-                    userSongsRef.set(songKey);
 
                     // upload Song File
                     var songStorageRef = storageRef.child('songs/' + songKey);
@@ -443,6 +440,10 @@
                             var coverStorageRef = storageRef.child('covers/' + songKey);
                             coverStorageRef.put(coverFile).then(function(snapshot) {
                                 console.log('Uploaded a Single cover file!');
+                                // upload Song Data
+                                newSongRef.set(readyData);
+                                userSongsRef.set(songKey);
+
                                 window.open("myProfile.html", "_self"); 
 
 
@@ -452,6 +453,10 @@
 
                         }
                         else {
+                            // upload Song Data
+                            newSongRef.set(readyData);
+                            userSongsRef.set(songKey);
+
                             window.open("myProfile.html", "_self"); 
 
                         }

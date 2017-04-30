@@ -202,8 +202,6 @@
 
             } // end good Create Account
 
-
-
             function tryLogin(){
 
                 var inputEmail = navLogin.navEmail.value;
@@ -226,15 +224,12 @@
                 });
             }
 
-
-
             function writeUserData(username, email, uid, name) {
                 firebase.database().ref('users/' + username + '/details').set({
                     username: username,
                     email: email,
                     userID: uid,
                     publicName: name
-
                 })
             }
 

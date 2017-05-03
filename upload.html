@@ -142,7 +142,7 @@
                     </form>
 
                     <button class="btn btn-primary" style="margin-top:3%;display: none;" onclick="startSongUpload()" id="uploadButton">+ Upload Song File </button> 
-                    <button class="btn btn-primary" style="margin-top:3%;display: none; float: right" onclick="addTrack()" id="addTrackButton">+ Add Tracks </button> 
+                    <!--                      <button class="btn btn-primary" style="margin-top:3%;display: none; float: right" onclick="addTrack()" id="addTrackButton">+ Add Tracks </button> -->
 
                 </div>
 
@@ -164,8 +164,23 @@
 
 
             </div>
+            <div id="publishBlock" class="container">
 
-            <button class="btn btn-primary btn-lg" id="publishButton" style="display: none;float:right;margin-top: 5%; margin-right: 2%" onclick="publish()">Publish</button>
+                <div style="float: left; width: 90%; margin-top:1% ">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" id ="uploadProgress" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="float: right; width: 10%">
+                    <button class="btn btn-primary btn-lg" id="publishButton" style="float:right" onclick="publish()">Publish</button>
+
+                </div>
+
+            </div>
+
 
 
         </div>
@@ -205,7 +220,8 @@
 
             // HTML OBJECTS
             var uploadButton = document.getElementById('uploadButton');
-            var publishButton = document.getElementById('publishButton');
+            var uploadProgress = document.getElementById('uploadProgress');
+            var publishBlock = document.getElementById('publishBlock');
             var addTrackButton = document.getElementById('addTrackButton');
 
             var artistNameId = document.getElementById('artistName');
@@ -366,17 +382,12 @@
 
                     if (songFile){
                         // controller.style.display = 'block';
-                        publishButton.style.display = 'block'; 
+                        publishBlock.style.display = 'block'; 
                     }
                     createSong(songFile);
 
 
                 }
-
-
-
-
-
 
 
 
@@ -422,6 +433,10 @@
                     uploadTask.on('state_changed', function(snapshot){
 
                         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    
+                        
+                        uploadProgress.style.width = progress+ "%";
+                        
                         console.log( progress + "% DONE");
 
                     }, function(error) {
@@ -430,7 +445,6 @@
                         // Handle successful uploads on complete
 
                         if (coverSelected == true) {
-
 
                             // write cover location
                             var coverLocation = songsRef.child(songKey + "/cover");
@@ -445,9 +459,6 @@
                                 userSongsRef.set(songKey);
 
                                 window.open("myProfile.html", "_self"); 
-
-
-
 
                             });
 
@@ -568,12 +579,9 @@
 
                 if (songName.length > 0){
                     uploadButton.style.display = 'block';
-
-
                 }
                 if (songName.length == 0){
                     uploadButton.style.display = 'none';
-
                 }
 
             }

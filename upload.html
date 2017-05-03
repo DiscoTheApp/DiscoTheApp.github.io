@@ -167,8 +167,8 @@
             <div id="publishBlock" class="container">
 
                 <div style="float: left; width: 90%; margin-top:1% ">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" id ="uploadProgress" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
+                    <div class="progress"  id = "progressDiv" style="display: none">
+                        <div class="progress-bar" role="progressbar" id ="uploadProgress" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:0%">
                             
                         </div>
                     </div>
@@ -431,11 +431,11 @@
 
                     // UPLOADING TASK
                     uploadTask.on('state_changed', function(snapshot){
-
                         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    
                         
+                        progressDiv.style.display = 'block'
                         uploadProgress.style.width = progress+ "%";
+                        uploadProgress.innerHTML = (progress.toFixed(0) + "%");
                         
                         console.log( progress + "% DONE");
 

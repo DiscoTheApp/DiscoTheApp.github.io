@@ -231,6 +231,7 @@
                     userID: uid,
                     publicName: name
                 })
+                firebase.database().ref('users/' + username + '/details/following/disco').set("disco");
             }
 
 

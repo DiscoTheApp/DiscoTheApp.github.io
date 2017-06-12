@@ -1,486 +1,278 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <meta name="description" content="DISCO">
-        <meta name="author" content="Tushar">
-
-        <title>DISCO</title>
-
-        <!-- Bootstrap core CSS -->
-        <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="jumbotron.css" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
-
-        <!-- Firebase -->
-
-        <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
-        <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
-
-
-
-        <!--        SROLL MAGIC        -->
-
-        <script>
-
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
-                authDomain: "disco-6a3bf.firebaseapp.com",
-                databaseURL: "https://disco-6a3bf.firebaseio.com",
-                storageBucket: "disco-6a3bf.appspot.com",
-                messagingSenderId: "71660981931"
-            };
-            firebase.initializeApp(config);
-
-        </script>
-
-    </head>
-
-
-    <body  style = "background-color: #222">
-
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html"> DISCO </a>
-                </div>
-                <div class="navbar-right" id="userOptionsBar">
-                    <a class="navbar-brand" href="upload.html"> Upload </a>
-                    <a class="navbar-brand" href="feed.html"> Feed </a>
-                    <a class="navbar-brand" href="myMusic.html"> My Music </a>
-                    <a class="navbar-brand" href=myProfile.html> Username </a>
-
-
-                </div>
-
-                <div class="navbar-right" style = "padding-right: 15px">
-                    <div class="navbar-right" style = "padding-right: 15px">
-                        <div id="navbarLogin" class="navbar-collapse collapse">
-                            <form class="navbar-form navbar-right" id="navLogin">
-                                <div class="form-group">
-                                    <input type="email" placeholder="Email" class="form-control" id="navEmail">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" placeholder="Password" class="form-control" id="navPassword">
-                                </div>
-                                <button type="button" class="btn btn-primary" onclick="tryLogin()">SIGN IN</button>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
-            </div>  
-        </nav>
-
-        <div class="container" style = "background-color: #222" id="newUserDiv">
-            <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
-                <div class="container">
-                    <h1 >Discover new music.</h1>
-                    <p>Disco is music streaming service that allows Artists to share their music for free, and get paid for their work.</p>
-                    <p><a class="btn btn-primary btn-lg" href="createAccount.html" role="button">CREATE ACCOUNT</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="container" style="text-align:center; color: #D7B659">
-
-            <h1><i>NEW RELEASES</i></h1>
-
-        </div>
-
-        <div id="timeline">    
-
-
-
-            <div class="timeline-left">
-                <div class="innerTimeline-left">
-                    <div id="songBlock" style="text-align: center;color: white">
-                        <img  src="Images/coverArt.png"  class= "square-large" id="coverArt1" onclick="playSong1()">
-                        <h2 class="detail-padding" id="name1">Song Name</h2>
-                        <i><h2 class="detail-padding" id="artist1" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2></i>
-                    </div>
-                </div>
-                <div class="innerTimeline-right">
-                    <div id="songBlock" style="text-align: center;color: white">
-                        <img  src="Images/coverArt.png" class= "square-large" id="coverArt2" onclick="playSong2()">
-                        <h2 class="detail-padding" id="name2">Song Name</h2>
-                        <i><h2 class="detail-padding" id="artist2" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
-                        </i>
-                    </div>
-                </div>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="DISCO">
+		<meta name="author" content="Tushar">
 
-            </div>
+		<title>DISCO</title>
 
+		<!-- Bootstrap core CSS -->
+		<link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="jumbotron.css" rel="stylesheet">
 
-            <div class="timeline-right">
-                <div class="innerTimeline-left">
-                    <div id="songBlock" style="text-align: center;color: white">
-                        <img  src="Images/coverArt.png" class= "square-large" id="coverArt4" onclick="playSong4()">
-                        <h2 class="detail-padding" id="name4">Song Name</h2>
-                        <i><h2 class="detail-padding" id="artist4" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2></i>
-                    </div>
-                </div>
-                <div class="innerTimeline-right">
-                    <div id="songBlock" style="text-align: center;color: white">
-                        <img  src="Images/coverArt.png" class= "square-large" id="coverArt5" onclick="playSong5()">
-                        <h2 class="detail-padding" id="name5">Song Name</h2>
-                        <i><h2 class="detail-padding" id="artist5" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2></i>
-                    </div>
-                </div>
-            </div>
+		<!--Boostrap JS-->
+		<link href="bootstrap-3.3.7-dist/js/bootstrap.js" rel="stylesheet">
+
+
+		<!-- Firebase -->
+
+		<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
+
+
+
+		<!--JQuery-->
+
+
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+		<!--initialize Firebase & Check Login-->
+		<script src="FirebaseStart.js"> </script>
 
-            <div class="timeline-center">
-                <div id="songBlock" style="text-align: center;color: white">
-                    <img  src="Images/coverArt.png" class= "square-large" id="coverArt3" onclick="playSong3()">
-                    <h2 class="detail-padding" id="name3">Song Name</h2>
-                    <i><h2 class="detail-padding" id="artist3" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2></i>
-                </div>
-            </div>
+	</head>
 
 
+	<body  style = "background-color: #222">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="Index.html"> DISCO </a>
+					<form class="navbar-form navbar-left">
+						<div class="form-group">
+							<input type="text" class="form-control" style="width:300px" placeholder="Search">
+						</div>
+					</form>
 
+				</div>
+				<div class="navbar-right">
+					<a class="navbar-brand" href="myMusic.html"> My Music </a>
+					<a class="navbar-brand" href="myProfile.html" id= "navUsername"> Username</a> 
+					<a class="navbar-brand" href="upload.html"> Post + </a>
+				</div>
+			</div>
+		</nav>
 
-        </div>
 
-        <div class="container">    
-            <div style="color: white; text-align: center">
 
-                <!--              <H1>top songs</H1>-->
-            </div>
-        </div>
+		<!--        -->
 
+		<div class="container" style = "background-color: #222" id="newUserDiv">
+			<div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
+				<div class="container">
+					<h1 >Discover new music.</h1>
+					<p>Disco is music streaming service that allows Artists to share their music for free, and get paid for their work.</p>
+					<p><a class="btn btn-primary btn-lg" href="createAccount.html" role="button">CREATE ACCOUNT</a></p>
+				</div>
+			</div>
+		</div>
+		<div class="container" style="text-align:center; color: #D7B659">
 
-        <!--            FOOTER -->
+			<h1><i>NEW RELEASES</i></h1>
 
-        <footer class="footer" id = "footerPlayer" style="display: none">
+		</div>
 
-            <audio id="player"></audio>
+		<div id="timeline">    
 
-            <div class="player-left">
-                <img id="footerCover" class="footerCover" style="float:left; margin-right: 10px"> 
 
-                <h3 style="margin-top:2%; color: white; margin-bottom:1%" id="playerSong"> Song Name</h3>
-                <i> <h4 style="margin-top: 2%; margin-bottom: 1%; color: #D7B659" id="playerArtist"></h4></i>
-            </div>
 
-            <div class="player-center" style="margin-top:1.5%" id="controller">
+			<div class="timeline-left">
+				<div class="innerTimeline-left">
+					<div id="songBlock" style="text-align: center;color: white">
+						<img  src="Images/coverArt.png"  class= "square-large" id="coverArt1" onclick="playSong1()">
+						<h2 class="detail-padding" id="name1">Song Name</h2>
+						<i><h2 class="detail-padding" id="artist1" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2></i>
+					</div>
+				</div>
+				<div class="innerTimeline-right">
+					<div id="songBlock" style="text-align: center;color: white">
+						<img  src="Images/coverArt.png" class= "square-large" id="coverArt2" onclick="playSong2()">
+						<h2 class="detail-padding" id="name2">Song Name</h2>
+						<i><h2 class="detail-padding" id="artist2" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2>
+						</i>
+					</div>
+				</div>
 
-                <img  id="repeatButton"class="audioIconSmall" src="Icons/Repeat-96.png" onclick="">
-                <img  id="rewindButton"class="audioIconBig" src="Icons/Rewind-100.png" onclick="">
-                <img  id="playButton"class="audioIconBig" src="Icons/Pause-100.png" onclick="toggleMusic()">
-                <img  id="forwardButton"class="audioIconBig" src="Icons/Fast%20Forward-100.png" onclick="">
-                <img  id="shuffleButton"class="audioIconSmall" src="Icons/Shuffle-96.png" onclick="">
-            </div>
+			</div>
 
-            <div class="player-right" style="margin-top:1.5%">
 
-                <!--               que-->
-                <button type="button" class="btn btn-primary" style="margin-right: 1%">
-                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                </button>
+			<div class="timeline-right">
+				<div class="innerTimeline-left">
+					<div id="songBlock" style="text-align: center;color: white">
+						<img  src="Images/coverArt.png" class= "square-large" id="coverArt4" onclick="playSong4()">
+						<h2 class="detail-padding" id="name4">Song Name</h2>
+						<i><h2 class="detail-padding" id="artist4" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2></i>
+					</div>
+				</div>
+				<div class="innerTimeline-right">
+					<div id="songBlock" style="text-align: center;color: white">
+						<img  src="Images/coverArt.png" class= "square-large" id="coverArt5" onclick="playSong5()">
+						<h2 class="detail-padding" id="name5">Song Name</h2>
+						<i><h2 class="detail-padding" id="artist5" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2></i>
+					</div>
+				</div>
+			</div>
 
-                <!--                add-->
-                <button type="button" class="btn btn-primary" style="margin-right: 1%">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                </button>
 
-                <!--                like-->
-                <button type="button" class="btn btn-primary" style="margin-right: 1%">
-                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                </button>
+			<div class="timeline-center">
+				<div id="songBlock" style="text-align: center;color: white">
+					<img  src="Images/coverArt.png" class= "square-large" id="coverArt3" onclick="playSong3()">
+					<h2 class="detail-padding" id="name3">Song Name</h2>
+					<i><h2 class="detail-padding" id="artist3" style="font-size: 120%; color: #D7B659"><small>Artist Name</small></h2></i>
+				</div>
+			</div>
 
-                <!--                share-->
-                <button type="button" class="btn btn-primary" style="margin-right: 1%">
-                    <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
-                </button>
 
-                <!--                suggest-->
-                <button type="button" class="btn btn-primary" style="margin-right: 1%">
-                    <span class="glyphicon glyphicon-envelope"></span>
-                </button>
 
-                <!--                volume-->
-                <button type="button" class="btn btn-primary" style="margin-right: 1%">
-                    <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
-                </button>
 
-            </div>
+		</div>
 
+		<div class="container">    
+			<div style="color: #D7B659; text-align: center">
+				<h1><i>FEED</i></h1>
 
-        </footer>
+				<!--              <H1>top songs</H1>-->
+			</div>
+		</div>
 
+		
+		
+		
+		
+		
 
+		<!--            FOOTER -->
 
-        <script>
+		<footer class="footer" id = "footerPlayer" style="display: none">
 
-            // NAV BAR CHOICE 
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    // User is signed in.
-                    console.log("logged in as: "+ user.displayName);
-                    document.getElementById("newUserDiv").remove();
-                    document.getElementById("navbarLogin").remove();
+			<audio id="player"></audio>
 
-                } else {
-                    // No user is signed in.
+			<div class="player-left">
+				<img id="footerCover" class="footerCover" style="float:left; margin-right: 10px"> 
 
-                    console.log("no one logged in");
-                    document.getElementById("userOptionsBar").remove();
+				<h3 style="margin-top:2%; color: white; margin-bottom:1%" id="playerSong"> Song Name</h3>
+				<i> <h4 style="margin-top: 2%; margin-bottom: 1%; color: #D7B659" id="playerArtist"></h4></i>
+			</div>
 
-                }
-            });
-            function tryLogin(){
+			<div class="player-center" style="margin-top:1.5%" id="controller">
 
-                var inputEmail = navLogin.navEmail.value;
-                var inputPassword = navLogin.navPassword.value;
+				<img  id="repeatButton"class="audioIconSmall" src="Icons/Repeat-96.png" onclick="">
+				<img  id="rewindButton"class="audioIconBig" src="Icons/Rewind-100.png" onclick="">
+				<img  id="playButton"class="audioIconBig" src="Icons/Pause-100.png" onclick="toggleMusic()">
+				<img  id="forwardButton"class="audioIconBig" src="Icons/Fast%20Forward-100.png" onclick="">
+				<img  id="shuffleButton"class="audioIconSmall" src="Icons/Shuffle-96.png" onclick="">
+			</div>
 
-                firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword).catch(function(error) {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    // ...
-                });
+			<div class="player-right" style="margin-top:1.5%">
 
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) {
-                        window.open("myProfile.html", "_self");  
-                        // User is signed in.
+				<!--               que-->
+				<button type="button" class="btn btn-primary" style="margin-right: 1%">
+					<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+				</button>
 
-                    } else {
-                        // No user is signed in.
-                    }
-                });
-            }
+				<!--                add-->
+				<button type="button" class="btn btn-primary" style="margin-right: 1%">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</button>
 
+				<!--                like-->
+				<button type="button" class="btn btn-primary" style="margin-right: 1%">
+					<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+				</button>
 
-            //SHARED REF
-            var songsRef = firebase.database().ref('songs');
-            var coverStorageRef = firebase.storage().ref('covers');
-            var songStorageRef = firebase.storage().ref('songs');
+				<!--                share-->
+				<button type="button" class="btn btn-primary" style="margin-right: 1%">
+					<span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+				</button>
 
+				<!--                suggest-->
+				<button type="button" class="btn btn-primary" style="margin-right: 1%">
+					<span class="glyphicon glyphicon-envelope"></span>
+				</button>
 
+				<!--                volume-->
+				<button type="button" class="btn btn-primary" style="margin-right: 1%">
+					<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+				</button>
 
+			</div>
 
-            // SHARED VARIABLES
 
-            var songArray = [""];
-            var newNamesArray = [""];
-            var newArtistsArray = [""];
-            var newSongURLArray = [""];
-            // DEFAULTS
+		</footer>
 
-            var defaultCover = "https://firebasestorage.googleapis.com/v0/b/disco-6a3bf.appspot.com/o/covers%2FcoverArt.png?alt=media&token=ac5f78d7-580b-4f61-9d1d-f86aa4e64fee";
 
-            var newCoverURLArray = [defaultCover,defaultCover,defaultCover,defaultCover,defaultCover,defaultCover];
+		<script>
+			var songsRef = firebase.database().ref('songs');
 
+			function showSong(data){
+				console.log("GOT DATA!");
+				console.log(data);
+			}
 
-            function makeSongList(songId){
 
-                songArray.push(songId);
-                loadTimelineData(songId, songArray.length -1 );
-            }
 
-            function loadTimelineData(songId, position){
+			songsRef.limitToLast(5).on('child_added', function(data) {
+				if (newNamesArray.length == 6){
+					console.log("PAUSING!!!!");
+					setTimeout(function() {
 
-                var songIdRef = songsRef.child(songId);
+						songArray.splice(1, 1);
+						newArtistsArray.splice(1, 1);
+						newNamesArray.splice(1, 1);
+						newCoverURLArray.splice(1, 1);
+						newSongURLArray.splice(1,1);
+						console.log("AFTER  SPLICE: ");
+						console.log(newNamesArray);
+						console.log(newArtistsArray);
 
-                // song name
-                songIdRef.once('value').then(function(snapshot) {
-                    var name = snapshot.val().name;
-                    console.log("NEW SONG NAME: " + name);
-                    newNames(name, position);
-                    // ...
-                });
 
-                // artist name
-                songIdRef.child("creator").once('value').then(function(snapshot) {
-                    var publicName = snapshot.val().publicName;
-                    newArtists(publicName, position);
 
-                    // ...
-                });
+						setTimeout(function() {
+							makeSongList(data.key);
 
-                //cover File
-                coverStorageRef.child(songId).getDownloadURL().then(function(coverURL) {
-                    // image url
-                    newCovers(coverURL, position);
-                }).catch(function(error) {
-                    // No Image
-                    newCovers(defaultCover, position);
+						}, 1000);
 
-                });
+					}, 1000);
 
-                //song File
-                songStorageRef.child(songId).getDownloadURL().then(function(songURL) {
-                    // song url
-                    console.log("SONG URL is: " + songURL);
-                    newSongs(songURL, position);
 
-                }).catch(function(error) {
 
-                });
+				}
+				else {
+					showSong(data);
+					makeSongList(data.key);
 
-            }
+				}
+				console.log("SAVING KEYS: " + data.key);
+			});
 
+		</script>
+		
+		<script src="main.js"></script>
 
-            function newNames(name, position){
+		<script>
 
-                newNamesArray[position] = name;
-                updateTimeline();
 
-            }
 
-            function newArtists(artist, position){
+			window.onload = 
 
-                newArtistsArray[position] = artist;
-                updateTimeline();
+				function() {    
+				// NAV BAR CHOICE 
+				navbarName();
+			}
 
-            }
 
-            function newCovers(coverURL, position){
+		</script>
 
-                newCoverURLArray[position] = coverURL;
-                updateTimeline();
-
-            }
-
-            function newSongs(songURL, position){
-
-                newSongURLArray[position] = songURL;
-
-            }
-
-            function playSong1(){
-                updatePlayer(1);
-            }
-
-            function playSong2(){
-                updatePlayer(2);
-
-            }
-
-            function playSong3(){
-                updatePlayer(3);
-
-            }
-
-            function playSong4(){         
-                updatePlayer(4);
-
-            }
-
-            function playSong5(){
-                updatePlayer(5);
-
-            }
-
-
-            function updatePlayer(position){
-                footerPlayer.style.display = 'block';
-                player.src = newSongURLArray[position];
-                playerSong.innerHTML = newNamesArray[position];
-                playerArtist.innerHTML = newArtistsArray[position];
-                footerCover.src = newCoverURLArray[position];
-                player.play();
-
-            }
-
-            function toggleMusic(){ 
-
-                console.log("clicked");
-                if (player.paused == true){
-                    player.play();  
-                    playButton.src = "Icons/Pause-100.png";
-                }
-                else if (player.paused == false){
-                    player.pause();
-                    playButton.src = "Icons/Play-100.png";
-
-                }
-            }
-
-
-            function updateTimeline(){
-
-                console.log(newNamesArray);
-                console.log(newArtistsArray);
-
-                name1.innerHTML=  newNamesArray[1];
-                name2.innerHTML =  newNamesArray[2];
-                name3.innerHTML =  newNamesArray[3];
-                name4.innerHTML =  newNamesArray[4];
-                name5.innerHTML =  newNamesArray[5];
-
-                artist1.innerHTML =  newArtistsArray[1];
-                artist2.innerHTML =  newArtistsArray[2];
-                artist3.innerHTML =  newArtistsArray[3];
-                artist4.innerHTML =  newArtistsArray[4];
-                artist5.innerHTML =  newArtistsArray[5];
-
-                coverArt1.src = newCoverURLArray[1];
-                coverArt2.src = newCoverURLArray[2];
-                coverArt3.src = newCoverURLArray[3];
-                coverArt4.src = newCoverURLArray[4];
-                coverArt5.src = newCoverURLArray[5];
-
-            }
-
-
-            songsRef.limitToLast(5).on('child_added', function(data) {
-                if (newNamesArray.length == 6){
-                    console.log("PAUSING!!!!");
-                    setTimeout(function() {
-
-                        songArray.splice(1, 1);
-                        newArtistsArray.splice(1, 1);
-                        newNamesArray.splice(1, 1);
-                        newCoverURLArray.splice(1, 1);
-                        newSongURLArray.splice(1,1);
-                        console.log("AFTER  SPLICE: ");
-                        console.log(newNamesArray);
-                        console.log(newArtistsArray);
-
-
-
-                        setTimeout(function() {
-                            makeSongList(data.key);
-
-                        }, 1000);
-
-                    }, 1000);
-
-
-
-                }
-                else {
-                    makeSongList(data.key);
-
-                }
-                console.log("SAVING KEYS: " + data.key);
-            });
-
-
-
-            window.onload = 
-
-                function() {    
-                
-                // on load
-            }
-
-
-        </script>
-
-    </body>
+	</body>
 
 </html>

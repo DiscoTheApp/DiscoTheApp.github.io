@@ -1,85 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <meta name="description" content="DISCO">
-        <meta name="author" content="Tushar">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="DISCO">
+		<meta name="author" content="Tushar">
 
-        <title>DISCO</title>
+		<title>DISCO</title>
 
-        <!-- Bootstrap core CSS -->
-        <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="jumbotron.css" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+		<!-- Bootstrap core CSS -->
+		<link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="jumbotron.css" rel="stylesheet">
 
-        <!-- Firebase -->
-
-        <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
-        <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<!--Boostrap JS-->
+		<link href="bootstrap-3.3.7-dist/js/bootstrap.js" rel="stylesheet">
 
 
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<!-- Firebase -->
+
+		<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
 
 
-        <script>
+
+		<!--JQuery-->
 
 
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
-                authDomain: "disco-6a3bf.firebaseapp.com",
-                databaseURL: "https://disco-6a3bf.firebaseio.com",
-                storageBucket: "disco-6a3bf.appspot.com",
-                messagingSenderId: "71660981931"
-            };
-            firebase.initializeApp(config);
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-            // before anything happends login code starts here
+		<!--initialize Firebase & Check Login-->
+		<script src="FirebaseStart.js"> </script>
 
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    creator();
-                } else {
-                    // No user is signed in.
-                    window.open("createAccount.html", "_self");  
-                }
-            });
+	</head>
 
 
-        </script>
+	<body  style = "background-color: #222">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="Index.html"> DISCO </a>
+					<form class="navbar-form navbar-left">
+						<div class="form-group">
+							<input type="text" class="form-control" style="width:300px" placeholder="Search">
+						</div>
+					</form>
 
-    </head>
-
-
-    <body  style = "background-color: #222">
-
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html"> DISCO </a>
-                </div>
-                <div class="navbar-right">
-                    <a class="navbar-brand" href="upload.html"> Upload </a>
-                    <a class="navbar-brand" href="feed.html"> Feed </a>
-                    <a class="navbar-brand" href="myMusic.html"> My Music </a>
-                    <a class="navbar-brand" href="myProfile.html"> Username </a> 
-
-
-                </div>
-            </div>
-        </nav>
+				</div>
+				<div class="navbar-right">
+					<a class="navbar-brand" href="myMusic.html"> My Music </a>
+					<a class="navbar-brand" href="myProfile.html" id= "navUsername" > Username</a> 
+					<a class="navbar-brand" href="upload.html"> Post + </a>
+				</div>
+			</div>
+		</nav>
 
 
         <!-- Type Select-->
@@ -169,11 +151,11 @@
                 <div style="float: left; width: 90%; margin-top:1% ">
                     <div class="progress"  id = "progressDiv" style="display: none">
                         <div class="progress-bar" role="progressbar" id ="uploadProgress" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:0%">
-                            
+
                         </div>
                     </div>
                 </div>
-                
+
                 <div style="float: right; width: 10%">
                     <button class="btn btn-primary btn-lg" id="publishButton" style="float:right" onclick="publish()">Publish</button>
 
@@ -190,16 +172,6 @@
 
 
         <script>
-
-            // FIREBASE REFERENCES 
-            var storageRef = firebase.storage().ref();
-            var database = firebase.database();
-
-            var songsRef = firebase.database().ref('songs');
-            var vibesRef =  firebase.database().ref('Vibes/Verified');
-            var newVibesRef =  firebase.database().ref('Vibes/Unverified');
-
-
 
             // SHARED VARIABLES
             var songName, publicName, details,songFile,coverFile, vibeCount;
@@ -240,620 +212,15 @@
             var inputCaption = document.getElementById('inputCaption');
             var inputAlbumName = document.getElementById('inputAlbumName');
 
-
-            // SHARED FUNCTIONS 
-            function handleCoverSelect(input) {
-                console.log("file chosen");
-
-                if (input.files && input.files[0]) {
-                    console.log("file exists");
-
-
-                    coverFile = input.files[0];
-                    coverSelected = true;
-
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $('#coverArt')
-                            .attr('src', e.target.result);
-                    };
-
-                    reader.readAsDataURL(input.files[0]);
-                }
-
-            } // END FILE SELECT
-
-            function startCoverUpload(){
-                document.getElementById('coverFile').click();
-            }
-
-            function createSong(songFile){
-
-                console.log("creating song @: " + position);
-
-                // capture Song Data 
-                var readySongName = inputSongName.value;
-                var readyFeatures = inputFeatures.value; 
-                var readyCapion = inputCaption.value;
-
-                //vibes 
-                if (myVibesArray){
-                    var readyVibes = myVibesArray;
-                }
-                else if(typeof myVibesArray == "undefined") {
-                    var readyVibes = false;
-                }
-
-
-                // explicit
-
-                var readyExplicit = false;
-                if (inputExplicit.checked == true){
-                    readyExplicit = true;
-                }
-
-
-
-                // create Song Object 
-                var songObject = {
-                    name: readySongName ,
-                    caption: readyCapion,
-                    vibes: readyVibes ,
-                    creator: savedCreator,
-                    features: readyFeatures,
-                    dateAdded: Date(),
-                    timeline: timestamp.getTime(),
-                    plays: 1,
-                    likes: 1,
-                    shares: 0,
-                    explicit: readyExplicit
-                };
-
-                console.log(songObject);
-
-                if (position != 0){
-                    songDataArray.push(songObject);
-                    songFileArray.push(songFile);
-                }
-
-                if (position == 0){
-                    songDataArray = [songObject];
-                    songFileArray = [songFile];    
-                }
-                position = position +1;
-
-
-                console.log("DataArray of size: " + songDataArray.length);
-                console.log(songDataArray);
-
-                console.log("FileArray of size: " + songFileArray.length);
-                console.log(songFileArray);
-
-
-            }
-
-            function saveCreator(incomingCreator){
-                savedCreator = incomingCreator;
-                console.log(savedCreator);
-
-            }
-
-            function creator() {
-
-                var user = firebase.auth().currentUser;
-
-                if (user) {
-                    // User is signed in.
-
-                    if (user != null) {
-                        userUsername = user.displayName;
-                        userUid = user.uid;
-
-                        firebase.database().ref('/users/' + userUsername + "/details/publicName").once('value').then(function(snapshot) {
-                            userPublicName = snapshot.val();
-
-                            creator = {
-                                username: userUsername,
-                                uid: userUid,
-                                publicName: userPublicName
-                            }
-
-                            saveCreator(creator)
-
-                        });
-
-
-                    }
-                } else {
-                    // No user is signed in.
-                    console.log("creator is NOT here")
-
-                }
-
-
-            }
-
-            function handleSongSelect(input) {
-                console.log("file selected for: " + position);
-                if (input.files && input.files[0]) {
-                    console.log("file exists");
-                    songFile = input.files[0];
-
-                    if (songFile){
-                        // controller.style.display = 'block';
-                        publishBlock.style.display = 'block'; 
-                    }
-                    createSong(songFile);
-
-
-                }
-
-
-
-            } // END SONG SELECT
-
-            function startSongUpload(){
-                document.getElementById('songFile').click();
-            }
-
-            function publish(){
-
-                console.log(songDataArray.length + " song data ready");
-                console.log(songDataArray);
-
-                console.log(songFileArray.length + " song files ready");
-                console.log(songFileArray);
-
-
-
-                // SINGLE UPLOAD
-                if (songDataArray.length == 1 ){
-
-
-                    var readyData = songDataArray[0];
-                    var readyFile = songFileArray[0];  
-
-                    var newSongRef = songsRef.push();
-                    var songKey = newSongRef.key; 
-                    var userSongsRef = firebase.database().ref('users/' + userUsername + '/posts/singles/' + songKey);
-
-
-
-                    console.log("posting: ");
-                    console.log(readyData);
-
-
-                    // upload Song File
-                    var songStorageRef = storageRef.child('songs/' + songKey);
-
-                    var uploadTask =  songStorageRef.put(readyFile);
-
-                    // UPLOADING TASK
-                    uploadTask.on('state_changed', function(snapshot){
-                        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        
-                        progressDiv.style.display = 'block'
-                        uploadProgress.style.width = progress+ "%";
-                        uploadProgress.innerHTML = (progress.toFixed(0) + "%");
-                        
-                        console.log( progress + "% DONE");
-
-                    }, function(error) {
-                        // Handle unsuccessful uploads
-                    }, function() {
-                        // Handle successful uploads on complete
-
-                        if (coverSelected == true) {
-
-                            // write cover location
-                            var coverLocation = songsRef.child(songKey + "/cover");
-                            coverLocation.set(songKey);
-
-                            // store image
-                            var coverStorageRef = storageRef.child('covers/' + songKey);
-                            coverStorageRef.put(coverFile).then(function(snapshot) {
-                                console.log('Uploaded a Single cover file!');
-                                // upload Song Data
-                                newSongRef.set(readyData);
-                                userSongsRef.set(songKey);
-
-                                window.open("myProfile.html", "_self"); 
-
-                            });
-
-                        }
-                        else {
-                            // upload Song Data
-                            newSongRef.set(readyData);
-                            userSongsRef.set(songKey);
-
-                            window.open("myProfile.html", "_self"); 
-
-                        }
-
-
-
-
-
-
-
-                    }); // DONE with all Uploads
-
-
-
-                }
-
-                //
-                //                // ALBUM UPLOAD
-                //                if (songDataArray.length > 1){
-                //
-                //                    for ( postPosition;(postPosition + 1) < songDataArray.length; postPosition++) {
-                //                        var readyData = songDataArray[postPosition];
-                //                        var readyFile = songFileArray[postPosition];  
-                //
-                //                        var newSongRef = songsRef.push();
-                //                        var songKey = newSongRef.key; 
-                //                        createAlbumKeysArray(songKey);
-                //
-                //                        console.log("posting: ");
-                //                        console.log(readyData);
-                //
-                //                        // upload Song Data
-                //                        newSongRef.set(readyData);
-                //
-                //                        // upload Song File
-                //                        var songStorageRef = storageRef.child('songs/' + songKey);
-                //
-                //                        var uploadTask =  songStorageRef.put(readyFile);
-                //
-                //
-                //                        uploadTask.on('state_changed', function(snapshot){
-                //                            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                //                            console.log('Upload is ' + progress + '% done');
-                //                            switch (snapshot.state) {
-                //                                case firebase.storage.TaskState.PAUSED: // or 'paused'
-                //                                    console.log('Upload is paused');
-                //                                    break;
-                //                                case firebase.storage.TaskState.RUNNING: // or 'running'
-                //                                    console.log('Upload is running');
-                //                                    break;
-                //                                                  }
-                //                        }, function(error) {
-                //                            // Handle unsuccessful uploads
-                //                        }, function() {
-                //                            // Handle successful uploads on complete
-                //
-                //                        }); // END OF UPLOAD TASK 
-                //
-                //
-                //                        // Done uploading redirect 
-                //                        if ((postPosition + 1) == songDataArray.length){
-                //                            window.open("createAccount.html", "_self");  
-                //
-                //
-                //                        } 
-
-                //
-                //                    } // end of FOR loop
-                //
-
-                //                }
-
-            } 
-
-            function createAlbumKeysArray(songKey){
-
-                if (postPosition == 0) {
-                    albumKeys = [songKey];  
-                }
-
-                if (postPosition > 0 ){
-                    albumKeys.push(songKey);
-                }
-
-            }
-
-            function addTrack(){
-
-                console.log("post postition is : ");
-                console.log(postPosition);
-
-                var trackName =  inputSongName.value;
-
-
-
-                trackList.style.display = 'block';
-                console.log("song is: " + trackName);
-                track1.innerHTML = trackName;
-                inputFields.reset();
-
-
-
-            }
-
-            function nameExists(event){
-
-                songName = event.target.value;
-
-
-                if (songName.length > 0){
-                    uploadButton.style.display = 'block';
-                }
-                if (songName.length == 0){
-                    uploadButton.style.display = 'none';
-                }
-
-            }
-
-            function vibesList(vibes){
-
-                if(typeof vibesArray == "undefined") {
-                    vibesArray = [vibes];
-                }
-                else if (vibesArray){
-                    vibesArray.push(vibes);
-                }
-
-            }
-
-            function unverifiedVibesList(vibes){
-
-                console.log("starting unverified list:");
-
-
-
-                if(typeof unverifiedVibesArray == "undefined") {
-                    unverifiedVibesArray = [vibes];
-                }
-                else if (unverifiedVibesArray){
-                    unverifiedVibesArray.push(vibes);
-                }
-
-            }
-
-
-            function loadFill(){
-                var availableTags = vibesArray;
-
-                $( "#inputVibes" ).autocomplete({
-                    source: availableTags
-                });
-            }
-
-
-            function saveVibes(e){
-
-
-                console.log(e.keyCode);
-
-
-                if (e.keyCode === 0 || e.keyCode === 32 || e.keyCode === 13) {
-
-                    newVibe(inputVibes.value);
-
-                    e.preventDefault();
-                    console.log('Space  or Enter pressed');
-
-                    if(typeof myVibesArray == "undefined") {
-                        myVibesArray = [inputVibes.value];
-                        console.log("my vibes: " + myVibesArray);
-                        vibeButtons();
-                        inputVibes.value = "";
-
-                    }
-
-                    else if (myVibesArray){
-                        var isRepeat = myVibesArray.indexOf(inputVibes.value);
-                        if (isRepeat < 0){
-                            // not typed
-                            if (myVibesArray.length == 1){
-                                myVibesArray.push(inputVibes.value);
-                                console.log("my vibes: " + myVibesArray);
-                                vibeButtons();
-                                inputVibes.value = "";
-
-                            }
-                            else if (myVibesArray.length == 2){
-                                myVibesArray.push(inputVibes.value);
-                                console.log("my vibes: " + myVibesArray);
-                                vibeButtons();
-                                inputVibes.value = "";
-
-
-                            }
-                            else if (myVibesArray.length == 3){
-                                myVibesArray.push(inputVibes.value);
-                                console.log("my vibes: " + myVibesArray);
-                                vibeButtons();
-                                inputVibes.value = "";
-
-
-                            }
-                            else if (myVibesArray.length == 4){
-                                myVibesArray.push(inputVibes.value);
-                                console.log("my vibes: " + myVibesArray);
-                                vibeButtons();
-                                inputVibes.value = "";
-
-
-                            }
-                            else if (myVibesArray.length == 5){
-                                alert("Out of spots :/``");
-                            }
-
-                        }
-                        else if (isRepeat > -1){
-                            // already typed 
-                            return false
-
-                        }
-
-
-                    }
-
-
-                }
-
-            }
-
-
-            function vibeButtons(){
-
-                console.log("Reset buttons to:");
-                console.log(myVibesArray);
-
-
-                if(typeof myVibesArray == "undefined" || myVibesArray.length == 0) {
-                    $("#vibe1").html("");
-                    $("#vibe2").html("");
-                    $("#vibe3").html("");
-                    $("#vibe4").html("");
-                    $("#vibe5").html("");
-                }
-
-                else if (myVibesArray.length == 1){
-                    $("#vibe1").html(myVibesArray[0]);
-                    $("#vibe2").html("");
-                    $("#vibe3").html("");
-                    $("#vibe4").html("");
-                    $("#vibe5").html("");
-
-                }
-                else if (myVibesArray.length == 2){
-                    $("#vibe1").html(myVibesArray[0]);
-                    $("#vibe2").html(myVibesArray[1]);
-                    $("#vibe3").html("");
-                    $("#vibe4").html("");
-                    $("#vibe5").html("");
-
-                }
-                else if (myVibesArray.length == 3){
-                    $("#vibe1").html(myVibesArray[0]);
-                    $("#vibe2").html(myVibesArray[1]);
-                    $("#vibe3").html(myVibesArray[2]);
-                    $("#vibe4").html("");
-                    $("#vibe5").html("");
-                }
-                else if (myVibesArray.length == 4){
-                    $("#vibe1").html(myVibesArray[0]);
-                    $("#vibe2").html(myVibesArray[1]);
-                    $("#vibe3").html(myVibesArray[2]);
-                    $("#vibe4").html(myVibesArray[3]);
-                    $("#vibe5").html("");         
-                }
-                else if (myVibesArray.length == 5){
-                    $("#vibe1").html(myVibesArray[0]);
-                    $("#vibe2").html(myVibesArray[1]);
-                    $("#vibe3").html(myVibesArray[2]);
-                    $("#vibe4").html(myVibesArray[3]);
-                    $("#vibe5").html(myVibesArray[4]);         
-                }
-
-
-            }
-
-
-            function click1(){
-                myVibesArray.splice(0, 1);
-                vibeButtons();
-            }
-            function click2(){
-                myVibesArray.splice(1, 1);       
-                vibeButtons();
-            }
-            function click3(){
-                myVibesArray.splice(2, 1);
-                vibeButtons();
-
-            }
-            function click4(){
-                myVibesArray.splice(3,1);
-                vibeButtons();
-
-            }
-            function click5(){
-                myVibesArray.splice(4,1);
-                vibeButtons();
-
-            }
-
-            function newVibe(input){
-
-                // check if input is a new or old vibe
-
-                var isUnverified = vibesArray.indexOf(input);
-                var isNew = unverifiedVibesArray.indexOf(input);
-
-                console.log("isNew: " + isNew);
-
-                console.log("isUnverified: " + isUnverified);
-
-
-
-
-                if (isUnverified >= 0){
-                    // if already verified 
-                    console.log("already verified");
-
-                }
-
-
-                else if (isUnverified < 0 && isNew >= 0){
-                    console.log("not verified but old");
-
-                    // if unverified not new
-                    var unverifiedRef = newVibesRef.child(input);
-                    console.log("check 1");
-
-
-                    unverifiedRef.once('value').then(function(snapshot) {
-                        console.log("check 2");
-
-                        var count = snapshot.val();
-                        console.log("check 3");
-
-
-                        // add one 
-                        count++;
-
-                        unverifiedRef.set(count);
-
-                        console.log("tag count is: " + count);
-
-
-
-                    });
-
-
-                }
-
-
-
-                else if (isUnverified < 0 && isNew < 0){
-
-                    console.log("not verified and new");
-                    // if unverified and new 
-                    var unverifiedRef = newVibesRef.child(input);
-                    unverifiedRef.set(1);
-                    console.log("added vibe! Thanks :)");
-
-
-
-                }
-
-
-            }
-
-
-
-
-
-
+        </script>
+        <script src="main.js"></script>
+        <script> 
             // ON LOAD EVENT LISTENERS 
             window.onload = 
 
                 function() {    
+				navbarName();
+				
                 inputSongName.addEventListener('input', nameExists,false);
 
                 vibesRef.on('child_added', function(data) {
@@ -863,11 +230,9 @@
                     unverifiedVibesList(data.key)
                 });
 
-
-
             }
-
         </script>
+
 
 
 

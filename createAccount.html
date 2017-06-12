@@ -1,243 +1,128 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <meta name="description" content="DISCO">
-        <meta name="author" content="Tushar">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="DISCO">
+		<meta name="author" content="Tushar">
 
-        <title>DISCO</title>
+		<title>DISCO</title>
 
-        <!-- Bootstrap core CSS -->
-        <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="jumbotron.css" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+		<!-- Bootstrap core CSS -->
+		<link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="jumbotron.css" rel="stylesheet">
+		<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
 
-        <!-- Firebase -->
+		<!-- Firebase -->
 
-        <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
-        <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
-
-
-        <script>
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
-                authDomain: "disco-6a3bf.firebaseapp.com",
-                databaseURL: "https://disco-6a3bf.firebaseio.com",
-                storageBucket: "disco-6a3bf.appspot.com",
-                messagingSenderId: "71660981931"
-            };
-            firebase.initializeApp(config);
-
-            function avoidSpace(event) {
-                var k = event ? event.which : window.event.keyCode;
-                if (k == 32) return false;
-                if (k == 64) return false;       
-            }
+		<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+		<script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
 
 
 
-        </script>
+		<script>
+			// Initialize Firebase
+			var config = {
+				apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
+				authDomain: "disco-6a3bf.firebaseapp.com",
+				databaseURL: "https://disco-6a3bf.firebaseio.com",
+				storageBucket: "disco-6a3bf.appspot.com",
+				messagingSenderId: "71660981931"
+			};
+			firebase.initializeApp(config);
 
-
-    </head>
-
-
-    <body  style = "background-color: #222">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html"> DISCO </a>
-                </div>
-                <div class="navbar-right" style = "padding-right: 15px">
-                    <div id="navbarLogin" class="navbar-collapse collapse">
-                        <form class="navbar-form navbar-right" id="navLogin">
-                            <div class="form-group">
-                                <input type="email" placeholder="Email" class="form-control" id="navEmail">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" placeholder="Password" class="form-control" id="navPassword">
-                            </div>
-                            <button type="button" class="btn btn-primary" onclick="tryLogin()">Sign in</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <div class="container" style = "background-color: #222">
-            <div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
-                <div class="container">
-                    <h1 >Welcome to Disco</h1>
-                    <p style="color: #D7B659"> <i>Made for Artists</i></p>
-                </div>
-            </div>
-            <div style="color: white" class= "formCenter">
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label style="color: #D7B659">Name (Artist Name)</label>
-                        <input type="text" class="form-control" id="inputPublicName" placeholder="Name">
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label style="color: #D7B659">Username</label>
-                        <input onkeypress="return avoidSpace(event)" type="text" class="form-control" id="inputUsername" placeholder="Username">
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label style="color: #D7B659">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label style="color: #D7B659">Password</label>
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label style="color: #D7B659">Confirm Password</label>
-                        <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password">
-                    </div>
-                    <br>
-                    <button type="button" class="btn btn-primary btn-medium" onclick="checkUsername()">Create Account</button>
-
-                </form>
-            </div>
-        </div>
-
-        <script> // page end script
-            var loginForm = document.getElementById('loginForm');
+			function avoidSpace(event) {
+				var k = event ? event.which : window.event.keyCode;
+				if (k == 32) return false;
+				if (k == 64) return false;       
+			}
 
 
 
-            function checkUsername(){
+		</script>
 
 
-                var inputPublicName = loginForm.inputPublicName.value;
-                var inputUsername = loginForm.inputUsername.value;
-                var inputEmail = loginForm.inputEmail.value;
-                var inputPassword = loginForm.inputPassword.value;
-                var inputConfirmPassword = loginForm.inputConfirmPassword.value;
+	</head>
 
 
-                // check username availibility 
+	<body  style = "background-color: #222">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="index.html"> DISCO </a>
+				</div>
+				<div class="navbar-right" style = "padding-right: 15px">
+					<div id="navbarLogin" class="navbar-collapse collapse">
+						<form class="navbar-form navbar-right" id="navLogin">
+							<div class="form-group">
+								<input type="email" placeholder="Email" class="form-control" id="navEmail">
+							</div>
+							<div class="form-group">
+								<input type="password" placeholder="Password" class="form-control" id="navPassword">
+							</div>
+							<button type="button" class="btn btn-primary" onclick="tryLogin()">Sign in</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</nav>
 
-                if (inputUsername.length > 0){
+		<div class="container" style = "background-color: #222">
+			<div style="text-align: center; background-color: #333333; color:white" class="jumbotron">
+				<div class="container">
+					<h1 >Welcome to Disco</h1>
+					<p style="color: #D7B659"> <i>Made for Artists</i></p>
+				</div>
+			</div>
+			<div style="color: white" class= "formCenter">
+				<form id="loginForm">
+					<div class="form-group">
+						<label style="color: #D7B659">Name (Artist Name)</label>
+						<input type="text" class="form-control" id="inputPublicName" placeholder="Name">
+					</div>
+					<br>
+					<div class="form-group">
+						<label style="color: #D7B659">Username</label>
+						<input onkeypress="return avoidSpace(event)" type="text" class="form-control" id="inputUsername" placeholder="Username">
+					</div>
+					<br>
+					<div class="form-group">
+						<label style="color: #D7B659">Email</label>
+						<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+					</div>
+					<br>
+					<div class="form-group">
+						<label style="color: #D7B659">Password</label>
+						<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+					</div>
+					<br>
+					<div class="form-group">
+						<label style="color: #D7B659">Confirm Password</label>
+						<input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password">
+					</div>
+					<br>
+					<button type="button" class="btn btn-primary btn-medium" onclick="checkUsername()">Create Account</button>
 
-                    // username typed 
-                    var usernameRef = firebase.database().ref("users/");
-                    usernameRef.once("value")
-                        .then(function(snapshot) {
-                        if (snapshot.child(inputUsername).exists()){
-                            alert("Username is taken");
-                        }
-                        else {
-                            console.log("username NOT is taken");
-                            if (inputPassword.length > 5 && inputPassword == inputConfirmPassword){
-                                // password is longer than 5 and matches confirm
-
-                                createAccount(inputEmail, inputPassword, inputUsername, inputPublicName);
-                            }
-                            else {
-                                alert("Passwords DO NOT match");
-                            }
-                        }
-                    });
-                } // end username typed  
-
-
-
-            } // end checkCreate()
-
-            function createAccount(goodEmail, goodPassword, goodUsername, goodPublicName){
-                console.log("about to create");
-                firebase.auth().createUserWithEmailAndPassword(goodEmail, goodPassword).catch(function(error) {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    // [START_EXCLUDE]
-                    if (errorCode == 'auth/weak-password') {
-                        alert('The password is too weak.');
-                    } else {
-                        alert(errorMessage);
-                    }
-                    console.log(error);
-                    // [END_EXCLUDE]
-                });
-
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) {
-                        // User is signed in.
-                        console.log("user was created");
-                        console.log(user.uid);
-                        writeUserData(goodUsername,goodEmail,user.uid, goodPublicName);
-
-                        var user = firebase.auth().currentUser;
-
-                        user.updateProfile({
-                            displayName: goodUsername
-                        }).then(function() {
-                            window.open("myProfile.html", "_self");  
-                            // Update successful.
-                        }, function(error) {
-                            // An error happened.
-                        });
-                        // user now created and logged in:
+				</form>
+			</div>
+		</div>
 
 
-                    } else {
-                        // No user is signed in.
-                        console.log("user was NOT created");
-                    }
-                });
+		<script> // page end script
+			var loginForm = document.getElementById('loginForm');
+		</script>
+
+		<script src="main.js"></script>
 
 
-            } // end good Create Account
-
-            function tryLogin(){
-
-                var inputEmail = navLogin.navEmail.value;
-                var inputPassword = navLogin.navPassword.value;
-
-                firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword).catch(function(error) {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    // ...
-                });
-
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) {
-                        window.open("myProfile.html", "_self");  
-                        // User is signed in.
-                    } else {
-                        // No user is signed in.
-                    }
-                });
-            }
-
-            function writeUserData(username, email, uid, name) {
-                firebase.database().ref('users/' + username + '/details').set({
-                    username: username,
-                    email: email,
-                    userID: uid,
-                    publicName: name
-                })
-                firebase.database().ref('users/' + username + '/details/following/disco').set("disco");
-            }
-
-
-
-        </script>
-
-    </body>
+	</body>
 
 </html>

@@ -1,227 +1,199 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <meta name="description" content="DISCO">
-        <meta name="author" content="Tushar">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="DISCO">
+		<meta name="author" content="Tushar">
 
-        <title>DISCO</title>
+		<title>DISCO</title>
 
-        <!-- Bootstrap core CSS -->
-        <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="jumbotron.css" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+		<!-- Bootstrap core CSS -->
+		<link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="jumbotron.css" rel="stylesheet">
 
-        <!-- Firebase -->
-
-        <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
-        <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
-
-        <script>
-
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyDquIdmKQfr-QGF3kyEb28FzAboOPBE36g",
-                authDomain: "disco-6a3bf.firebaseapp.com",
-                databaseURL: "https://disco-6a3bf.firebaseio.com",
-                storageBucket: "disco-6a3bf.appspot.com",
-                messagingSenderId: "71660981931"
-            };
-            firebase.initializeApp(config);
-            var storage = firebase.storage();
-        </script>
-
-    </head>
+		<!--Boostrap JS-->
+		<link href="bootstrap-3.3.7-dist/js/bootstrap.js" rel="stylesheet">
 
 
-    <body  style = "background-color: #222">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html"> DISCO </a>
-                </div>
-                <div class="navbar-right">
-                    <a class="navbar-brand" href="upload.html"> Upload </a>
-                    <a class="navbar-brand" href="feed.html"> Feed </a>
-                    <a class="navbar-brand" href="myMusic.html"> My Music </a>
-                    <a class="navbar-brand" href="myProfile.html" id="navUsername"> </a>
-                </div>
-            </div>
-        </nav>
+		<!-- Firebase -->
 
-        <div class="container jumbotron" style = "padding-top: 50px">
-
-            <div class="column-left" style="text-align: center"> 
-                <img onclick="document.getElementById('file').click();" id="profileImage" class ="img-circle square-medium">
-                <input type="file" name="file" id = "file" style="display: none;" accept="image/*" />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-8"> 
-                <h1 style = "color: #D7B659" id="publicName"></h1>
-                <h3 style="text-align: left; color: white" id="usernameDisplay"></h3> <br>
-            </div>
-
-        </div>
-
-        <div class="container">
-            <div>
-
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">All</a></li>
-                    <li role="presentation"><a href="#posts" aria-controls="posts" role="tab" data-toggle="tab">Posts</a></li>
-                    <li role="presentation"><a href="#shares" aria-controls="shares" role="tab" data-toggle="tab">Shares</a></li>
-                    <li role="presentation"><a href="#likes" aria-controls="likes" role="tab" data-toggle="tab">Likes</a></li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="home">...</div>
-                    <div role="tabpanel" class="tab-pane" id="profile">...</div>
-                    <div role="tabpanel" class="tab-pane" id="messages">...</div>
-                    <div role="tabpanel" class="tab-pane" id="settings">...</div>
-                </div>
-
-            </div>
-
-        </div>
+		<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>  
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-messaging.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script>
 
 
 
+		<!--JQuery-->
 
 
-        <script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-            var auth = firebase.auth();
-            var user = firebase.auth().currentUser;
-            
-            var defaultProfile = "https://firebasestorage.googleapis.com/v0/b/disco-6a3bf.appspot.com/o/profileImages%2Fprofile.png?alt=media&token=bf906fc5-bc41-4a1b-ba29-6376e4a626ed";
+		<!--initialize Firebase & Check Login-->
+		<script src="FirebaseStart.js"> </script>
 
-            if (user != null){
-                var userId = user.uid;
-
-            }
-            if (user == null) {
-                userId = "anon";
-            }
+	</head>
 
 
+	<body  style = "background-color: #222">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="Index.html"> DISCO </a>
+					<form class="navbar-form navbar-left">
+						<div class="form-group">
+							<input type="text" class="form-control" style="width:300px" placeholder="Search">
+						</div>
+					</form>
 
-            var storageRef = firebase.storage().ref();
+				</div>
+				<div class="navbar-right">
+					<a class="navbar-brand" href="myMusic.html"> My Music </a>
+					<a class="navbar-brand" href="myProfile.html" id= "navUsername" > Username</a> 
+					<a class="navbar-brand" href="upload.html"> Post + </a>
+				</div>
+			</div>
+		</nav>
 
-            function handleFileSelect(evt) {
+		<div class="container jumbotron" style = "padding-top: 50px">
 
+			<div class="column-left" style="text-align: center"> 
+				<img onclick="document.getElementById('file').click();" id="profileImage" class ="img-circle square-medium">
+				<span class="badge" style="margin-top:5%" > Verified Artist</span>
+				<input type="file" name="file" id = "file" style="display: none;" accept="image/*" />
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-8"> 
 
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) {
-                        userId = user.uid;
-                        console.log("user: " + userId);
-                        evt.stopPropagation();
-                        evt.preventDefault();
-                        var file = evt.target.files[0];
-                        var metadata = {
-                            'contentType': file.type
-                        };
-                        // Push to child path.
-                        // [START oncomplete]
-                        storageRef.child('profileImages/'+ userId +'/profileImage.jpg').put(file, metadata).then(function(snapshot) {
-                            console.log('Uploaded', snapshot.totalBytes, 'bytes.');
-                            console.log(snapshot.metadata);
-                            var url = snapshot.downloadURL;
-                            console.log('File available at', url);
-                            user.updateProfile({
-                                photoURL: url
-                            }).then(function() {
-                                // Update successful.
-                            }, function(error) {
-                                // An error happened.
-                            });
+				<div class="column-left">
+					<h1 style = "color: #D7B659" id="publicName"></h1>
+					<h2 style="text-align: left; color: white" id="usernameDisplay"></h2><br>
+					<button class="btn btn-primary"> Edit Music Taste</button>
 
-                            selectImage(url);
+				</div>
 
-                            // [START_EXCLUDE]
+				<div class="column-right" style="text-align: right; margin-top: 5%; position: absolute; bottom:0">
+					<h3 style="color: #B5B2AF"> Followers </h3>
+					<h4 style="color:white">0</h4>
+					<h3 style="color: #B5B2AF"> Following </h3>
+					<h4 style="color:white"> 1</h4>			
+				</div>
+			</div>
 
-                            // [END_EXCLUDE]
-                        }).catch(function(error) {
-                            // [START onfailure]
-                            console.error('Upload failed:', error);
-                            // [END onfailure]
-                        });
-                        // [END oncomplete]
+		</div>
 
-                    }    // User is signed in.
+		<div class="container" >
+			<div>
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">All</a></li>
+					<li role="presentation"><a href="#posts" aria-controls="posts" role="tab" data-toggle="tab">Posts</a></li>
+					<li role="presentation"><a href="#shares" aria-controls="shares" role="tab" data-toggle="tab">Shares</a></li>
+					<li role="presentation"><a href="#likes" aria-controls="likes" role="tab" data-toggle="tab">Likes</a></li>
+				</ul>
 
-                    else {
-                        // no one logged in 
-                        window.open("createAccount.html", "_self");  
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="home">...</div>
+					<div role="tabpanel" class="tab-pane" id="profile">...</div>
+					<div role="tabpanel" class="tab-pane" id="messages">...</div>
+					<div role="tabpanel" class="tab-pane" id="settings">...</div>
+				</div>
 
-                    }
-                });
+			</div>
 
-            } // END FILE SELECT
+		</div>
 
+		<script src="main.js"></script>
 
+		<script>
 
-            window.onload = function() {
-                document.getElementById('file').addEventListener('change', handleFileSelect, false);
+			var auth = firebase.auth();
+			var user = firebase.auth().currentUser;
 
-                auth.onAuthStateChanged(function(user) {
-                    if (user) {
-                        var userID = user.uid;
-                        var username = user.displayName;
+			var defaultProfile = "https://firebasestorage.googleapis.com/v0/b/disco-6a3bf.appspot.com/o/profileImages%2Fprofile.png?alt=media&token=bf906fc5-bc41-4a1b-ba29-6376e4a626ed";
 
-                        console.log(userID);
-                        console.log(username);
-                        document.getElementById("usernameDisplay").innerHTML = "@" + username;
-                        document.getElementById("navUsername").innerHTML = username;
+			if (user != null){
+				var userId = user.uid;
 
-
-                        if (user.photoURL != null){
-                            document.getElementById("profileImage").src = user.photoURL;
-
-                        }
-                        if (user.photoURL == null){
-                            document.getElementById("profileImage").src = defaultProfile;
-                        }
-
-                        // get public name
-
-                        return firebase.database().ref('/users/' + username + "/details/publicName").once('value').then(function(snapshot) {
-                            var publicName = snapshot.val()
-                            document.getElementById("publicName").innerHTML = publicName;
+			}
+			if (user == null) {
+				userId = "anon";
+			}
 
 
 
-                        });
+		</script>
 
-                    } else {
-                        // no user
-                        window.open("createAccount.html", "_self");                      }
-                });
+		<script>
 
-
-            }
-
-            function selectImage(fileName) {
-                document.getElementById("profileImage").src = fileName;
-            }
+			// get Posts
 
 
 
 
 
-        </script>
+			window.onload = function() {
+				document.getElementById('file').addEventListener('change', handleFileSelect, false);
+
+				auth.onAuthStateChanged(function(user) {
+					if (user) {
+						var userID = user.uid;
+						var username = user.displayName;
+						var userPostsRef = firebase.database().ref('users/' + username + '/posts/singles');
+						console.log("post ref: " + userPostsRef);
+
+						userPostsRef.limitToLast(10).on('child_added', function(data) {
+
+							makeUserPostsList(data.key);
+							console.log("SAVING KEYS: " + data.key);
+						});
 
 
 
-    </body>
+						console.log(userID);
+						console.log(username);
+						document.getElementById("usernameDisplay").innerHTML = "@" + username;
+						document.getElementById("navUsername").innerHTML = username;
+
+
+						if (user.photoURL != null){
+							document.getElementById("profileImage").src = user.photoURL;
+
+						}
+						if (user.photoURL == null){
+							document.getElementById("profileImage").src = defaultProfile;
+						}
+
+						// get public name
+
+
+
+						return firebase.database().ref('/users/' + username + "/details/publicName").once('value').then(function(snapshot) {
+							var publicName = snapshot.val()
+							document.getElementById("publicName").innerHTML = publicName;
+						});
+
+					}
+					else {
+						// no user
+						window.open("createAccount.html", "_self");          
+					}
+				});
+
+
+			}
+		</script>
+
+
+
+	</body>
 
 </html>

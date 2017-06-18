@@ -30,7 +30,7 @@ var userPostsArray = [""];
 
 var defaultCover = "https://firebasestorage.googleapis.com/v0/b/disco-6a3bf.appspot.com/o/covers%2FcoverArt.png?alt=media&token=ac5f78d7-580b-4f61-9d1d-f86aa4e64fee";
 
-var newCoverURLArray = [defaultCover,defaultCover,defaultCover,defaultCover,defaultCover,defaultCover];
+var newCoverURLArray = [defaultCover, defaultCover, defaultCover, defaultCover, defaultCover, defaultCover];
 
 
 
@@ -129,7 +129,6 @@ function newCovers(coverURL, position){
 }
 
 function newSongs(songURL, position){
-
 	newSongURLArray[position] = songURL;
 
 }
@@ -480,6 +479,12 @@ function publish(){
 
 		var newSongRef = songsRef.push();
 		var songKey = newSongRef.key; 
+
+		var stream = require('getstream');
+		// Instantiate a new client (server side)
+		var client = stream.connect('u4smkaq5a3ef', 'xxdx4qj5xpu8bqj5a7f2rczfe5ezs68p8sgxv9tem2sces3rryqqsbhsurafm83g', '25707');
+		var userFeed = client.feed('user', userUsername);
+
 		var userSongsRef = firebase.database().ref('users/' + userUsername + '/posts/singles/' + songKey);
 
 
@@ -518,8 +523,18 @@ function publish(){
 				var coverStorageRef = storageRef.child('covers/' + songKey);
 				coverStorageRef.put(coverFile).then(function(snapshot) {
 					console.log('Uploaded a Single cover file!');
+
 					// upload Song Data
 					newSongRef.set(readyData);
+
+					//feed stuff
+					userFeed.addActivity(readyData)
+						.then(function(data) {
+						console.log("FEED ADDED!");
+						/* on success */ })
+						.catch(function(reason) { /* on failure, reason.error contains an explanation */ });
+
+
 					userSongsRef.set(songKey);
 
 					window.open("index.html", "_self"); 
@@ -1011,9 +1026,9 @@ function songObject(songId){
 		var shares = snapshot.val().shares;
 		var timeline = snapshot.val().timeline;
 		var vibes = snapshot.val().vibes;
-		
 
-		
+
+
 		songObject.name = name;
 	});
 
@@ -1084,8 +1099,8 @@ function loadUserTimelineData(songId, position){
 	}).catch(function(error) {
 
 	});
-	
-	
+
+
 }
 
 

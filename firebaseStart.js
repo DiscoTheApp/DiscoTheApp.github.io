@@ -24,7 +24,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 	}
 });
 
-
 function navbarName(){
 
 	firebase.auth().onAuthStateChanged(function(user) {

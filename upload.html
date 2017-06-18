@@ -38,6 +38,7 @@
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 		<!--initialize Firebase & Check Login-->
+		<script src="getStream.js"></script>
 		<script src="FirebaseStart.js"> </script>
 
 	</head>
@@ -64,178 +65,179 @@
 		</nav>
 
 
-        <!-- Type Select-->
-        <div class="container">
-            <div class="container" style="text-align: center; width: 100%; margin-top: 2%" >
-            </div>
+		<!-- Type Select-->
+		<div class="container">
+			<div class="container" style="text-align: center; width: 100%; margin-top: 2%" >
+			</div>
 
-            <!--left side-->
-            <div class="col-xs-6 col-md-4">
-                <div class="square-large">
+			<!--left side-->
+			<div class="col-xs-6 col-md-4">
+				<div class="square-large">
 
-                    <img  src="Images/coverArt.png" style="margin-bottom: 3%; max-width:100%; max-height: auto" onclick="startCoverUpload()" id="coverArt">
+					<img  src="Images/coverArt.png" style="margin-bottom: 3%; max-width:100%; max-height: auto" onclick="startCoverUpload()" id="coverArt">
 
-                </div>
+				</div>
 
 
-                <button class="btn btn-primary" style="width: 100%; margin-top: 3%" onclick="startCoverUpload()"> Upload Cover Art</button> <br>
-                <input type="text" class="formDetails-control" placeholder= "Post Caption" style="width: 100%; margin-top: 3%" id="inputCaption"> <br>
+				<button class="btn btn-primary" style="width: 100%; margin-top: 3%" onclick="startCoverUpload()"> Upload Cover Art</button> <br>
+				<input type="text" class="formDetails-control" placeholder= "Post Caption" style="width: 100%; margin-top: 3%" id="inputCaption"> <br>
 
-            </div>
+			</div>
 
-            <!--right side-->
-            <div class="col-xs-12 col-sm-6 col-md-8" style="background-color: #222"> 
+			<!--right side-->
+			<div class="col-xs-12 col-sm-6 col-md-8" style="background-color: #222"> 
 
 
-                <!--single-->
-                <div id="singleDiv" style="color: white">
+				<!--single-->
+				<div id="singleDiv" style="color: white">
 
 
-                    <form id="inputFields" >
+					<form id="inputFields" >
 
-                        <input type="text" class="formDetails-control" placeholder="Song Name" style="width: 100%; height: 60px; font-size: 40px" id="inputSongName"> <br>
+						<input type="text" class="formDetails-control" placeholder="Song Name" style="width: 100%; height: 60px; font-size: 40px" id="inputSongName"> <br>
 
-                        <input type="text" class="formDetails-control" placeholder="@Usernames (Featured Artists)" style="width: 100%; margin-top:1%" id="inputFeatures"> <br>
+						<input type="text" class="formDetails-control" placeholder="@Usernames (Featured Artists)" style="width: 100%; margin-top:1%" id="inputFeatures"> <br>
 
 
-                        <input type="text" class="formDetails-control" placeholder="#Vibes (Recommended)" style="width: 100%" id="inputVibes" onfocus="loadFill()" onkeypress="saveVibes(event)"> <br>
+						<input type="text" class="formDetails-control" placeholder="#Vibes (Recommended)" style="width: 100%" id="inputVibes" onfocus="loadFill()" onkeypress="saveVibes(event)"> <br>
 
-                        <button id="vibe1" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click1()">   </button>
-                        <button id="vibe2" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click2()">   </button>
-                        <button id="vibe3" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click3()">   </button>
-                        <button id="vibe4" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click4()">   </button>
-                        <button id="vibe5" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click5()">   </button>
+						<button id="vibe1" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click1()">   </button>
+						<button id="vibe2" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click2()">   </button>
+						<button id="vibe3" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click3()">   </button>
+						<button id="vibe4" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click4()">   </button>
+						<button id="vibe5" type="button"  style=" margin-right: 1%" class="btn btn-default" onclick="click5()">   </button>
 
-                        <br>
+						<br>
 
 
 
-                        <!--                        <h4 id="postVibes" style=":none"></h4>-->
+						<!--                        <h4 id="postVibes" style=":none"></h4>-->
 
 
 
 
-                        <input type="checkbox" id="inputExplicit"  style="margin-top: 3%" value="true" > Explicit <br>
 
-                        <input type="file" id = "songFile" style="display: none;" accept="audio/*" onchange="handleSongSelect(this)"  /> 
+						<input type="checkbox" id="inputExplicit"  style="margin-top: 3%" value="true" > Explicit <br>
 
-                        <input type="file" id = "coverFile" style="display: none;" accept="image/*" onchange="handleCoverSelect(this)" /> 
+						<input type="file" id = "songFile" style="display: none;" accept="audio/*" onchange="handleSongSelect(this)"  /> 
 
-                    </form>
+						<input type="file" id = "coverFile" style="display: none;" accept="image/*" onchange="handleCoverSelect(this)" /> 
 
-                    <button class="btn btn-primary" style="margin-top:3%;display: none;" onclick="startSongUpload()" id="uploadButton">+ Upload Song File </button> 
-                    <!--                      <button class="btn btn-primary" style="margin-top:3%;display: none; float: right" onclick="addTrack()" id="addTrackButton">+ Add Tracks </button> -->
+					</form>
 
-                </div>
+					<button class="btn btn-primary" style="margin-top:3%;display: none;" onclick="startSongUpload()" id="uploadButton">+ Upload Song File </button> 
+					<!--                      <button class="btn btn-primary" style="margin-top:3%;display: none; float: right" onclick="addTrack()" id="addTrackButton">+ Add Tracks </button> -->
 
-            </div>
+				</div>
 
+			</div>
 
-        </div>
 
-        <div class="container">
-            <div id = "trackList" style="color: white; padding-left: 2%; padding-right: 2%; display: none" >
+		</div>
 
-                <h1 style="text-align: center"><i>Album Preview</i></h1>
-                <input type="text" class="formDetails-control" placeholder="Album Name" style="width: 100%; height: 60px; font-size: 40px" id="inputAlbumName"> <br>
+		<div class="container">
+			<div id = "trackList" style="color: white; padding-left: 2%; padding-right: 2%; display: none" >
 
+				<h1 style="text-align: center"><i>Album Preview</i></h1>
+				<input type="text" class="formDetails-control" placeholder="Album Name" style="width: 100%; height: 60px; font-size: 40px" id="inputAlbumName"> <br>
 
-                <h3 id="track1"></h3>  
 
+				<h3 id="track1"></h3>  
 
 
 
-            </div>
-            <div id="publishBlock" class="container">
 
-                <div style="float: left; width: 90%; margin-top:1% ">
-                    <div class="progress"  id = "progressDiv" style="display: none">
-                        <div class="progress-bar" role="progressbar" id ="uploadProgress" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+			</div>
+			<div id="publishBlock" class="container">
 
-                        </div>
-                    </div>
-                </div>
+				<div style="float: left; width: 90%; margin-top:1% ">
+					<div class="progress"  id = "progressDiv" style="display: none">
+						<div class="progress-bar" role="progressbar" id ="uploadProgress" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:0%">
 
-                <div style="float: right; width: 10%">
-                    <button class="btn btn-primary btn-lg" id="publishButton" style="float:right" onclick="publish()">Publish</button>
+						</div>
+					</div>
+				</div>
 
-                </div>
+				<div style="float: right; width: 10%">
+					<button class="btn btn-primary btn-lg" id="publishButton" style="float:right" onclick="publish()">Publish</button>
 
-            </div>
+				</div>
 
+			</div>
 
 
-        </div>
 
+		</div>
 
-        <!--        END OF HTML   -->
 
+		<!--        END OF HTML   -->
 
-        <script>
 
-            // SHARED VARIABLES
-            var songName, publicName, details,songFile,coverFile, vibeCount;
-            var coverSelected = false;
+		<script>
 
-            var timestamp = new Date();
+			// SHARED VARIABLES
+			var songName, publicName, details,songFile,coverFile, vibeCount;
+			var coverSelected = false;
 
+			var timestamp = new Date();
 
-            //DATA Arrays
 
-            var position = 0;
-            var postPosition = 0;
-            var songDataArray, songFileArray,albumKeys,vibesArray, myVibesArray, unverifiedVibesArray;
+			//DATA Arrays
 
-            // USER DATA 
+			var position = 0;
+			var postPosition = 0;
+			var songDataArray, songFileArray,albumKeys,vibesArray, myVibesArray, unverifiedVibesArray;
 
-            var creator, userUsername, userUid, userPublicName, savedCreator;
+			// USER DATA 
 
-            // HTML OBJECTS
-            var uploadButton = document.getElementById('uploadButton');
-            var uploadProgress = document.getElementById('uploadProgress');
-            var publishBlock = document.getElementById('publishBlock');
-            var addTrackButton = document.getElementById('addTrackButton');
+			var creator, userUsername, userUid, userPublicName, savedCreator;
 
-            var artistNameId = document.getElementById('artistName');
-            var inputSongName = document.getElementById('inputSongName');
+			// HTML OBJECTS
+			var uploadButton = document.getElementById('uploadButton');
+			var uploadProgress = document.getElementById('uploadProgress');
+			var publishBlock = document.getElementById('publishBlock');
+			var addTrackButton = document.getElementById('addTrackButton');
 
+			var artistNameId = document.getElementById('artistName');
+			var inputSongName = document.getElementById('inputSongName');
 
-            var trackList = document.getElementById("trackList");
-            var track1 = document.getElementById("track1");
 
-            var inputFields = document.getElementById("inputFields");
+			var trackList = document.getElementById("trackList");
+			var track1 = document.getElementById("track1");
 
-            var postVibes =  document.getElementById('postVibes');
-            var inputVibes = document.getElementById('inputVibes');
-            var inputFeatures = document.getElementById('inputFeatures');
-            var inputExplicit = document.getElementById('inputExplicit');
-            var inputCaption = document.getElementById('inputCaption');
-            var inputAlbumName = document.getElementById('inputAlbumName');
+			var inputFields = document.getElementById("inputFields");
 
-        </script>
-        <script src="main.js"></script>
-        <script> 
-            // ON LOAD EVENT LISTENERS 
-            window.onload = 
+			var postVibes =  document.getElementById('postVibes');
+			var inputVibes = document.getElementById('inputVibes');
+			var inputFeatures = document.getElementById('inputFeatures');
+			var inputExplicit = document.getElementById('inputExplicit');
+			var inputCaption = document.getElementById('inputCaption');
+			var inputAlbumName = document.getElementById('inputAlbumName');
 
-                function() {    
+		</script>
+		<script src="main.js"></script>
+		<script> 
+			// ON LOAD EVENT LISTENERS 
+			window.onload = 
+
+				function() {    
 				navbarName();
-				
-                inputSongName.addEventListener('input', nameExists,false);
 
-                vibesRef.on('child_added', function(data) {
-                    vibesList(data.key)
-                });
-                newVibesRef.on('child_added', function(data) {
-                    unverifiedVibesList(data.key)
-                });
+				inputSongName.addEventListener('input', nameExists,false);
 
-            }
-        </script>
+				vibesRef.on('child_added', function(data) {
+					vibesList(data.key)
+				});
+				newVibesRef.on('child_added', function(data) {
+					unverifiedVibesList(data.key)
+				});
 
-
+			}
+		</script>
 
 
-    </body>
+
+
+	</body>
 
 </html>

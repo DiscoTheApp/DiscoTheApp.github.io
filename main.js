@@ -469,6 +469,16 @@ function publish(){
 	console.log(songFileArray);
 
 
+	var stream = require('getstream');
+	// Instantiate a new client (server side)
+	client = stream.connect('u4smkaq5a3ef', 'xxdx4qj5xpu8bqj5a7f2rczfe5ezs68p8sgxv9tem2sces3rryqqsbhsurafm83g', '25707');
+	// Instantiate a new client (client side)
+	client = stream.connect('u4smkaq5a3ef', null, '25707');
+	// Find your API keys here https://getstream.io/dashboard/
+
+
+
+
 
 	// SINGLE UPLOAD
 	if (songDataArray.length == 1 ){
@@ -479,10 +489,6 @@ function publish(){
 
 		var newSongRef = songsRef.push();
 		var songKey = newSongRef.key; 
-
-		// Instantiate a new client (server side)
-		var client = stream.connect('u4smkaq5a3ef', 'xxdx4qj5xpu8bqj5a7f2rczfe5ezs68p8sgxv9tem2sces3rryqqsbhsurafm83g', '25707');
-		var userFeed = client.feed('user', userUsername);
 
 		var userSongsRef = firebase.database().ref('users/' + userUsername + '/posts/singles/' + songKey);
 
@@ -525,15 +531,6 @@ function publish(){
 
 					// upload Song Data
 					newSongRef.set(readyData);
-
-					//feed stuff
-					userFeed.addActivity(readyData)
-						.then(function(data) {
-						console.log("FEED ADDED!");
-						/* on success */ })
-						.catch(function(reason) { /* on failure, reason.error contains an explanation */ });
-
-
 					userSongsRef.set(songKey);
 
 					window.open("index.html", "_self"); 
@@ -542,27 +539,14 @@ function publish(){
 
 			}
 			else {
-				
+
 				// upload Song Data
 				newSongRef.set(readyData);
-
-				//feed stuff
-				userFeed.addActivity(readyData)
-					.then(function(data) {
-					console.log("FEED ADDED!");
-					/* on success */ })
-					.catch(function(reason) { /* on failure, reason.error contains an explanation */ });
-
-
 				userSongsRef.set(songKey);
 
 				window.open("index.html", "_self"); 
 
 			}
-
-
-
-
 
 
 

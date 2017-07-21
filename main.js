@@ -469,16 +469,6 @@ function publish(){
 	console.log(songFileArray);
 
 
-	var stream = require('getstream');
-	// Instantiate a new client (server side)
-	client = stream.connect('u4smkaq5a3ef', 'xxdx4qj5xpu8bqj5a7f2rczfe5ezs68p8sgxv9tem2sces3rryqqsbhsurafm83g', '25707');
-	// Instantiate a new client (client side)
-	client = stream.connect('u4smkaq5a3ef', null, '25707');
-	// Find your API keys here https://getstream.io/dashboard/
-
-
-
-
 
 	// SINGLE UPLOAD
 	if (songDataArray.length == 1 ){

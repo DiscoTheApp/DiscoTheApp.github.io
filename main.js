@@ -34,7 +34,7 @@ var newCoverURLArray = [defaultCover, defaultCover, defaultCover, defaultCover, 
 
 
 
-function tryLogin(){
+function tryLogin() {
 
 	var inputEmail = navLogin.navEmail.value;
 	var inputPassword = navLogin.navPassword.value;
@@ -476,7 +476,6 @@ function publish(){
 
 		var readyData = songDataArray[0];
 		var readyFile = songFileArray[0];  
-
 		var newSongRef = songsRef.push();
 		var songKey = newSongRef.key; 
 

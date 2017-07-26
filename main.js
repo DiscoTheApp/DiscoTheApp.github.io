@@ -452,8 +452,6 @@ function handleSongSelect(input) {
 
 	}
 
-
-
 } // END SONG SELECT
 
 function startSongUpload(){
@@ -470,10 +468,12 @@ function publish(){
 
 
 
+
 	// SINGLE UPLOAD
 	if (songDataArray.length == 1 ){
 
 
+		var readyData = songDataArray[0];
 		var readyData = songDataArray[0];
 		var readyFile = songFileArray[0];  
 		var newSongRef = songsRef.push();
@@ -532,6 +532,10 @@ function publish(){
 				// upload Song Data
 				newSongRef.set(readyData);
 				userSongsRef.set(songKey);
+                
+                //upload to getstream
+                
+                feed.uploadActivity();
 
 				window.open("index.html", "_self"); 
 

@@ -1,5 +1,26 @@
 //main.js
 
+
+
+// NICK WORKS HERE
+
+
+// NOT working
+var stream = require('getstream');
+
+var client = stream.connect('t4dqhkkgv4gh', null, '26942');
+
+
+
+
+
+
+
+
+
+// NICK STOPS HERE
+
+
 // VARIABLES
 
 
@@ -427,6 +448,7 @@ function creator() {
 			});
 
 
+
 		}
 	} else {
 		// No user is signed in.
@@ -522,6 +544,9 @@ function publish(){
 					newSongRef.set(readyData);
 					userSongsRef.set(songKey);
 
+					feed.uploadActivity();
+
+
 					window.open("index.html", "_self"); 
 
 				});
@@ -532,10 +557,10 @@ function publish(){
 				// upload Song Data
 				newSongRef.set(readyData);
 				userSongsRef.set(songKey);
-                
-                //upload to getstream
-                
-                feed.uploadActivity();
+
+				//upload to getstream
+
+				feed.uploadActivity();
 
 				window.open("index.html", "_self"); 
 
@@ -1087,7 +1112,45 @@ function loadUserTimelineData(songId, position){
 	});
 
 
+
+
+
 }
+
+
+
+
+
+// GET STREAM FUCNTIONS !!!!!!!!!
+
+
+var userFeed = client.feed('user', creator.publicName , 'ecOXiJT_5WGCZoYjOhZ3un8ZwNQ');
+// Add the activity to the feed
+
+function uploadActivity (){
+	userFeed.addActivity({
+		actor: creator.publicName, 
+		tweet: readyData.name, 
+		verb: 'post', 
+		object: 1
+	});   
+}
+
+function listenActivity(){
+	userFeed.addActivity({
+		actor: 'eric', 
+		tweet: 'Hello world', 
+		verb: 'listen', 
+		object: 1
+	}); 
+
+}
+
+
+
+
+
+
 
 
 
